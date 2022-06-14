@@ -1,0 +1,35 @@
+﻿CREATE TABLE IF NOT EXISTS OffLinePrestamoXCobrar (
+    Id					INTEGER PRIMARY KEY AUTOINCREMENT,
+    IdPrestamo			INTEGER NOT NULL,
+    cFolio				TEXT NOT NULL,  
+    cCliente			TEXT NOT NULL,  
+    nMontoTotal			REAL NOT NULL,
+    nSaldoPendiente		REAL NOT NULL,
+    DteSaveInfo			INTEGER DEFAULT (strftime('%s', 'now')),
+	IdCliente			INTEGER NOT NULL DEFAULT 0,
+	IdClienteMoral		INTEGER NOT NULL DEFAULT 0,
+	IdGrupoSolidario	INTEGER NOT NULL DEFAULT 0,
+	cDireccion			TEXT NOT NULL DEFAULT '',
+	nEstadoRegistro		INTEGER NOT NULL DEFAULT 0,	
+	nPos				INTEGER NOT NULL DEFAULT 1,	
+	cGeoLocalizacion			TEXT NOT NULL DEFAULT '',
+	cColor			TEXT NOT NULL DEFAULT '',
+	lManual			INTEGER NOT NULL DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS OffLinePrestamoXOperador (
+    Id					INTEGER PRIMARY KEY AUTOINCREMENT,
+    IdPrestamo			INTEGER NOT NULL,
+    cFolio				TEXT NOT NULL,  
+    cCliente			TEXT NOT NULL,  
+    nMontoTotal			REAL NOT NULL,
+    nSaldoPendiente		REAL NOT NULL,
+    DteSaveInfo			INTEGER DEFAULT (strftime('%s', 'now')),
+	IdCliente			INTEGER NOT NULL DEFAULT 0,
+	IdClienteMoral		INTEGER NOT NULL DEFAULT 0,
+	IdGrupoSolidario	INTEGER NOT NULL DEFAULT 0,
+	cDireccion			TEXT NOT NULL DEFAULT '',
+	nEstadoRegistro		INTEGER NOT NULL DEFAULT 0,	
+	nPos				INTEGER NOT NULL DEFAULT 1,	
+	cGeoLocalizacion			TEXT NOT NULL DEFAULT '',
+	cColor			TEXT NOT NULL DEFAULT ''
+);
