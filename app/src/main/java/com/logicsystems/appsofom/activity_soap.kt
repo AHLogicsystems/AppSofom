@@ -37,9 +37,6 @@ class activity_soap : AppCompatActivity() {
         myExecutor.execute {
             val response = CallWebService.callApi(methodName, params)
             Log.v("response", "response==" + response)
-//            myHandler.post {
-//                findViewById<TextView>(R.id.resultValue).text = response
-//            }
         }
     }
 }
