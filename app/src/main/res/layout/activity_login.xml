@@ -1,123 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.6"
+        android:contentDescription="@string/result"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo_extended" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-        <ImageView
-            android:src="@drawable/logo"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/gradient_principal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/dialogTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/txtViewVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/text_version"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="30dp"
-            android:id="@+id/dialogTitle"
-            android:layout_gravity="center" />
-        <TextView
-            android:id="@+id/txtViewVersion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/text_version"
-            android:textColor="#000000"
-            android:textSize="10dp"
-            android:layout_marginTop="2dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/rounded_linearlayout">
-        <!--<TextView
-            android:id="@+id/txtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textSize="18dp"
-            android:layout_gravity="center"
-            android:text="Ingresa al CIB"
-            android:textColor="#2196F3" />-->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
+            android:background="@drawable/rounded_linearlayout"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtUserName"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:paddingLeft="10dp"
-                android:hint="Usuario"
-                android:textColor="@android:color/black"
-                android:textSize="16dp"
-                android:inputType="text"
-                android:text="" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:inputType="textPassword"
+                android:theme="@style/EditTextHint">
+                <EditText
+                    android:id="@+id/txtUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="20dp"
+                    android:autofillHints="@string/usuario"
+                    android:hint="@string/usuario"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtPassword"
-                android:hint="Contraseña"
-                android:textColor="@android:color/black"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:paddingLeft="10dp"
-                android:textSize="16dp"
-                android:imeOptions="actionGo"
-                android:text=""
-                tools:ignore="HardcodedText" />
-        </android.support.design.widget.TextInputLayout>
-        <Button
-            android:text="Entrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLogIn"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/rounded_buttom" />
-        <TextView
-            android:id="@+id/txtViewConfigurar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/text_configurar"
-            android:textColor="#0099CC"
-            android:layout_marginTop="10dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:theme="@style/EditTextHint">
+
+                <EditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:autofillHints="@string/Contrasenia"
+                    android:hint="@string/Contrasenia"
+                    android:imeOptions="actionGo"
+                    android:inputType="textPassword"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnLogIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="80dp"
+                android:background="@drawable/rounded_buttom"
+                android:text="@string/Entrar"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/txtViewConfigurar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/text_configurar"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#0099CC" />
+        </LinearLayout>
     </LinearLayout>
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="35"
-        android:layout_marginLeft="0.0dp"
-        android:layout_marginTop="0.0dp"
-        android:layout_marginBottom="0.0dp"
-        android:minWidth="25px"
-        android:minHeight="25px">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pbLogin"
-            android:layout_centerInParent="true"
-            android:indeterminate="true" />
-    </RelativeLayout>-->
-</LinearLayout>
+</RelativeLayout>

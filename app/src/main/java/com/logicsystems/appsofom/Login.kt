@@ -43,11 +43,11 @@ open class Login : AppCompatActivity(){
             } else {
                 if (txtUserName.text.toString() != "" && txtPassword.text.toString() != ""){
                     if (Utils.isConnected(this)){
-                        txtUserName.isFocusableInTouchMode = false
-                        txtUserName.isFocusable = false
-                        txtPassword.isFocusableInTouchMode = false
-                        txtPassword.isFocusable = false
-                        btnLogIn.isEnabled = false
+//                        txtUserName.isFocusableInTouchMode = false
+//                        txtUserName.isFocusable = false
+//                        txtPassword.isFocusableInTouchMode = false
+//                        txtPassword.isFocusable = false
+//                        btnLogIn.isEnabled = false
                         val imm: InputMethodManager =
                             btnLogIn.context.getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         var result = imm.hideSoftInputFromWindow(btnLogIn.windowToken, 0)
@@ -91,9 +91,9 @@ open class Login : AppCompatActivity(){
                 }
             }
         }
-    txtViewConfigurar.setOnClickListener {
-        val intent = Intent(this, Config::class.java)
-        this.startActivity(intent)
-    }
+        txtViewConfigurar.setOnClickListener {
+            val intent = Intent(this, Config::class.java)
+            this.startActivity(intent)
+        }
     }
 }

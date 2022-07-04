@@ -85,8 +85,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:gravity="center"
         android:layout_margin="15dp"
-        android:textColor="@color/white"
-        android:background="@color/black"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
         android:text="enviar"
         android:padding="10dp"/>
     <TextView

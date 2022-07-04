@@ -46,5 +46,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     implementation "com.google.code.ksoap2-android:ksoap2-android:3.6.4"
-
 }

@@ -65,7 +65,7 @@ open class Config : AppCompatActivity() {
             }
         }
         btnGuardarConfig.setOnClickListener {
-            var lExecute: Boolean = false
+            var lExecute = false
             val cUpdateGPS: String = txtUpdateGPS.text.toString().trim()
             val cUpdateInfo: String = txtUpdateInfo.text.toString().trim()
             if (cUpdateGPS == "" || cUpdateInfo == "") {
@@ -102,5 +102,14 @@ open class Config : AppCompatActivity() {
             }
         }
         AppSofomConfigs().lLoggin = false
+    }
+
+    fun service_AppGetEmpresasCompleted() : Unit{
+        try {
+
+        }
+        catch (e: Exception){
+            Toast.makeText(this,"Error: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
 }

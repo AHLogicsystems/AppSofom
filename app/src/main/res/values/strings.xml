@@ -23,6 +23,9 @@
 
     <string name="result" translatable="false">Resultado</string>
 
+    <string name="usuario" translatable="false">Usuario</string>
+    <string name="Contrasenia" translatable="false">Contraseña</string>
+    <string name="Entrar" translatable="false">Entrar</string>
 
     <string-array name="Genero_array">
         <item>Masculino</item>

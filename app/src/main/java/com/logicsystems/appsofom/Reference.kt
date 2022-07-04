@@ -17,11 +17,11 @@ open class Reference {
         }
     }
     fun IsLocalFileSystemWebService(url: String): Boolean{
-        var BlnReturn: Boolean = false
+        var BlnReturn = false
         if (url == ""){
             BlnReturn = false
         }
-        val wsUri: URI = URI(url)
+        val wsUri = URI(url)
         if ((wsUri.port >= 1024)){
             BlnReturn = true
         }
