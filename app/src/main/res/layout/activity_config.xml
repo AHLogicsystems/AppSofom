@@ -54,13 +54,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         style="@style/InputLabel" />
+
     <TextView
-        android:text="@string/result"
         android:id="@+id/txtTest"
+        style="@style/InputLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        style="@style/InputLabel" />
+        android:textColor="@android:color/black"
+        android:text="@string/result"
+        android:visibility="visible" />
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

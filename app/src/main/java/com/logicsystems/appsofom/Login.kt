@@ -55,7 +55,7 @@ open class Login : AppCompatActivity(){
 //                        progress.isIndeterminate = true
                         val service = Reference()
                         service.Url = AppSofomConfigs().URLWSFull()
-                        service.AppLoginAsync(txtUserName.text.toString(), txtPassword.text.toString(), AppSofomConfigs().cNameEmpresa, StrIMEI)
+                        service.AppLoginAsync(txtViewConfigurar,txtUserName.text.toString(), txtPassword.text.toString(), AppSofomConfigs().cNameEmpresa, StrIMEI)
                     }
                     if (AppSofomConfigs().cLogUser == "" && AppSofomConfigs().cLogPass == "") {
                         Toast.makeText(

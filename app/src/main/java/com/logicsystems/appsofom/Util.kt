@@ -12,7 +12,7 @@ open class AppSofomConfigs{
             DEBUG_MODE.LOCAL to "https://192.168.201.77/",
             DEBUG_MODE.TESTING_INTERNO to "http://testing.logicsystems.com.mx/",
             DEBUG_MODE.TESTING_EXTERNO to "http://187.141.66.20:5001/",
-            DEBUG_MODE.PRODUCCION to "https://bkcib.logicsystems.com.mx/"
+            DEBUG_MODE.PRODUCCION to "https://cib.logicsystems.com.mx/"
         )
         var IdConfiguracion: Int = 0
         var cNameEntorno: String = ""
@@ -25,7 +25,7 @@ open class AppSofomConfigs{
         var cInfoTicket: String = ""
         var lLoggin: Boolean = false
         var nDigitosIdDispositivo: Int = 16
-        var MODO = DEBUG_MODE.LOCAL
+        var MODO = DEBUG_MODE.PRODUCCION
         fun URLWSFull(): String {return getURLFUll(cNameEntorno)}
 
         fun getURLFUll(entorno: String): String{

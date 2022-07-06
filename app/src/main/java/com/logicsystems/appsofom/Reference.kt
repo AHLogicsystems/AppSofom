@@ -1,5 +1,6 @@
 package com.logicsystems.appsofom
 
+import android.widget.TextView
 import java.net.URI
 
 
@@ -28,19 +29,19 @@ open class Reference {
         return BlnReturn
     }
 
-    fun AppLoginAsync(StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String) {
-        AppLoginAsync(StrUser, StrPass, StrEmpresa, StrIMEI, null)
+    fun AppLoginAsync(txtTest: TextView, StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String) {
+        AppLoginAsync(txtTest, StrUser, StrPass, StrEmpresa, StrIMEI, null)
     }
 
-    fun AppLoginAsync(StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String, userState: Any?) {
-        activity_soap().doMyTask("AppLogin", listOf(StrUser, StrPass, StrEmpresa, StrIMEI))
+    fun AppLoginAsync(txtTest:TextView, StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String, userState: Any?) {
+        Utils().doMyTask(txtTest, "AppLogin", listOf(StrUser, StrPass, StrEmpresa, StrIMEI))
     }
 
-    fun AppGetEmpresasAsync() {
-        AppGetEmpresasAsync(null)
+    fun AppGetEmpresasAsync(txtTest : TextView) {
+        AppGetEmpresasAsync(txtTest, null)
     }
 
-    fun AppGetEmpresasAsync(userState: Any?) {
-        activity_soap().doMyTask("AppGetEmpresas", listOf())
+    fun AppGetEmpresasAsync(txtTest: TextView, userState: Any?) {
+        Utils().doMyTask(txtTest, "AppGetEmpresas", listOf())
     }
 }

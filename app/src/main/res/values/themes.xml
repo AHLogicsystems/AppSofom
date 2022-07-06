@@ -45,6 +45,7 @@
     <item name="android:paddingBottom">@dimen/input_label_vertical_spinner</item>
     <item name="android:paddingLeft">@dimen/input_label_horizontal_spinner</item>
     <item name="android:paddingRight">@dimen/input_label_horizontal_spinner</item>
+      <item name="android:textColor">@android:color/black</item>
   </style>
 
     <style name="EditTextHint" parent="TextAppearance.AppCompat">

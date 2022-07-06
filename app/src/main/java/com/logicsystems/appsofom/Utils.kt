@@ -4,14 +4,24 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import org.ksoap2.SoapEnvelope
+import org.ksoap2.serialization.SoapObject
+import org.ksoap2.serialization.SoapSerializationEnvelope
+import org.ksoap2.transport.HttpTransportSE
+import java.util.concurrent.Executors
 
 
 //open class WSAppSofomWrapper : WSAppSofom {
 //}
 
 class Utils : Reference(){
+    private val myExecutor = Executors.newSingleThreadExecutor()
+    private val myHandler = Handler(Looper.getMainLooper())
     fun MultiWebMethodsAppAsync(context: Context, dialog: ProgressBar, StrMetodo: String, obtenerParametro: ClsCapaNegocios): Boolean {
         val StrIMEI: String = AppSofomConfigs().getIMEI(context)
         val parametro: ClsCapaNegocios = obtenerParametro
@@ -46,9 +56,7 @@ class Utils : Reference(){
         return true
     }
     companion object {
-        val SOAP_URL = "https://cib.logicsystems.com.mx/APPCOBRO/WSAppSofom.asmx?"
         val SOAP_NAMESPACE = "http://LogicSystems.org/"
-        var METHOD_ADD = "Add"
 
         fun isConnected(context: Context): Boolean {
 
@@ -86,6 +94,56 @@ class Utils : Reference(){
                     connectivityManager.activeNetworkInfo ?: return false
                 @Suppress("DEPRECATION")
                 return networkInfo.isConnected
+            }
+        }
+    }
+
+    fun callApi(methodName: String, params: List<String>): String {
+        var result = ""
+        val SOAP_ACTION = SOAP_NAMESPACE + methodName
+        val soapObject = SoapObject(SOAP_NAMESPACE, methodName)
+
+        when (methodName){
+            "AppGetEmpresas" -> {}
+            "AppLogin" -> {
+                soapObject.addProperty("StrUser", params[0])
+                soapObject.addProperty("StrPass", params[1])
+                soapObject.addProperty("StrEmpresa", params[2])
+                soapObject.addProperty("StrIMEI", params[3])
+            }
+            "MultiWebMethodsApp" -> {
+                soapObject.addProperty("StrEmpresa", params[0])
+                soapObject.addProperty("StrClaseNegocios", params[1])
+                soapObject.addProperty("StrMetodo", params[2])
+                soapObject.addProperty("StrParametros", params[3])
+                soapObject.addProperty("StrUser", params[4])
+                soapObject.addProperty("StrPass", params[5])
+                soapObject.addProperty("StrIMEI", params[6])
+            }
+        }
+
+        val envelope = SoapSerializationEnvelope(SoapEnvelope.VER11)
+        envelope.setOutputSoapObject(soapObject)
+        envelope.dotNet = true
+
+        val httpTransportSE = HttpTransportSE(this.Url)
+
+        val cXML = try {
+            httpTransportSE.call(SOAP_ACTION, envelope)
+            val soapPrimitive = envelope.response
+            soapPrimitive.toString()
+        } catch (e: Exception) {
+            e.message.toString()
+        }
+
+        return cXML
+    }
+
+    fun doMyTask(tView : TextView, methodName: String, params: List<String>){
+        myExecutor.execute {
+            val response = callApi(methodName, params)
+            myHandler.post {
+                tView.text = response
             }
         }
     }
