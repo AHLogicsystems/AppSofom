@@ -27,6 +27,16 @@
     <string name="Contrasenia" translatable="false">Contraseña</string>
     <string name="Entrar" translatable="false">Entrar</string>
 
+
+    <string name="Empresa" translatable="false">Empresa</string>
+    <string name="Entorno" translatable="false">Entorno</string>
+    <string name="NuevaConfiguracion" translatable="false">Nueva Configuración</string>
+    <string name="ValidarEntorno" translatable="false">Validar Entorno</string>
+    <string name="EnviarUbicación" translatable="false">Enviar Ubicación (en minutos)</string>
+    <string name="VigenciaInformación" translatable="false">Vigencia de la Información (en minutos)</string>
+    <string name="GuardarConfiguración" translatable="false">Guardar Configuración</string>
+    <string name="ConfiguraciónActual" translatable="false">Configuración Actual</string>
+
     <string-array name="Genero_array">
         <item>Masculino</item>
         <item>Femenino</item>

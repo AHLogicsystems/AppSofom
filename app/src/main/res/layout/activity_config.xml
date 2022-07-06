@@ -14,7 +14,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/second_toolbar">
         <TextView
-            android:text="Nueva Configuración"
+            android:text="@string/NuevaConfiguracion"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,35 +30,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtEntorno"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="0dp"
-            android:hint="Entorno"
+            android:hint="@string/Entorno"
             android:textColor="@android:color/black"
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            android:autofillHints="" />
     </android.support.design.widget.TextInputLayout>
     <Button
-        android:text="Validar Entorno"
+        android:text="@string/ValidarEntorno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnEntorno"
         android:layout_marginTop="0dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:textSize="16dp" />
+        android:textSize="16sp" />
     <TextView
-        android:text="Empresa"
+        android:text="@string/Empresa"
         android:id="@+id/txtViewEmpresa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        style="@style/InputLabel" />
+    <TextView
+        android:text="@string/result"
+        android:id="@+id/txtTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         style="@style/InputLabel" />
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerEmpresa"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="0dp" />
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -67,14 +75,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtUpdateGPS"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="0dp"
             android:inputType="number"
-            android:hint="Enviar Ubicación (en minutos)"
+            android:hint="@string/EnviarUbicación"
             android:textColor="@android:color/black"
             android:maxLength="15"
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            android:autofillHints="" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -83,24 +92,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtUpdateInfo"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="0dp"
             android:inputType="number"
-            android:hint="Vigencia de la Información (en minutos)"
+            android:hint="@string/VigenciaInformación"
             android:textColor="@android:color/black"
             android:maxLength="15"
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            android:autofillHints="" />
     </android.support.design.widget.TextInputLayout>
     <Button
-        android:text="Guardar Configuración"
+        android:text="@string/GuardarConfiguración"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnGuardarConfig"
         android:layout_marginTop="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textSize="16dp" />
+        android:textSize="16sp" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -108,7 +118,7 @@
         android:layout_marginTop="0dp"
         android:background="@drawable/second_toolbar">
         <TextView
-            android:text="Configuración Actual"
+            android:text="@string/ConfiguraciónActual"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,7 +127,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="0dp"
             android:textColor="#546E7A"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
     </LinearLayout>
     <TextView
         android:text=""
@@ -125,53 +135,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tViewEntornoActual"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="0dp"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
     <TextView
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tViewEmpresaActual"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="0dp"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
     <TextView
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tViewUpdateGPSActual"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="0dp"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
     <TextView
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tViewUpdateInfoActual"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="0dp"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
     <TextView
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tViewIdDispositivo"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="0dp"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
 </LinearLayout>
