@@ -303,7 +303,7 @@ open class ClsCapaNegocios {
         var BlnReturn = false
         try {
             this.StrXMLReturn = SerializeXML(oPago)
-        } catch (ex: java.lang.Exception) {
+        } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
         if (this.StrProblema == "") {
@@ -668,7 +668,7 @@ open class ClsCapaNegocios {
     }
 }
 
-class AppListaEmpresa
+open class AppListaEmpresa
 {
     var Empresas = mutableListOf<AppEmpresa>()
 }

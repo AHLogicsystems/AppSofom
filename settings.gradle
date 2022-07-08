@@ -11,7 +11,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
+        maven { url 'https://github.com/Kotlin/kotlinx.serialization' }
     }
 }
 rootProject.name = "AppSofom"
 include ':app'
+include ':JSON-java-master'

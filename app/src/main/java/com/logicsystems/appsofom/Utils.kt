@@ -9,15 +9,19 @@ import android.os.Looper
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import org.JsonAppSofom.JSONArray
+import org.JsonAppSofom.XML
+import org.json.JSONException
 import org.ksoap2.SoapEnvelope
 import org.ksoap2.serialization.SoapObject
 import org.ksoap2.serialization.SoapSerializationEnvelope
 import org.ksoap2.transport.HttpTransportSE
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserException
+import org.xmlpull.v1.XmlPullParserFactory
+import java.io.IOException
+import java.io.StringReader
 import java.util.concurrent.Executors
-
-
-//open class WSAppSofomWrapper : WSAppSofom {
-//}
 
 class Utils : Reference(){
     private val myExecutor = Executors.newSingleThreadExecutor()
@@ -142,9 +146,58 @@ class Utils : Reference(){
     fun doMyTask(tView : TextView, methodName: String, params: List<String>){
         myExecutor.execute {
             val response = callApi(methodName, params)
+            val jsonReturn = convertXMLtoJSON(response)
+            val ArrayJson = JSONArray(jsonReturn)
+
+            val empresas = ArrayJson.getJSONObject(1)
+
+            val Result = "Empresa" + empresas.getString("Empresa")
             myHandler.post {
-                tView.text = response
+                tView.text = Result
             }
         }
     }
+
+    fun convertXMLtoJSON(cXML: String) : String{
+        val INDENTATION = 4
+        return try {
+            val jsonObj = XML.toJSONObject(cXML)
+            val json = jsonObj.toString(INDENTATION)
+            println(json)
+            json
+        } catch (ex: JSONException) {
+            ex.printStackTrace().toString()
+        }
+    }
+
+    data class Entry (val Any: List<Any>?)
+    @Throws(XmlPullParserException::class, IOException::class)
+    fun parse(type: Any, XmlArray: String, cXML: String) : List<*> {
+        val nameClass = type.javaClass.name
+        val MOV = mutableListOf<String>()
+        val factory: XmlPullParserFactory = XmlPullParserFactory.newInstance()
+        factory.setNamespaceAware(true)
+        val xpp: XmlPullParser = factory.newPullParser()
+        xpp.setInput(StringReader(cXML))
+        var eventType = xpp.eventType
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+
+
+
+            if (eventType == XmlPullParser.START_DOCUMENT) {
+                println("Start document")
+            } else if (eventType == XmlPullParser.START_TAG) {
+                println("Start tag " + xpp.name)
+            } else if (eventType == XmlPullParser.END_TAG) {
+                println("End tag " + xpp.name)
+            } else if (eventType == XmlPullParser.TEXT) {
+                println("Text " + xpp.text)
+                if (xpp.text.trim() != "") MOV.add(xpp.text)
+            }
+            eventType = xpp.next()
+        }
+        println("End document")
+        return MOV
+    }
+
 }
