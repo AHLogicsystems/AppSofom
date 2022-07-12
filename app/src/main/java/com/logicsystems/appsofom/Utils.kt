@@ -6,10 +6,13 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
+import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.Spinner
 import android.widget.Toast
-import org.JsonAppSofom.JSONArray
+import com.google.gson.Gson
 import org.JsonAppSofom.XML
 import org.json.JSONException
 import org.ksoap2.SoapEnvelope
@@ -143,17 +146,26 @@ class Utils : Reference(){
         return cXML
     }
 
-    fun doMyTask(tView : TextView, methodName: String, params: List<String>){
+    fun doMyTask(context: Context, sPinnerE : Spinner, methodName: String, params: List<String>){
         myExecutor.execute {
-            val response = callApi(methodName, params)
-            val jsonReturn = convertXMLtoJSON(response)
-            val ArrayJson = JSONArray(jsonReturn)
+            val gson = Gson()
+            val cXML = callApi(methodName, params)
+            val jsonReturn = convertXMLtoJSON(cXML)
+            val Empresa = gson.fromJson(jsonReturn, Response::class.java).AppListaEmpresa!!.Empresas!!.AppEmpresa!!
 
-            val empresas = ArrayJson.getJSONObject(1)
+            val languages = arrayOf("Java", "PHP", "Kotlin", "Javascript", "Python", "Swift")
 
-            val Result = "Empresa" + empresas.getString("Empresa")
+            val aa = ArrayAdapter(context, android.R.layout.simple_spinner_item, languages)
             myHandler.post {
-                tView.text = Result
+                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                with(sPinnerE)
+                {
+                    adapter = aa
+                    setSelection(0, false)
+                    prompt = "Selecciona tu ambiente"
+                    gravity = Gravity.CENTER
+                    visibility = View.VISIBLE
+                }
             }
         }
     }

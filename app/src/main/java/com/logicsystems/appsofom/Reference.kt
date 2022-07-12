@@ -1,6 +1,5 @@
 package com.logicsystems.appsofom
 
-import android.widget.TextView
 import java.net.URI
 
 
@@ -29,19 +28,19 @@ open class Reference {
         return BlnReturn
     }
 
-    fun AppLoginAsync(txtTest: TextView, StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String) {
-        AppLoginAsync(txtTest, StrUser, StrPass, StrEmpresa, StrIMEI, null)
-    }
+//    fun AppLoginAsync(spinner: Spinner, StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String) {
+//        AppLoginAsync(spinner, StrUser, StrPass, StrEmpresa, StrIMEI, null)
+//    }
+//
+//    fun AppLoginAsync(spinner: Spinner, StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String, userState: Any?) {
+//        Utils().doMyTask(spinner, "AppLogin", listOf(StrUser, StrPass, StrEmpresa, StrIMEI))
+//    }
 
-    fun AppLoginAsync(txtTest:TextView, StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String, userState: Any?) {
-        Utils().doMyTask(txtTest, "AppLogin", listOf(StrUser, StrPass, StrEmpresa, StrIMEI))
-    }
+//    fun AppGetEmpresasAsync(txtTest : TextView) {
+//        AppGetEmpresasAsync(txtTest, null)
+//    }
 
-    fun AppGetEmpresasAsync(txtTest : TextView) {
-        AppGetEmpresasAsync(txtTest, null)
-    }
-
-    fun AppGetEmpresasAsync(txtTest: TextView, userState: Any?) {
-        Utils().doMyTask(txtTest, "AppGetEmpresas", listOf())
-    }
+//    fun AppGetEmpresasAsync(txtTest: TextView, userState: Any?) {
+//        Utils().doMyTask(txtTest, "AppGetEmpresas", listOf())
+//    }
 }

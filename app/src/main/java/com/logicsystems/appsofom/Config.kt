@@ -59,7 +59,7 @@ open class Config : AppCompatActivity() {
                 txtTest.text = "prueba de que si funciona"
                 val service = Utils()
                 service.Url = AppSofomConfigs().getURLFUll(txtEntorno.text.toString().uppercase().trim())
-                service.doMyTask(txtTest,"AppGetEmpresas", mutableListOf())
+                service.doMyTask(this, spinnerEmpresa,"AppGetEmpresas", mutableListOf())
                 Toast.makeText(this, txtTest.text,Toast.LENGTH_LONG).show()
             }
             else

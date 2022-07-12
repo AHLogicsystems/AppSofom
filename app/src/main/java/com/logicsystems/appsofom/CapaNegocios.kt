@@ -668,13 +668,19 @@ open class ClsCapaNegocios {
     }
 }
 
-open class AppListaEmpresa
-{
-    var Empresas = mutableListOf<AppEmpresa>()
+open class Response{
+    var AppListaEmpresa : AppListaEmpresa? = null
 }
-class AppEmpresa {
+open class AppListaEmpresa {
+    var Empresas:AppEmpresa? = null
+}
+open class AppEmpresa{
+    var AppEmpresa : ArrayList<Empresa>? = null
+}
+open class Empresa{
     var Empresa = ""
 }
+
 open class AppRespuesta {
     var Exitoso = false
     var Error = ""
