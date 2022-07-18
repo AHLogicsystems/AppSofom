@@ -668,16 +668,12 @@ open class ClsCapaNegocios {
     }
 }
 
-open class Response{
-    var AppListaEmpresa : AppListaEmpresa? = null
+open class AppListaEmpresa
+{
+    var Empresas = arrayListOf<AppEmpresa>()
 }
-open class AppListaEmpresa {
-    var Empresas:AppEmpresa? = null
-}
-open class AppEmpresa{
-    var AppEmpresa : ArrayList<Empresa>? = null
-}
-open class Empresa{
+open class AppEmpresa
+{
     var Empresa = ""
 }
 

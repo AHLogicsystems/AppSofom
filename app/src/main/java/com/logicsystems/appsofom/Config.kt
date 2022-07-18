@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.view.View
 import android.widget.*
+import com.logicsystems.appsofom.datos.CallingsApi
 import com.logicsystems.appsofom.datos.ClsConfiguracion
 
 
@@ -57,9 +58,9 @@ open class Config : AppCompatActivity() {
 //                btnEntorno.isEnabled = false
 
                 txtTest.text = "prueba de que si funciona"
-                val service = Utils()
+                val service = CallingsApi()
                 service.Url = AppSofomConfigs().getURLFUll(txtEntorno.text.toString().uppercase().trim())
-                service.doMyTask(this, spinnerEmpresa,"AppGetEmpresas", mutableListOf())
+                service.getArrayEmpresas(this, spinnerEmpresa,"AppGetEmpresas")
                 Toast.makeText(this, txtTest.text,Toast.LENGTH_LONG).show()
             }
             else

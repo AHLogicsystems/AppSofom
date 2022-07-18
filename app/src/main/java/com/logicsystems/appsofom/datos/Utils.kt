@@ -1,34 +1,22 @@
-package com.logicsystems.appsofom
+package com.logicsystems.appsofom.datos
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import android.view.Gravity
-import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.ProgressBar
-import android.widget.Spinner
 import android.widget.Toast
-import com.google.gson.Gson
-import org.JsonAppSofom.XML
-import org.json.JSONException
-import org.ksoap2.SoapEnvelope
-import org.ksoap2.serialization.SoapObject
-import org.ksoap2.serialization.SoapSerializationEnvelope
-import org.ksoap2.transport.HttpTransportSE
+import com.logicsystems.appsofom.AppSofomConfigs
+import com.logicsystems.appsofom.ClsCapaNegocios
+import com.logicsystems.appsofom.Reference
+import com.logicsystems.appsofom.UserApp
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.IOException
 import java.io.StringReader
-import java.util.concurrent.Executors
 
-class Utils : Reference(){
-    private val myExecutor = Executors.newSingleThreadExecutor()
-    private val myHandler = Handler(Looper.getMainLooper())
+open class Utils : Reference(){
     fun MultiWebMethodsAppAsync(context: Context, dialog: ProgressBar, StrMetodo: String, obtenerParametro: ClsCapaNegocios): Boolean {
         val StrIMEI: String = AppSofomConfigs().getIMEI(context)
         val parametro: ClsCapaNegocios = obtenerParametro
@@ -105,82 +93,17 @@ class Utils : Reference(){
         }
     }
 
-    fun callApi(methodName: String, params: List<String>): String {
-        var result = ""
-        val SOAP_ACTION = SOAP_NAMESPACE + methodName
-        val soapObject = SoapObject(SOAP_NAMESPACE, methodName)
-
-        when (methodName){
-            "AppGetEmpresas" -> {}
-            "AppLogin" -> {
-                soapObject.addProperty("StrUser", params[0])
-                soapObject.addProperty("StrPass", params[1])
-                soapObject.addProperty("StrEmpresa", params[2])
-                soapObject.addProperty("StrIMEI", params[3])
-            }
-            "MultiWebMethodsApp" -> {
-                soapObject.addProperty("StrEmpresa", params[0])
-                soapObject.addProperty("StrClaseNegocios", params[1])
-                soapObject.addProperty("StrMetodo", params[2])
-                soapObject.addProperty("StrParametros", params[3])
-                soapObject.addProperty("StrUser", params[4])
-                soapObject.addProperty("StrPass", params[5])
-                soapObject.addProperty("StrIMEI", params[6])
-            }
-        }
-
-        val envelope = SoapSerializationEnvelope(SoapEnvelope.VER11)
-        envelope.setOutputSoapObject(soapObject)
-        envelope.dotNet = true
-
-        val httpTransportSE = HttpTransportSE(this.Url)
-
-        val cXML = try {
-            httpTransportSE.call(SOAP_ACTION, envelope)
-            val soapPrimitive = envelope.response
-            soapPrimitive.toString()
-        } catch (e: Exception) {
-            e.message.toString()
-        }
-
-        return cXML
-    }
-
-    fun doMyTask(context: Context, sPinnerE : Spinner, methodName: String, params: List<String>){
-        myExecutor.execute {
-            val gson = Gson()
-            val cXML = callApi(methodName, params)
-            val jsonReturn = convertXMLtoJSON(cXML)
-            val Empresa = gson.fromJson(jsonReturn, Response::class.java).AppListaEmpresa!!.Empresas!!.AppEmpresa!!
-
-            val languages = arrayOf("Java", "PHP", "Kotlin", "Javascript", "Python", "Swift")
-
-            val aa = ArrayAdapter(context, android.R.layout.simple_spinner_item, languages)
-            myHandler.post {
-                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                with(sPinnerE)
-                {
-                    adapter = aa
-                    setSelection(0, false)
-                    prompt = "Selecciona tu ambiente"
-                    gravity = Gravity.CENTER
-                    visibility = View.VISIBLE
-                }
-            }
-        }
-    }
-
-    fun convertXMLtoJSON(cXML: String) : String{
-        val INDENTATION = 4
-        return try {
-            val jsonObj = XML.toJSONObject(cXML)
-            val json = jsonObj.toString(INDENTATION)
-            println(json)
-            json
-        } catch (ex: JSONException) {
-            ex.printStackTrace().toString()
-        }
-    }
+//    fun convertXMLtoJSON(cXML: String) : String{
+//        val INDENTATION = 4
+//        return try {
+//            val jsonObj = XML.toJSONObject(cXML)
+//            val json = jsonObj.toString(INDENTATION)
+//            println(json)
+//            json
+//        } catch (ex: JSONException) {
+//            ex.printStackTrace().toString()
+//        }
+//    }
 
     data class Entry (val Any: List<Any>?)
     @Throws(XmlPullParserException::class, IOException::class)

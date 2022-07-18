@@ -5,8 +5,9 @@ import java.net.URI
 
 open class Reference {
     private var useDefaultCredentialsSetExplicitly: Boolean = false
-    var Url: String = ""
+    open var Url = ""
     var UseDefaultCredentials: Boolean = false
+    open var StrProblema = ""
     fun WSAppSofom() {
         this.Url = "https://cib.logicsystems.com.mx/APPCOBRO/WSAppSofom.asmx"
         if (this.IsLocalFileSystemWebService(this.Url)) {
