@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/User.xml" value="0.2075" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/app_background.xml" value="0.1295" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/bordetabla.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/bordetablaImpar.xml" value="0.2075" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/bordetablatitulo.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/gradient_principal.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_User.xml" value="0.1295" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_search.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_user.xml" value="0.1005" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/myrect.xml" value="0.1295" />
@@ -23,6 +28,8 @@
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/login.xml" value="0.21" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/myrect.xml" value="0.1859375" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/nav_header.xml" value="0.19895833333333332" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/spinner_item.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/test_layout.xml" value="0.19895833333333332" />
       </map>
     </option>

@@ -1,30 +1,23 @@
 package com.logicsystems.appsofom.datos
 
-import android.R
-import android.content.Context
+
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.Gravity
-import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
 import com.google.gson.Gson
-import com.logicsystems.appsofom.AppListaEmpresa
 import org.ksoap2.SoapEnvelope
 import org.ksoap2.serialization.SoapObject
 import org.ksoap2.serialization.SoapSerializationEnvelope
 import org.ksoap2.transport.HttpTransportSE
 import java.util.concurrent.Executors
 
-class CallingsApi : Utils() {
+class Service : Utils() {
     private val myExecutor = Executors.newSingleThreadExecutor()
     private val myHandler = Handler(Looper.getMainLooper())
-    val Mov = arrayListOf<String>()
+    val gson = Gson()
     var cJSON = ""
 
-    fun callApi(methodName: String, params: List<String>): Boolean {
+    fun callApi(methodName: String, params: List<String>): String {
         var result = ""
         val SOAP_ACTION = SOAP_NAMESPACE + methodName
         val soapObject = SoapObject(SOAP_NAMESPACE, methodName)
@@ -68,35 +61,14 @@ class CallingsApi : Utils() {
             Log.e("Error", this.StrProblema, ex.cause)
         }
 
-        return this.StrProblema == ""
+        return this.cJSON
     }
 
-    fun getArrayEmpresas(context: Context, sPinnerE : Spinner, methodName: String){
-        myExecutor.execute {
-            if (callApi(methodName, arrayListOf())){
-                val gson = Gson()
-                val ORespuesta = gson.fromJson(this.cJSON, AppListaEmpresa::class.java)
-                for (OEach in ORespuesta.Empresas){
-                    Mov.add(OEach.Empresa)
-                }
-                val AdapterEmpresas = ArrayAdapter(context, R.layout.simple_spinner_item, Mov)
-                myHandler.post {
-                    AdapterEmpresas.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
-                    with(sPinnerE)
-                    {
-                        adapter = AdapterEmpresas
-                        setSelection(0, false)
-                        prompt = "Selecciona tu ambiente"
-                        gravity = Gravity.CENTER
-                        visibility = View.VISIBLE
-                    }
-                }
-            }
-            else{
-                myHandler.post {
-                    Toast.makeText(context, this.StrProblema, Toast.LENGTH_LONG).show()
-                }
-            }
-        }
+//    fun getArrayEmpresas(context: Context, methodName: String) : AppListaEmpresa{
+//        return gson.fromJson(callApi(methodName, arrayListOf()), AppListaEmpresa::class.java)
+//    }
+
+    inline fun <reified T : Any> parseJSON(JSON: String) : T {
+        return gson.fromJson(JSON, T::class.java)
     }
 }

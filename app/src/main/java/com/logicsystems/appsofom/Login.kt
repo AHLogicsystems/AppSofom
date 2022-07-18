@@ -17,17 +17,11 @@ open class Login : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        try {
-            AppSofomConfigs().LoadConfig(this)
+        AppSofomConfigs().LoadConfig(this)
+        if(AppSofomConfigs().cNameEntorno == "" || AppSofomConfigs().cNameEmpresa == ""){
+            val intent = Intent(this, Config::class.java)
+            this.startActivity(intent)
         }
-        catch (ex: Exception){
-            Toast.makeText(this, ex.message, Toast.LENGTH_LONG).show()
-        }
-//        if(AppSofomConfigs.cNameEntorno == "" || AppSofomConfigs.cNameEmpresa == ""){
-//            val intent = Intent(this, Config::class.java)
-//            startActivity(intent)
-//                //this.startActivityForResult(intent,11)
-//        }
         val txtUserName = findViewById<EditText>(R.id.txtUserName)
         val txtPassword = findViewById<EditText>(R.id.txtPassword)
         val btnLogIn = findViewById<Button>(R.id.btnLogIn)

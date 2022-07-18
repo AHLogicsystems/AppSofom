@@ -2,15 +2,21 @@ package com.logicsystems.appsofom
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.view.View
 import android.widget.*
-import com.logicsystems.appsofom.datos.CallingsApi
 import com.logicsystems.appsofom.datos.ClsConfiguracion
+import com.logicsystems.appsofom.datos.Service
+import java.util.concurrent.Executors
 
 
 open class Config : AppCompatActivity() {
+    private val myExecutor = Executors.newSingleThreadExecutor()
+    private val myHandler = Handler(Looper.getMainLooper())
+    var StrProblema = ""
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +38,6 @@ open class Config : AppCompatActivity() {
         var txtViewUpdateGPSActual = findViewById<TextView>(R.id.tViewUpdateGPSActual)
         var txtViewUpdateInfoActual = findViewById<TextView>(R.id.tViewUpdateInfoActual)
         val txtViewIdDispositivo = findViewById<TextView>(R.id.tViewIdDispositivo)
-        val txtTest = findViewById<TextView>(R.id.txtTest)
 
         txtViewIdDispositivo.text = "Identificador CIB: " + AppSofomConfigs().getIdInstalacion(this)
         txtViewEmpresa.visibility = View.GONE
@@ -54,14 +59,47 @@ open class Config : AppCompatActivity() {
                     isFocusableInTouchMode = false
                     isFocusable = false
                 }
+                btnEntorno.isEnabled = false
 
-//                btnEntorno.isEnabled = false
-
-                txtTest.text = "prueba de que si funciona"
-                val service = CallingsApi()
+                val service = Service()
                 service.Url = AppSofomConfigs().getURLFUll(txtEntorno.text.toString().uppercase().trim())
-                service.getArrayEmpresas(this, spinnerEmpresa,"AppGetEmpresas")
-                Toast.makeText(this, txtTest.text,Toast.LENGTH_LONG).show()
+                myExecutor.execute {
+                    val OJson = service.callApi("AppGetEmpresas", arrayListOf())
+                    if(service.StrProblema == ""){
+                        val ORespuesta = service.parseJSON<AppListaEmpresa>(OJson)
+                        val Mov = arrayListOf<String>()
+                        for (OEach in ORespuesta.Empresas){
+                            Mov.add(OEach.Empresa)
+                        }
+                        val AdapterEmpresas = ArrayAdapter(this, R.layout.spinner_item, Mov)
+                        myHandler.post {
+                            AdapterEmpresas.setDropDownViewResource(R.layout.spinner_dropdown_item)
+                            with(spinnerEmpresa)
+                            {
+                                adapter = AdapterEmpresas
+                                setSelection(0, false)
+                                prompt = "Selecciona tu ambiente"
+                                gravity = android.view.Gravity.CENTER
+                                visibility = View.VISIBLE
+                            }
+                            txtViewEmpresa.visibility = View.VISIBLE
+                            spinnerEmpresa.visibility = View.VISIBLE
+                            txtUpdateGPS.visibility = View.VISIBLE
+                            txtUpdateInfo.visibility = View.VISIBLE
+                            btnGuardarConfig.visibility = View.VISIBLE
+                        }
+                    }
+                    else{
+                        myHandler.post {
+                            Toast.makeText(this, service.StrProblema, Toast.LENGTH_LONG).show()
+                            txtEntorno.apply {
+                                isFocusableInTouchMode = true
+                                isFocusable = true
+                            }
+                            btnEntorno.isEnabled = true
+                        }
+                    }
+                }
             }
             else
             {
@@ -106,5 +144,8 @@ open class Config : AppCompatActivity() {
             }
         }
         AppSofomConfigs().lLoggin = false
+
+
     }
 }
+
