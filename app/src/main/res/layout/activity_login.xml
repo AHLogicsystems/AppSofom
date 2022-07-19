@@ -58,7 +58,7 @@
             android:background="@drawable/rounded_linearlayout"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/EditTextHint">
@@ -75,9 +75,9 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     android:textColor="@android:color/black" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/EditTextHint">
@@ -98,7 +98,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnLogIn"

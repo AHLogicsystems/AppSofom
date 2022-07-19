@@ -71,7 +71,7 @@ open class ClsGenerica : Any() {
     }
 
     protected fun Guardar(): Boolean {
-        var BlnReturn: Boolean = false
+        var BlnReturn = false
         val db: SQLiteDatabase = _helper.writableDatabase
         db.beginTransaction()
         try {
@@ -92,7 +92,7 @@ open class ClsGenerica : Any() {
     }
 
     fun Delete(): Boolean {
-        var BlnReturn: Boolean = false
+        var BlnReturn = false
         val db: SQLiteDatabase = _helper.writableDatabase
         db.beginTransaction()
         try {
@@ -133,7 +133,7 @@ open class ClsGenerica : Any() {
     }
 
     private fun Search(OCom: SQLiteDatabase,IntTipoConsulta: Int, StrValues: Array<String>): Boolean{
-        val BlnReturn: Boolean = false
+        val BlnReturn = false
         val db: SQLiteDatabase = _helper.writableDatabase
 
         try {

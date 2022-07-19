@@ -8,7 +8,7 @@ import android.util.Log
 import java.io.IOException
 import java.io.InputStreamReader
 
-class DataManagerHelper(private val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+open class DataManagerHelper(private val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 //    val dbHelper = DataManagerHelper(context)
     override fun onCreate(db: SQLiteDatabase) {
         Log.e(DATABASE_NAME, "Creando la base de datos")

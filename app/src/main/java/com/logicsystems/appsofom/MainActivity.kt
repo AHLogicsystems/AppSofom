@@ -2,8 +2,8 @@ package com.logicsystems.appsofom
 
 import android.os.Bundle
 import android.os.SystemClock
-import android.support.design.widget.NavigationView
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView

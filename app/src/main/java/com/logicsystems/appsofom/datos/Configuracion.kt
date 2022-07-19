@@ -26,7 +26,7 @@ open class ClsConfiguracion : ClsGenerica() {
         return BlnReturn
     }
 
-    override fun Guardar(ODB: SQLiteDatabase): Boolean{
+    override fun Guardar(OCom: SQLiteDatabase): Boolean{
         var BlnReturn: Boolean = false
         try {
             if (this.Id == 0) {
@@ -40,10 +40,10 @@ open class ClsConfiguracion : ClsGenerica() {
                 values.put("cLoginPass", this.cLoginPass)
                 values.put("cOperador", this.cOperador)
                 values.put("cInfoTicket", this.cInfoTicket)
-                val LastId: Long = ODB.insert("Configuracion", null, values)
+                val LastId: Long = OCom.insert("Configuracion", null, values)
                 this.Id = LastId.toInt()
             } else {
-                ODB.execSQL(
+                OCom.execSQL(
                     "Update Configuracion Set " +
                             "cEntorno= '" + this.cEntorno + "'," +
                             "cEmpresa='" + this.cEmpresa + "'," +
@@ -65,10 +65,10 @@ open class ClsConfiguracion : ClsGenerica() {
         return BlnReturn
     }
 
-    override fun LoadAll (ODB: SQLiteDatabase): Boolean{
-        var columnas = arrayOf("Id", "cEntorno", "cEmpresa", "nMinUpdateGPS", "nMinUpdateInfo", "cLoginUser", "cLoginPass", "cOperador", "cInfoTicket")
+    override fun LoadAll (OCom: SQLiteDatabase): Boolean{
+        val columnas = arrayOf("Id", "cEntorno", "cEmpresa", "nMinUpdateGPS", "nMinUpdateInfo", "cLoginUser", "cLoginPass", "cOperador", "cInfoTicket")
         try {
-            this.c = ODB.query("Configuracion", columnas, null, null, null, null, null)
+            this.c = OCom.query("Configuracion", columnas, null, null, null, null, null)
         }
         catch (ex: SQLiteException){
             this.StrProblema = "ZX: ${ex.message}"

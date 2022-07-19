@@ -2,15 +2,16 @@ package com.logicsystems.appsofom
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.logicsystems.appsofom.datos.Dao.ConfigApp
 import com.logicsystems.appsofom.datos.Utils
 
-open class Login : AppCompatActivity(){
+open class Login : AppCompatActivity() {
     var StrIMEI: String = ""
 //    var progress = ProgressBar(this)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +19,11 @@ open class Login : AppCompatActivity(){
         setContentView(R.layout.activity_login)
 
         AppSofomConfigs().LoadConfig(this)
-        if(AppSofomConfigs().cNameEntorno == "" || AppSofomConfigs().cNameEmpresa == ""){
+        val OConfig = applicationContext as ConfigApp
+
+        val config = OConfig.room.configDao().getConfig()
+
+        if(config.cEntorno == "" || config.cEmpresa == ""){
             val intent = Intent(this, Config::class.java)
             this.startActivity(intent)
         }
