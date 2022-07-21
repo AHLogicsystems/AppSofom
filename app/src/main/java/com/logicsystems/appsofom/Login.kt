@@ -2,27 +2,46 @@ package com.logicsystems.appsofom
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.logicsystems.appsofom.data.ConexionDB
 import com.logicsystems.appsofom.datos.Utils
+import kotlinx.coroutines.launch
 
 open class Login : AppCompatActivity() {
     var StrIMEI: String = ""
+
+//    val OConfig = applicationContext as ConexionDB
+    val OConfig by lazy {applicationContext as ConexionDB}
 //    var progress = ProgressBar(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         AppSofomConfigs().LoadConfig(this)
-//        val OConfig = applicationContext as ConfigApp
 
-        val config = AppSofomConfigs()
+    var Entorno = ""
+    var Empresa = ""
+    lifecycleScope.launch{
+        try {
+            val data = OConfig.room.configDao().getConfig()
+            Entorno = data.cEntorno
+            Empresa = data.cEmpresa
+        }
+        catch (ex: Exception){
+            Log.e("Error", ex.message.toString(), ex.cause)
+        }
+    }
 
-        if(config.cNameEntorno == "" || config.cNameEmpresa == ""){
+//        val config = AppSofomConfigs()
+
+        if(Entorno == "" || Empresa == ""){
             val intent = Intent(this, Config::class.java)
             this.startActivity(intent)
         }
