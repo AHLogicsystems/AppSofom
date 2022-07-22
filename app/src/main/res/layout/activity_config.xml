@@ -112,7 +112,7 @@
         android:layout_marginTop="0dp"
         android:background="@drawable/second_toolbar">
         <TextView
-            android:text="@string/ConfiguraciónActual"
+            android:text="@string/ConfiguracionActual"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
+import com.logicsystems.appsofom.datos.bd.Configuracion
 
 
 open class ClsConfiguracion : ClsGenerica() {
@@ -31,16 +32,17 @@ open class ClsConfiguracion : ClsGenerica() {
         try {
             if (this.Id == 0) {
                 //Insertamos los datos en la tabla Usuarios
-                val values = ContentValues()
-                values.put("cEntorno", this.cEntorno)
-                values.put("cEmpresa", this.cEmpresa)
-                values.put("nMinUpdateGPS", this.nMinUpdateGPS)
-                values.put("nMinUpdateInfo", this.nMinUpdateInfo)
-                values.put("cLoginUser", this.cLoginUser)
-                values.put("cLoginPass", this.cLoginPass)
-                values.put("cOperador", this.cOperador)
-                values.put("cInfoTicket", this.cInfoTicket)
-                val LastId: Long = OCom.insert("Configuracion", null, values)
+                val values = ContentValues().apply {
+                    put(Configuracion.cEntorno, cEntorno)
+                    put(Configuracion.cEmpresa, cEmpresa)
+                    put(Configuracion.nMinUpdateGPS, nMinUpdateGPS)
+                    put(Configuracion.nMinUpdateInfo, nMinUpdateInfo)
+                    put(Configuracion.cLoginUser, cLoginUser)
+                    put(Configuracion.cLoginPass, cLoginPass)
+                    put(Configuracion.cOperador, cOperador)
+                    put(Configuracion.cInfoTicket, cInfoTicket)
+                }
+                val LastId: Long = OCom.insert(Configuracion.TABLE_NAME, null, values)
                 this.Id = LastId.toInt()
             } else {
                 OCom.execSQL(
@@ -66,9 +68,9 @@ open class ClsConfiguracion : ClsGenerica() {
     }
 
     override fun LoadAll (OCom: SQLiteDatabase): Boolean{
-        val columnas = arrayOf("Id", "cEntorno", "cEmpresa", "nMinUpdateGPS", "nMinUpdateInfo", "cLoginUser", "cLoginPass", "cOperador", "cInfoTicket")
+        val columnas = arrayOf(Configuracion.Id, Configuracion.cEntorno, Configuracion.cEmpresa, Configuracion.nMinUpdateGPS, Configuracion.nMinUpdateInfo, Configuracion.cLoginUser, Configuracion.cLoginPass, Configuracion.cOperador, Configuracion.cInfoTicket)
         try {
-            this.c = OCom.query("Configuracion", columnas, null, null, null, null, null)
+            this.c = OCom.query(Configuracion.TABLE_NAME, columnas, null, null, null, null, null)
         }
         catch (ex: SQLiteException){
             this.StrProblema = "ZX: ${ex.message}"

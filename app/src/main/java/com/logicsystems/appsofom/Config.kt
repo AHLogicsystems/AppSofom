@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.logicsystems.appsofom.datos.ClsConfiguracion
-import com.logicsystems.appsofom.datos.Dao.ConfigApp
-import com.logicsystems.appsofom.datos.Dao.Configuracion
 import com.logicsystems.appsofom.datos.Service
 import java.util.concurrent.Executors
 
@@ -37,7 +36,7 @@ open class Config : AppCompatActivity() {
         val btnGuardarConfig = findViewById<Button>(R.id.btnGuardarConfig)
         var txtViewEntornoActual = findViewById<TextView>(R.id.tViewEntornoActual)
         var txtViewEmpresaActual = findViewById<TextView>(R.id.tViewEmpresaActual)
-        var txtViewUpdateGPSActual = findViewById<TextView>(R.id.tViewUpdateGPSActual)
+        val txtViewUpdateGPSActual = findViewById<TextView>(R.id.tViewUpdateGPSActual)
         var txtViewUpdateInfoActual = findViewById<TextView>(R.id.tViewUpdateInfoActual)
         val txtViewIdDispositivo = findViewById<TextView>(R.id.tViewIdDispositivo)
 
@@ -48,8 +47,19 @@ open class Config : AppCompatActivity() {
         txtUpdateInfo.visibility = View.GONE
         btnGuardarConfig.visibility = View.GONE
 
+
+        val config = AppSofomConfigs()
+        config.LoadConfig(this)
         val Obj2 = ClsConfiguracion()
-        Obj2.Id = AppSofomConfigs().IdConfiguracion
+        Obj2.Id = config.IdConfiguracion
+
+        if (config.IdConfiguracion != 0){
+            txtViewEntornoActual.text = config.cNameEntorno
+            txtViewEmpresaActual.text = config.cNameEmpresa
+            txtViewUpdateGPSActual.text = config.nMinUpdateGPS.toString()
+            txtViewUpdateInfoActual.text = config.nMinUpdateInfo.toString()
+            txtViewIdDispositivo.text = config.cInfoTicket
+        }
 
         btnEntorno.setOnClickListener {
             txtEntorno.text = txtEntorno.text.trim() as Editable?
@@ -130,33 +140,26 @@ open class Config : AppCompatActivity() {
                 }
             }
             if (lExecute) {
-                val ConfigDao = applicationContext as ConfigApp
-                val IdConfig = ConfigDao.room.configDao().getIdConfig()
-                if (IdConfig != null || IdConfig > 0){
-                    val OConfiguracion = Configuracion()
-                    OConfiguracion.id = IdConfig
-                    OConfiguracion.cEntorno = txtEntorno.toString()
-                    OConfiguracion.cEmpresa = spinnerEmpresa.selectedItem.toString().uppercase()
-                    OConfiguracion.nMinUpdateGPS = cUpdateGPS.toIntOrNull() ?: 0
-                    OConfiguracion.nMinUpdateInfo = cUpdateInfo.toIntOrNull() ?: 0
-                    OConfiguracion.cLoginUser = ""
-                    OConfiguracion.cLoginPass = ""
-                    OConfiguracion.cOperador = ""
-                    OConfiguracion.cInfoTicket = ""
-                    ConfigDao.room.configDao().update(OConfiguracion)
+                //ConfigSave = new ConfigTask(this);
+                try {
+                    val Obj = ClsConfiguracion()
+                    //ConfigSave.nTipoOperacion = 1;
+                    Obj.SetContext(this)
+                    Obj.Id = AppSofomConfigs().IdConfiguracion
+                    Obj.cEntorno = txtEntorno.text.toString().uppercase()
+                    Obj.cEmpresa = spinnerEmpresa.selectedItem.toString().uppercase()
+                    Obj.nMinUpdateGPS = cUpdateGPS.toIntOrNull() ?: 0
+                    Obj.nMinUpdateInfo = cUpdateInfo.toIntOrNull() ?: 0
+                    Obj.cLoginUser = ""
+                    Obj.cLoginPass = ""
+                    Obj.cOperador = ""
+                    Obj.cInfoTicket = ""
+                    Obj.Guardar()
                 }
-                else{
-                    val OConfiguracion = Configuracion()
-                    OConfiguracion.cEntorno = txtEntorno.toString()
-                    OConfiguracion.cEmpresa = spinnerEmpresa.selectedItem.toString().uppercase()
-                    OConfiguracion.nMinUpdateGPS = cUpdateGPS.toIntOrNull() ?: 0
-                    OConfiguracion.nMinUpdateInfo = cUpdateInfo.toIntOrNull() ?: 0
-                    OConfiguracion.cLoginUser = ""
-                    OConfiguracion.cLoginPass = ""
-                    OConfiguracion.cOperador = ""
-                    OConfiguracion.cInfoTicket = ""
-                    ConfigDao.room.configDao().insert(OConfiguracion)
+                catch (ex: Exception){
+                    Log.e("Error", ex.message.toString())
                 }
+                //ConfigSave.Execute(Obj);
             }
         }
         AppSofomConfigs().lLoggin = false

@@ -3,9 +3,10 @@ package com.logicsystems.appsofom.datos
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 
 
-open class ClsGenerica : Any() {
+open class ClsGenerica : BaseColumns {
     protected var StrProblema: String = ""
     val cProblema: String = this.StrProblema
 
@@ -70,9 +71,12 @@ open class ClsGenerica : Any() {
         return BlnReturn
     }
 
-    protected fun Guardar(): Boolean {
+    fun Guardar(): Boolean {
         var BlnReturn = false
+
         val db: SQLiteDatabase = _helper.writableDatabase
+        val dbHelper = DataManagerHelper(myContext)
+        dbHelper.writableDatabase
         db.beginTransaction()
         try {
             if (Guardar(db)) {

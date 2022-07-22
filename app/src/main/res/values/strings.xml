@@ -35,7 +35,7 @@
     <string name="EnviarUbicación" translatable="false">Enviar Ubicación (en minutos)</string>
     <string name="VigenciaInformación" translatable="false">Vigencia de la Información (en minutos)</string>
     <string name="GuardarConfiguración" translatable="false">Guardar Configuración</string>
-    <string name="ConfiguraciónActual" translatable="false">Configuración Actual</string>
+    <string name="ConfiguracionActual" translatable="false">Configuración Actual</string>
 
     <string-array name="Genero_array">
         <item>Masculino</item>
