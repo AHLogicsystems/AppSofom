@@ -8,9 +8,12 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Looper
-import androidx.core.app.ActivityCompat
 import android.util.Log
-import com.logicsystems.appsofom.*
+import androidx.core.app.ActivityCompat
+import com.logicsystems.appsofom.AppSofomConfigs
+import com.logicsystems.appsofom.ClsCapaNegocios
+import com.logicsystems.appsofom.UbicacionGPS
+import com.logicsystems.appsofom.UserApp
 import java.util.*
 
 
@@ -102,7 +105,7 @@ open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
     fun ConsumirWebService(sGeoLocalizacion: String, DteFecha: Date){
         service.Url = AppSofomConfigs().URLWSFull()
 
-        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
+//        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
         if (!OCapa.getXMLSetUbicacionesGPS(sGeoLocalizacion, DteFecha)){
             this.StrProblema = "Error en el XML: " + OCapa.StrProblema
         }
@@ -111,14 +114,14 @@ open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
 
             val strXML: String = OCapa.StrXMLReturn.replace("AppUbicacionesGPS", "Ubicaciones")
 
-            service.MultiWebMethodsAppAsync(null,AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, StrIMEI)
+            service.MultiWebMethodsAppAsync(null,AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
         }
     }
 
     fun ConsumirWebService(aGeoLocalizacion: List<UbicacionGPS>){
         servicePendiente.Url = AppSofomConfigs().URLWSFull()
 
-        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
+//        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
 
         if (!OCapa.getXMLSetUbicacionesGPS(aGeoLocalizacion)){
             this.StrProblema = "Error en el XML: " + OCapa.StrProblema
@@ -126,7 +129,7 @@ open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
         else{
             val strXML: String = OCapa.StrXMLReturn.replace("AppUbicacionesGPS", "Ubicaciones")
 
-            servicePendiente.MultiWebMethodsAppAsync(null,AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, StrIMEI)
+            servicePendiente.MultiWebMethodsAppAsync(null,AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
         }
     }
 }

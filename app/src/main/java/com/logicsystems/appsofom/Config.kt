@@ -2,22 +2,15 @@ package com.logicsystems.appsofom
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import com.logicsystems.appsofom.datos.ClsConfiguracion
 import com.logicsystems.appsofom.datos.Service
-import java.util.concurrent.Executors
 
 
-open class Config : AppCompatActivity() {
-    private val myExecutor = Executors.newSingleThreadExecutor()
-    private val myHandler = Handler(Looper.getMainLooper())
-    var StrProblema = ""
+open class Config : AppSofom() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +27,10 @@ open class Config : AppCompatActivity() {
         val txtUpdateGPS = findViewById<EditText>(R.id.txtUpdateGPS)
         val txtUpdateInfo = findViewById<EditText>(R.id.txtUpdateInfo)
         val btnGuardarConfig = findViewById<Button>(R.id.btnGuardarConfig)
-        var txtViewEntornoActual = findViewById<TextView>(R.id.tViewEntornoActual)
-        var txtViewEmpresaActual = findViewById<TextView>(R.id.tViewEmpresaActual)
+        val txtViewEntornoActual = findViewById<TextView>(R.id.tViewEntornoActual)
+        val txtViewEmpresaActual = findViewById<TextView>(R.id.tViewEmpresaActual)
         val txtViewUpdateGPSActual = findViewById<TextView>(R.id.tViewUpdateGPSActual)
-        var txtViewUpdateInfoActual = findViewById<TextView>(R.id.tViewUpdateInfoActual)
+        val txtViewUpdateInfoActual = findViewById<TextView>(R.id.tViewUpdateInfoActual)
         val txtViewIdDispositivo = findViewById<TextView>(R.id.tViewIdDispositivo)
 
         txtViewIdDispositivo.text = "Identificador CIB: " + AppSofomConfigs().getIdInstalacion(this)
@@ -154,6 +147,7 @@ open class Config : AppCompatActivity() {
                     Obj.cLoginPass = ""
                     Obj.cOperador = ""
                     Obj.cInfoTicket = ""
+                    Obj.cIMEI = getIMEI()
                     Obj.Guardar()
                 }
                 catch (ex: Exception){
@@ -163,8 +157,6 @@ open class Config : AppCompatActivity() {
             }
         }
         AppSofomConfigs().lLoggin = false
-
-
     }
 }
 

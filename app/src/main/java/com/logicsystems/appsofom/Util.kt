@@ -23,22 +23,17 @@ open class AppSofomConfigs{
         var cLogPass: String = ""
         var cNameOperador: String = ""
         var cInfoTicket: String = ""
+        var cIMEI: String = ""
         var lLoggin: Boolean = false
         var nDigitosIdDispositivo: Int = 16
         var MODO = DEBUG_MODE.TESTING_INTERNO
         fun URLWSFull(): String {return getURLFUll(cNameEntorno)}
 
-        fun getURLFUll(entorno: String): String{
+        fun getURLFUll(entorno: String = ""): String{
             val url: String = URL_MODOS[MODO]!!
             var cEntorno: String = ""
             if (entorno != "/") { cEntorno = entorno + "/" }
             return url + cEntorno + "WSAppSofom.asmx"
-        }
-
-        fun getIMEI(_context: Context): String {
-            //TelephonyManager tm = (TelephonyManager)_context.GetSystemService(Android.Content.Context.TelephonyService);
-            //StrIMEI = tm.DeviceId;
-            return getIdInstalacion(_context)
         }
 
         fun getIdInstalacion(_context: Context): String {
@@ -74,6 +69,7 @@ open class AppSofomConfigs{
                     cLogPass = Data.c.getString(6)
                     cNameOperador = Data.c.getString(7)
                     cInfoTicket = Data.c.getString(8)
+                    cIMEI = Data.c.getString(9)
                 }
             }
         }

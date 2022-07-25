@@ -3,10 +3,9 @@ package com.logicsystems.appsofom.datos
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.provider.BaseColumns
 
 
-open class ClsGenerica : BaseColumns {
+open class ClsGenerica{
     protected var StrProblema: String = ""
     val cProblema: String = this.StrProblema
 

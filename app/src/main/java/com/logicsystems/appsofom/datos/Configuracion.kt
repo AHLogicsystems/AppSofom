@@ -18,6 +18,7 @@ open class ClsConfiguracion : ClsGenerica() {
     var cLoginPass: String = ""
     var cOperador: String = ""
     var cInfoTicket: String = ""
+    var cIMEI = ""
 
     fun validacion(ODB: SQLiteDatabase): Boolean {
         var BlnReturn = false
@@ -31,7 +32,6 @@ open class ClsConfiguracion : ClsGenerica() {
         var BlnReturn: Boolean = false
         try {
             if (this.Id == 0) {
-                //Insertamos los datos en la tabla Usuarios
                 val values = ContentValues().apply {
                     put(Configuracion.cEntorno, cEntorno)
                     put(Configuracion.cEmpresa, cEmpresa)
@@ -41,6 +41,7 @@ open class ClsConfiguracion : ClsGenerica() {
                     put(Configuracion.cLoginPass, cLoginPass)
                     put(Configuracion.cOperador, cOperador)
                     put(Configuracion.cInfoTicket, cInfoTicket)
+                    put(Configuracion.cIMEI, cIMEI)
                 }
                 val LastId: Long = OCom.insert(Configuracion.TABLE_NAME, null, values)
                 this.Id = LastId.toInt()
@@ -55,6 +56,7 @@ open class ClsConfiguracion : ClsGenerica() {
                             "cLoginPass= '" + this.cLoginPass + "'," +
                             "cOperador= '" + this.cOperador + "'," +
                             "cInfoTicket= '" + this.cInfoTicket + "' " +
+                            "cIMEI= '" + this.cIMEI + "' " +
                             "Where Id=" + this.Id.toString()
                 )
             }
@@ -68,7 +70,7 @@ open class ClsConfiguracion : ClsGenerica() {
     }
 
     override fun LoadAll (OCom: SQLiteDatabase): Boolean{
-        val columnas = arrayOf(Configuracion.Id, Configuracion.cEntorno, Configuracion.cEmpresa, Configuracion.nMinUpdateGPS, Configuracion.nMinUpdateInfo, Configuracion.cLoginUser, Configuracion.cLoginPass, Configuracion.cOperador, Configuracion.cInfoTicket)
+        val columnas = arrayOf(Configuracion.Id, Configuracion.cEntorno, Configuracion.cEmpresa, Configuracion.nMinUpdateGPS, Configuracion.nMinUpdateInfo, Configuracion.cLoginUser, Configuracion.cLoginPass, Configuracion.cOperador, Configuracion.cInfoTicket, Configuracion.cIMEI)
         try {
             this.c = OCom.query(Configuracion.TABLE_NAME, columnas, null, null, null, null, null)
         }

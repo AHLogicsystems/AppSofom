@@ -10,15 +10,10 @@ import com.logicsystems.appsofom.AppSofomConfigs
 import com.logicsystems.appsofom.ClsCapaNegocios
 import com.logicsystems.appsofom.Reference
 import com.logicsystems.appsofom.UserApp
-import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserException
-import org.xmlpull.v1.XmlPullParserFactory
-import java.io.IOException
-import java.io.StringReader
 
 open class Utils : Reference(){
     fun MultiWebMethodsAppAsync(context: Context, dialog: ProgressBar, StrMetodo: String, obtenerParametro: ClsCapaNegocios): Boolean {
-        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
+//        val StrIMEI: String = querys()
         val parametro: ClsCapaNegocios = obtenerParametro
         return if (parametro.StrProblema != "") {
             Toast.makeText(context, parametro.StrProblema, Toast.LENGTH_LONG).show()
@@ -31,11 +26,11 @@ open class Utils : Reference(){
             parametro.StrXMLReturn,
             UserApp.StrUser,
             UserApp.StrPass,
-            StrIMEI
+            ""
         )
     }
     fun MultiWebMethodsAppAsync(context: Context, dialog: ProgressBar, StrMetodo: String, parametro: String): Boolean? {
-        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
+//        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
         return this.MultiWebMethodsAppAsync(
             dialog,
             AppSofomConfigs().cNameEmpresa,
@@ -44,7 +39,7 @@ open class Utils : Reference(){
             parametro,
             UserApp.StrUser,
             UserApp.StrPass,
-            StrIMEI
+            ""
         )
     }
     fun MultiWebMethodsAppAsync(dialog: ProgressBar?, StrEmpresa: String, StrClaseNegocios: String, StrMetodo: String, StrParametros: String, StrUser: String, StrPass: String, StrIMEI: String): Boolean {
@@ -104,35 +99,4 @@ open class Utils : Reference(){
 //            ex.printStackTrace().toString()
 //        }
 //    }
-
-    data class Entry (val Any: List<Any>?)
-    @Throws(XmlPullParserException::class, IOException::class)
-    fun parse(type: Any, XmlArray: String, cXML: String) : List<*> {
-        val nameClass = type.javaClass.name
-        val MOV = mutableListOf<String>()
-        val factory: XmlPullParserFactory = XmlPullParserFactory.newInstance()
-        factory.setNamespaceAware(true)
-        val xpp: XmlPullParser = factory.newPullParser()
-        xpp.setInput(StringReader(cXML))
-        var eventType = xpp.eventType
-        while (eventType != XmlPullParser.END_DOCUMENT) {
-
-
-
-            if (eventType == XmlPullParser.START_DOCUMENT) {
-                println("Start document")
-            } else if (eventType == XmlPullParser.START_TAG) {
-                println("Start tag " + xpp.name)
-            } else if (eventType == XmlPullParser.END_TAG) {
-                println("End tag " + xpp.name)
-            } else if (eventType == XmlPullParser.TEXT) {
-                println("Text " + xpp.text)
-                if (xpp.text.trim() != "") MOV.add(xpp.text)
-            }
-            eventType = xpp.next()
-        }
-        println("End document")
-        return MOV
-    }
-
 }

@@ -697,7 +697,7 @@ class AppSofomSearch {
 
 class AppSearchRespuesta : AppRespuesta()
 {
-    var Creditos = mutableListOf<AppCredito>()
+    var Creditos = arrayListOf<AppCredito>()
 }
 
 class AppCredito : IBasicListElement {
