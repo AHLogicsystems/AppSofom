@@ -2,15 +2,17 @@ package com.logicsystems.appsofom
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.provider.Settings
 import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.*
 import com.logicsystems.appsofom.datos.ClsConfiguracion
+import com.logicsystems.appsofom.datos.ClsGenerica
 import com.logicsystems.appsofom.datos.Service
 
 
-open class Config : AppSofom() {
+open class Config : ClsGenerica() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +35,17 @@ open class Config : AppSofom() {
         val txtViewUpdateInfoActual = findViewById<TextView>(R.id.tViewUpdateInfoActual)
         val txtViewIdDispositivo = findViewById<TextView>(R.id.tViewIdDispositivo)
 
-        txtViewIdDispositivo.text = "Identificador CIB: " + AppSofomConfigs().getIdInstalacion(this)
+        val config = AppSofomConfigs()
+        config.LoadConfig(this)
+        val Obj2 = ClsConfiguracion()
+        Obj2.Id = config.IdConfiguracion
+
+        txtViewIdDispositivo.text = "Identificador CIB: ${config.cIMEI}"
         txtViewEmpresa.visibility = View.GONE
         spinnerEmpresa.visibility = View.GONE
         txtUpdateGPS.visibility = View.GONE
         txtUpdateInfo.visibility = View.GONE
         btnGuardarConfig.visibility = View.GONE
-
-
-        val config = AppSofomConfigs()
-        config.LoadConfig(this)
-        val Obj2 = ClsConfiguracion()
-        Obj2.Id = config.IdConfiguracion
 
         if (config.IdConfiguracion != 0){
             txtViewEntornoActual.text = config.cNameEntorno
@@ -138,7 +139,7 @@ open class Config : AppSofom() {
                     val Obj = ClsConfiguracion()
                     //ConfigSave.nTipoOperacion = 1;
                     Obj.SetContext(this)
-                    Obj.Id = AppSofomConfigs().IdConfiguracion
+                    Obj.Id = config.IdConfiguracion
                     Obj.cEntorno = txtEntorno.text.toString().uppercase()
                     Obj.cEmpresa = spinnerEmpresa.selectedItem.toString().uppercase()
                     Obj.nMinUpdateGPS = cUpdateGPS.toIntOrNull() ?: 0
@@ -154,9 +155,24 @@ open class Config : AppSofom() {
                     Log.e("Error", ex.message.toString())
                 }
                 //ConfigSave.Execute(Obj);
+                if (this.StrProblema == ""){
+                    this.finish()
+                }
             }
         }
         AppSofomConfigs().lLoggin = false
+    }
+    fun getIMEI() : String{
+        var cIMEI = ""
+        try{
+            cIMEI = Settings.Secure.getString(applicationContext.contentResolver,  Settings.Secure.ANDROID_ID)
+            cIMEI = Settings.System.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+            Log.d("IMEI",cIMEI)
+        }
+        catch (ex: Exception){
+            Log.e("Error en IMEI", ex.message.toString())
+        }
+        return cIMEI
     }
 }
 

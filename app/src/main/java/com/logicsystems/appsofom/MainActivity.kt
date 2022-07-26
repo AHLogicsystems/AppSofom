@@ -1,34 +1,45 @@
 package com.logicsystems.appsofom
 
+import android.content.res.Configuration
 import android.os.Bundle
-import android.os.SystemClock
-import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import com.logicsystems.appsofom.datos.ClsGenerica
 import com.logicsystems.appsofom.datos.Utils
 
 
-class MainActivity : AppCompatActivity() {
-    lateinit var mPreviosItem: MenuItem
-
-    var timer: SystemClock? = null
-    lateinit var timer2: SystemClock
-    var timerEstatus: SystemClock? = null
-    var txtEstadoConexion = TextView(this)
+class MainActivity : ClsGenerica() , NavigationView.OnNavigationItemSelectedListener{
+    private  lateinit var drawer: DrawerLayout
+    private  lateinit var toogle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main)
+        setSupportActionBar(toolbar)
+
+        drawer = findViewById(R.id.drawer_layout)
+
+        toogle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toogle)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
 
         val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
 
-        setSupportActionBar(findViewById(R.id.toolbar1))
+//        val navigationView: NavigationView = findViewById(R.id.nav_view)
+
+//        setSupportActionBar(findViewById(R.id.toolbar1))
 //        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-        setSupportActionBar(findViewById(R.id.toolbar1))
+//        setSupportActionBar(findViewById(R.id.toolbar1))
         val SAB = supportActionBar
         if (SAB != null) {
             SAB.title = "Bienvenido al CIB"
@@ -42,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 //            R.string.ApplicationName,
 //            R.string.drawer_close
 //        )
-        setSupportActionBar(findViewById(R.id.toolbar1))
+//        setSupportActionBar(findViewById(R.id.toolbar1))
         supportActionBar?.setDisplayShowTitleEnabled(true)
         supportActionBar?.setDisplayUseLogoEnabled(true)
 
@@ -51,14 +62,42 @@ class MainActivity : AppCompatActivity() {
 //        navigationView.setNavigationItemSelectedListener(this)
 
         val headerLayout: View = navigationView.getHeaderView(0)
-        val nav_menu: TextView = headerLayout.findViewById(R.id.navheader_username)
-        nav_menu.text = UserApp.StrNickName
+//        val nav_menu: TextView = headerLayout.findViewById(R.id.navheader_username)
+//        nav_menu.text = UserApp.StrNickName
 
-        txtEstadoConexion = headerLayout.findViewById(R.id.navheader_email)
+//        txtEstadoConexion = headerLayout.findViewById(R.id.navheader_email)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.nav_item_one -> Toast.makeText(this, "Item 1", Toast.LENGTH_SHORT).show()
+            R.id.nav_item_two -> Toast.makeText(this, "Item 2", Toast.LENGTH_SHORT).show()
+            R.id.nav_item_three -> Toast.makeText(this, "Item 3", Toast.LENGTH_SHORT).show()
+        }
+
+        drawer.closeDrawer(GravityCompat.START)
+        return  true
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        toogle.syncState()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        toogle.onConfigurationChanged(newConfig)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toogle.onOptionsItemSelected(item)){
+            return  true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun VerificarConexion() {
-        txtEstadoConexion.text = EstatusConexion()
+//        txtEstadoConexion.text = EstatusConexion()
     }
 
     fun EstatusConexion(): String {

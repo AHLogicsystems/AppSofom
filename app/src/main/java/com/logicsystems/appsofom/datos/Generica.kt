@@ -3,9 +3,14 @@ package com.logicsystems.appsofom.datos
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.os.Handler
+import android.os.Looper
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import java.util.concurrent.Executors
 
 
-open class ClsGenerica{
+open class ClsGenerica : AppCompatActivity(){
     protected var StrProblema: String = ""
     val cProblema: String = this.StrProblema
 
@@ -15,6 +20,18 @@ open class ClsGenerica{
     fun SetContext(context: Context) {
         this.myContext = context
         _helper = DataManagerHelper(context)
+    }
+
+
+    val myExecutor = Executors.newSingleThreadExecutor()
+    val myHandler = Handler(Looper.getMainLooper())
+
+    open fun alertasError(_context: Context, StrProblema: String){
+        AlertDialog.Builder(_context).apply {
+            setTitle("Mensaje del sistema")
+            setMessage(StrProblema)
+            setPositiveButton("Aceptar", null)
+        }.show()
     }
 
     fun Limpiar() {

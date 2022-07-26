@@ -37,6 +37,10 @@
     <string name="GuardarConfiguración" translatable="false">Guardar Configuración</string>
     <string name="ConfiguracionActual" translatable="false">Configuración Actual</string>
 
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+
     <string-array name="Genero_array">
         <item>Masculino</item>
         <item>Femenino</item>

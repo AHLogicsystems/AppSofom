@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_header"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:background="#1976D2"
-    android:orientation="vertical">
+    android:layout_height="160dp"
+    android:background="@color/CIBBlueLow"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/nav_header_imageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/icon"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/nav_header_textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="#FFF"
-        android:textStyle="bold"
-        android:gravity="left"
-        android:paddingBottom="4dp"
-        android:id="@+id/navheader_username"
-        android:layout_marginLeft="24dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/navheader_email"
-        android:gravity="left"
-        android:layout_marginBottom="8dp"
-        android:textSize="14sp"
-        android:textColor="#fff"
-        android:text="Estado de Conexión online"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/navheader_username"
-        android:layout_alignStart="@+id/navheader_username" />
-</RelativeLayout>
+        android:paddingTop="16dp"
+        android:text="Temporal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+</LinearLayout>

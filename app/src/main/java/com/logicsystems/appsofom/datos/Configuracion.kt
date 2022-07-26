@@ -55,7 +55,7 @@ open class ClsConfiguracion : ClsGenerica() {
                             "cLoginUser= '" + this.cLoginUser + "'," +
                             "cLoginPass= '" + this.cLoginPass + "'," +
                             "cOperador= '" + this.cOperador + "'," +
-                            "cInfoTicket= '" + this.cInfoTicket + "' " +
+                            "cInfoTicket= '" + this.cInfoTicket + "'," +
                             "cIMEI= '" + this.cIMEI + "' " +
                             "Where Id=" + this.Id.toString()
                 )
