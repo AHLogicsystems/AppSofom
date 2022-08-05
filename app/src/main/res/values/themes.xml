@@ -1,28 +1,39 @@
 <resources>
-	<style name="AlmicantaratTheme" parent="Theme.AppCompat.NoActionBar">
-		<item name="android:windowNoTitle">true</item>
-		<item name="android:windowActionBar">false</item>
-		<item name="android:colorPrimary">#15014E</item>
-	</style>
 
-  <style name="MyThemeConfig" parent="MyTheme.Base">
-  </style>
-  <style name="MyTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
-    <item name="android:windowNoTitle">true</item>
-    <item name="windowActionBar">false</item>
-    <item name="colorPrimary">#2196F3</item>
-    <item name="colorPrimaryDark">#1976D2</item>
-    <item name="colorAccent">#039BE5</item>
-  </style>
-  <style name="InputLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
-    <item name="android:paddingBottom">@dimen/input_label_vertical_spinner</item>
-    <item name="android:paddingLeft">@dimen/input_label_horizontal_spinner</item>
-    <item name="android:paddingRight">@dimen/input_label_horizontal_spinner</item>
-  </style>
+    <style name="AlmicantaratTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:colorPrimary">#15014E</item>
+    </style>
+
+    <style name="MyThemeConfig" parent="MyTheme.Base"></style>
+
+    <style name="MyTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimaryDark">#1976D2</item>
+        <item name="colorAccent">#039BE5</item>
+    </style>
+
+    <style name="InputLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="android:paddingBottom">@dimen/input_label_vertical_spinner</item>
+        <item name="android:paddingLeft">@dimen/input_label_horizontal_spinner</item>
+        <item name="android:paddingRight">@dimen/input_label_horizontal_spinner</item>
+    </style>
 
     <style name="EditTextHint" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="colorControlActivated">@color/CIBBlueHeavy</item>
     </style>
+
+    <style name="NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

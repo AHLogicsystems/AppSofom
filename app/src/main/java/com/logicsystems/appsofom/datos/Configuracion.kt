@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import com.logicsystems.appsofom.datos.bd.Configuracion
 
-
 open class ClsConfiguracion : ClsGenerica() {
     lateinit var c: Cursor
     var Id: Int = 0

@@ -1,4 +1,4 @@
-package com.logicsystems.appsofom
+package com.logicsystems.appsofom.datos
 
 //region RequestCodes
 enum class WS_OPERATION {

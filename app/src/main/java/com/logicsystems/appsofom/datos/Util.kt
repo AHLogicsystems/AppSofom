@@ -1,10 +1,10 @@
-package com.logicsystems.appsofom
+package com.logicsystems.appsofom.datos
 
 import android.content.Context
 import android.provider.Settings
 import android.widget.Spinner
 import android.widget.Toast
-import com.logicsystems.appsofom.datos.ClsConfiguracion
+import com.logicsystems.appsofom.R
 
 
 open class AppSofomConfigs{

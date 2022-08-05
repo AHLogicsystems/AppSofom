@@ -6,9 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.logicsystems.appsofom.AppSofomConfigs
 import com.logicsystems.appsofom.ClsCapaNegocios
-import com.logicsystems.appsofom.Reference
 import com.logicsystems.appsofom.UserApp
 
 open class Utils : Reference(){

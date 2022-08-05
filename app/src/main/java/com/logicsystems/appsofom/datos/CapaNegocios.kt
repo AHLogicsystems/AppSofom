@@ -2,6 +2,7 @@ package com.logicsystems.appsofom
 
 import android.app.Application
 import com.logicsystems.appsofom.Adapters.IBasicListElement
+import com.logicsystems.appsofom.datos.EdosCorte
 import org.xml.sax.helpers.XMLReaderAdapter
 import org.xmlpull.v1.XmlSerializer
 import java.io.StringWriter

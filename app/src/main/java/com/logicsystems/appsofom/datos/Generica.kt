@@ -5,8 +5,14 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Handler
 import android.os.Looper
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserException
+import org.xmlpull.v1.XmlPullParserFactory
+import java.io.IOException
+import java.io.InputStream
+import java.math.BigInteger
+import java.security.MessageDigest
 import java.util.concurrent.Executors
 
 
@@ -16,23 +22,62 @@ open class ClsGenerica : AppCompatActivity(){
 
     lateinit var myContext: Context
 
+    val service = Service()
+    val config = AppSofomConfigs()
+    val OCom = ConnectSql().dbConn()?.createStatement()
+
     private lateinit var _helper: DataManagerHelper
     fun SetContext(context: Context) {
         this.myContext = context
         _helper = DataManagerHelper(context)
     }
 
+    open fun readXML(cXML: InputStream): String{
+        var cReturn = ""
+        // Try and Catch for avoiding the application to crash
+        try {
+
+            // creating a user list string hash map arraylist
+            val userList = ArrayList<HashMap<String, String?>>()
+            var user = HashMap<String, String?>()
+
+            //creating a XmlPull parse Factory instance
+            val parserFactory = XmlPullParserFactory.newInstance()
+            val parser = parserFactory.newPullParser()
+
+            // setting the namespaces feature to false
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
+
+            // setting the input to the parser
+            parser.setInput(cXML, null)
+
+            // working with the input stream
+            var tag: String? = ""
+            var text: String? = ""
+            var event = parser.eventType
+            while (event != XmlPullParser.END_DOCUMENT) {
+                tag = parser.name
+                when (event) {
+                    XmlPullParser.START_TAG -> if (tag == "string") user = HashMap()
+                    XmlPullParser.TEXT -> text = parser.text
+                    XmlPullParser.END_TAG -> when (tag) {
+                        "string" -> cReturn = text.toString()
+                        "user" -> userList.add(user)
+                    }
+                }
+                event = parser.next()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } catch (e: XmlPullParserException) {
+            e.printStackTrace()
+        }
+        return cReturn
+    }
+
 
     val myExecutor = Executors.newSingleThreadExecutor()
     val myHandler = Handler(Looper.getMainLooper())
-
-    open fun alertasError(_context: Context, StrProblema: String){
-        AlertDialog.Builder(_context).apply {
-            setTitle("Mensaje del sistema")
-            setMessage(StrProblema)
-            setPositiveButton("Aceptar", null)
-        }.show()
-    }
 
     fun Limpiar() {
         this.StrProblema = ""
@@ -208,6 +253,12 @@ open class ClsGenerica : AppCompatActivity(){
             }
         }
         return false
+    }
+}
+object MD5 {
+    fun toMD5(input:String): String {
+        val md = MessageDigest.getInstance("MD5")
+        return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
     }
 }
 class GeoCoordinate{

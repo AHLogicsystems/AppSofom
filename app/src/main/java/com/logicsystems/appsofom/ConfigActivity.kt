@@ -7,12 +7,12 @@ import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.*
+import com.logicsystems.appsofom.datos.AppSofomConfigs
 import com.logicsystems.appsofom.datos.ClsConfiguracion
 import com.logicsystems.appsofom.datos.ClsGenerica
-import com.logicsystems.appsofom.datos.Service
 
 
-open class Config : ClsGenerica() {
+open class ConfigActivity : ClsGenerica() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,44 +67,37 @@ open class Config : ClsGenerica() {
                 }
                 btnEntorno.isEnabled = false
 
-                val service = Service()
                 service.Url = AppSofomConfigs().getURLFUll(txtEntorno.text.toString().uppercase().trim())
-                myExecutor.execute {
-                    val OJson = service.callApi("AppGetEmpresas", arrayListOf())
-                    if(service.StrProblema == ""){
-                        val ORespuesta = service.parseJSON<AppListaEmpresa>(OJson)
-                        val Mov = arrayListOf<String>()
-                        for (OEach in ORespuesta.Empresas){
-                            Mov.add(OEach.Empresa)
-                        }
-                        val AdapterEmpresas = ArrayAdapter(this, R.layout.spinner_item, Mov)
-                        myHandler.post {
-                            AdapterEmpresas.setDropDownViewResource(R.layout.spinner_dropdown_item)
-                            with(spinnerEmpresa)
-                            {
-                                adapter = AdapterEmpresas
-                                setSelection(0, false)
-                                prompt = "Selecciona tu ambiente"
-                                gravity = android.view.Gravity.CENTER
-                                visibility = View.VISIBLE
-                            }
-                            txtViewEmpresa.visibility = View.VISIBLE
-                            spinnerEmpresa.visibility = View.VISIBLE
-                            txtUpdateGPS.visibility = View.VISIBLE
-                            txtUpdateInfo.visibility = View.VISIBLE
-                            btnGuardarConfig.visibility = View.VISIBLE
-                        }
+                if (service.AppGetEmpresas()){
+                    val OJson = service.cJSON
+                    val ORespuesta = service.parseJSON<AppListaEmpresa>(OJson)
+                    val Mov = arrayListOf<String>()
+                    for (OEach in ORespuesta.Empresas){
+                        Mov.add(OEach.Empresa)
                     }
-                    else{
-                        myHandler.post {
-                            Toast.makeText(this, service.StrProblema, Toast.LENGTH_LONG).show()
-                            txtEntorno.apply {
-                                isFocusableInTouchMode = true
-                                isFocusable = true
-                            }
-                            btnEntorno.isEnabled = true
-                        }
+                    val AdapterEmpresas = ArrayAdapter(this, R.layout.spinner_item, Mov)
+                    AdapterEmpresas.setDropDownViewResource(R.layout.spinner_dropdown_item)
+                    with(spinnerEmpresa)
+                    {
+                        adapter = AdapterEmpresas
+                        setSelection(0, false)
+                        prompt = "Selecciona tu ambiente"
+                        gravity = android.view.Gravity.CENTER
+                        visibility = View.VISIBLE
                     }
+                    txtViewEmpresa.visibility = View.VISIBLE
+                    spinnerEmpresa.visibility = View.VISIBLE
+                    txtUpdateGPS.visibility = View.VISIBLE
+                    txtUpdateInfo.visibility = View.VISIBLE
+                    btnGuardarConfig.visibility = View.VISIBLE
+                }
+                else{
+                    service.alertasError(this, service.StrProblema)
+                    txtEntorno.apply {
+                        isFocusableInTouchMode = true
+                        isFocusable = true
+                    }
+                    btnEntorno.isEnabled = true
                 }
             }
             else

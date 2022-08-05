@@ -1,5 +1,7 @@
-package com.logicsystems.appsofom
+package com.logicsystems.appsofom.datos
 
+import android.content.Context
+import androidx.appcompat.app.AlertDialog
 import java.net.URI
 
 
@@ -44,4 +46,11 @@ open class Reference {
 //    fun AppGetEmpresasAsync(txtTest: TextView, userState: Any?) {
 //        Utils().doMyTask(txtTest, "AppGetEmpresas", listOf())
 //    }
+    open fun alertasError(_context: Context, StrProblema: String){
+        AlertDialog.Builder(_context).apply {
+            setTitle("Mensaje del sistema")
+            setMessage(StrProblema)
+            setPositiveButton("Aceptar", null)
+        }.show()
+    }
 }

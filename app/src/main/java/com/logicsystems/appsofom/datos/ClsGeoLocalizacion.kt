@@ -10,7 +10,6 @@ import android.location.LocationManager
 import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
-import com.logicsystems.appsofom.AppSofomConfigs
 import com.logicsystems.appsofom.ClsCapaNegocios
 import com.logicsystems.appsofom.UbicacionGPS
 import com.logicsystems.appsofom.UserApp
@@ -22,7 +21,6 @@ class ClsGeoLocalizacionRegs{
 }
 
 open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
-    val service = Utils()
     val servicePendiente = Utils()
     val OCapa = ClsCapaNegocios()
 
@@ -114,7 +112,8 @@ open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
 
             val strXML: String = OCapa.StrXMLReturn.replace("AppUbicacionesGPS", "Ubicaciones")
 
-            service.MultiWebMethodsAppAsync(null,AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
+            service.MultiWebMethodsAppAsync(null,
+                AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
         }
     }
 
@@ -129,7 +128,8 @@ open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
         else{
             val strXML: String = OCapa.StrXMLReturn.replace("AppUbicacionesGPS", "Ubicaciones")
 
-            servicePendiente.MultiWebMethodsAppAsync(null,AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
+            servicePendiente.MultiWebMethodsAppAsync(null,
+                AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
         }
     }
 }
