@@ -15,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.AppSofom" />
+        <activity
             android:name=".ClientesActivity"
             android:exported="false" />
         <activity

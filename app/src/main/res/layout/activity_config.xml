@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        style="@style/InputLabel" />
+        style="@style/Theme.AppSofom.InputLabel" />
 
     <Spinner
         android:layout_width="match_parent"

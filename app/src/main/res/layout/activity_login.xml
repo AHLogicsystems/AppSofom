@@ -18,12 +18,14 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical"
-        android:background="@android:color/white">
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:id="@+id/dialogTitle"
@@ -40,6 +42,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="350dp"
         android:layout_height="300dp"
         android:background="@drawable/rounded_linearlayout"
@@ -52,7 +55,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/EditTextHint">
+            android:theme="@style/Theme.AppSofom.EditTextHint">
 
             <EditText
                 android:id="@+id/txtUserName"
@@ -67,13 +70,13 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:text=""
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/EditTextHint">
+            android:theme="@style/Theme.AppSofom.EditTextHint">
 
             <EditText
                 android:id="@+id/txtPassword"
@@ -101,10 +104,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="80dp"
             android:background="@drawable/rounded_buttom"
-            android:text="@string/Entrar"
-            android:textColor="@android:color/white"
             android:onClick="LogInUser"
-            />
+            android:text="@string/Entrar"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/txtViewConfigurar"
@@ -112,9 +114,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:onClick="ConfigUser"
             android:text="@string/text_configurar"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#0099CC"
-            android:onClick="ConfigUser"/>
+            android:textColor="#0099CC" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarLogin"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

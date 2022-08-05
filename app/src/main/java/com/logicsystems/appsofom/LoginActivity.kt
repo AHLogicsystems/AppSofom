@@ -4,14 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import com.logicsystems.appsofom.datos.ClsConfiguracion
 import com.logicsystems.appsofom.datos.ClsGenerica
 import com.logicsystems.appsofom.datos.Utils
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
 
 open class LoginActivity : ClsGenerica() {
     private lateinit var txtUserName: EditText
     private lateinit var txtPassword: EditText
+    private lateinit var loading: pl.droidsonroids.gif.GifImageView
+    private lateinit var progressBar: ProgressBar
+    private val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,10 +25,22 @@ open class LoginActivity : ClsGenerica() {
 
         txtUserName = findViewById(R.id.txtUserName)
         txtPassword = findViewById(R.id.txtPassword)
+//        loading = findViewById(R.id.gifLoading)
+        progressBar = findViewById(R.id.progressBarLogin)
+        progressBar.visibility = View.GONE
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        scope.cancel() // Destruimos el alcance de la corrutina
     }
 
     fun LogInUser(v: View){
+        progressBar.visibility = View.VISIBLE
         LogIn()
+        progressBar.visibility = View.GONE
     }
 
     private fun LogIn(){
@@ -68,8 +86,8 @@ open class LoginActivity : ClsGenerica() {
                                             UserApp.StrNickName = config.cNameOperador
                                             txtUserName.setText("")
                                             txtPassword.setText("")
-//                                            val intent = Intent(this, MainActivity::class.java)
-//                                            this.startActivity(intent)
+                                            val intent = Intent(this, MainActivity::class.java)
+                                            this.startActivity(intent)
                                             this.finish()
                                         }
                                     } else {
@@ -83,8 +101,8 @@ open class LoginActivity : ClsGenerica() {
                                 UserApp.StrNickName = config.cNameOperador
                                 txtUserName.setText("")
                                 txtPassword.setText("")
-//                                val intent = Intent(this, MainActivity::class.java)
-//                                this.startActivity(intent)
+                                val intent = Intent(this, MainActivity::class.java)
+                                this.startActivity(intent)
                                 this.finish()
                             }
                         }
