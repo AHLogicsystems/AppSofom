@@ -2,7 +2,7 @@ package com.logicsystems.appsofom
 
 import android.os.Bundle
 import android.view.Menu
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,8 +12,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.logicsystems.appsofom.databinding.ActivityMainBinding
+import com.logicsystems.appsofom.datos.ClsGenerica
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : ClsGenerica() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -37,11 +39,15 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_caja, R.id.nav_prestamo, R.id.nav_otros, R.id.nav_reportes
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val hView = navView.getHeaderView(0)
+        val txtUser: TextView = hView.findViewById(R.id.txtUserHeader)
+        txtUser.text = UserApp.StrUser
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -10,7 +10,7 @@ import com.logicsystems.appsofom.R
 open class AppSofomConfigs{
         var URL_MODOS = mapOf(
             DEBUG_MODE.LOCAL to "https://192.168.201.77/",
-            DEBUG_MODE.TESTING_INTERNO to "https://testing.logicsystems.com.mx/",
+            DEBUG_MODE.TESTING_INTERNO to "http://testing.logicsystems.com.mx/",
             DEBUG_MODE.TESTING_EXTERNO to "http://187.141.66.20:5001/",
             DEBUG_MODE.PRODUCCION to "https://cib.logicsystems.com.mx/"
         )

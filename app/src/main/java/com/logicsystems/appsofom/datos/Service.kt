@@ -121,6 +121,9 @@ class Service : Utils() {
                 conn.requestMethod = "GET"
                 conn.doInput = true
                 conn.connect()
+
+
+
                 val parserFactory = XmlPullParserFactory.newInstance()
                 val parser = parserFactory.newPullParser()
 

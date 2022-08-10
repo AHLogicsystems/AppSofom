@@ -11,9 +11,29 @@
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/bordetablatitulo.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/gradient_principal.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_User.xml" value="0.1295" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_assessment.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_delete.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_event.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_hand_holding_dollar_solid.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_headset.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_img_solicitud.xml" value="0.197" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_assignment.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_camera.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_clientes.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_currency.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_done.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_exit.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_home.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_prestamos.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_settings.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_nav_clientes.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_phone.xml" value="0.197" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_search.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_trending_up.xml" value="0.197" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_user.xml" value="0.1005" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/myrect.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/rounded_buttom.xml" value="0.1295" />
@@ -31,9 +51,15 @@
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_splash_screen.xml" value="0.1859375" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/app_bar_main.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/content_main.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/fragment_cliente.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/fragment_clientes.xml" value="0.1859375" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/fragment_gallery.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/fragment_home.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/fragment_prestamos.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/fragment_slideshow.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/ic_menu_currency.xml" value="0.148224043715847" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/item_subprestamo.xml" value="0.5" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/listitem_subprestamos.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/login.xml" value="0.21" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/myrect.xml" value="0.1859375" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/nav_header.xml" value="0.19895833333333332" />

@@ -30,6 +30,8 @@
         <item name="colorControlActivated">@color/CIBBlueHeavy</item>
     </style>
 
+
+
     <style name="Theme.AppSofom.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AppSofom.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

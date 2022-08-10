@@ -13,6 +13,7 @@
         android:label="@string/ApplicationName"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name=".MainActivity"
