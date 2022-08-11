@@ -1,8 +1,10 @@
 package com.logicsystems.appsofom.datos
 
 
-import android.os.Handler
-import android.os.Looper
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.util.Log
 import com.google.gson.Gson
 import org.ksoap2.SoapEnvelope
@@ -16,13 +18,32 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
-import java.util.concurrent.Executors
 
-class Service : Utils() {
-    private val myExecutor = Executors.newSingleThreadExecutor()
-    private val myHandler = Handler(Looper.getMainLooper())
+open class Service : Reference() {
     val gson = Gson()
     var cJSON = ""
+
+    fun isConnected(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
+    }
+    companion object {
+        val SOAP_NAMESPACE = "http://LogicSystems.org/"
+    }
 
     fun callApi(methodName: String, params: List<String>): String {
         var result = ""
@@ -70,10 +91,6 @@ class Service : Utils() {
 
         return this.cJSON
     }
-
-//    fun getArrayEmpresas(context: Context, methodName: String) : AppListaEmpresa{
-//        return gson.fromJson(callApi(methodName, arrayListOf()), AppListaEmpresa::class.java)
-//    }
 
     inline fun <reified T : Any> parseJSON(JSON: String) : T {
         return gson.fromJson(JSON, T::class.java)

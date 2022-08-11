@@ -11,8 +11,6 @@ import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.logicsystems.appsofom.ClsCapaNegocios
-import com.logicsystems.appsofom.UbicacionGPS
-import com.logicsystems.appsofom.UserApp
 import java.util.*
 
 
@@ -21,7 +19,6 @@ class ClsGeoLocalizacionRegs{
 }
 
 open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
-    val servicePendiente = Utils()
     val OCapa = ClsCapaNegocios()
 
     var locationManager: LocationManager = Context.LOCATION_SERVICE as LocationManager
@@ -100,36 +97,36 @@ open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
     }
     //endregion
 
-    fun ConsumirWebService(sGeoLocalizacion: String, DteFecha: Date){
-        service.Url = AppSofomConfigs().URLWSFull()
+//    fun ConsumirWebService(sGeoLocalizacion: String, DteFecha: Date){
+//        service.Url = AppSofomConfigs().URLWSFull()
+//
+////        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
+//        if (!OCapa.getXMLSetUbicacionesGPS(sGeoLocalizacion, DteFecha)){
+//            this.StrProblema = "Error en el XML: " + OCapa.StrProblema
+//        }
+//        else{
+//            this.Guardar()
+//
+//            val strXML: String = OCapa.StrXMLReturn.replace("AppUbicacionesGPS", "Ubicaciones")
+//
+//            service.MultiWebMethodsAppAsync(null,
+//                AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
+//        }
+//    }
 
-//        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
-        if (!OCapa.getXMLSetUbicacionesGPS(sGeoLocalizacion, DteFecha)){
-            this.StrProblema = "Error en el XML: " + OCapa.StrProblema
-        }
-        else{
-            this.Guardar()
-
-            val strXML: String = OCapa.StrXMLReturn.replace("AppUbicacionesGPS", "Ubicaciones")
-
-            service.MultiWebMethodsAppAsync(null,
-                AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
-        }
-    }
-
-    fun ConsumirWebService(aGeoLocalizacion: List<UbicacionGPS>){
-        servicePendiente.Url = AppSofomConfigs().URLWSFull()
-
-//        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
-
-        if (!OCapa.getXMLSetUbicacionesGPS(aGeoLocalizacion)){
-            this.StrProblema = "Error en el XML: " + OCapa.StrProblema
-        }
-        else{
-            val strXML: String = OCapa.StrXMLReturn.replace("AppUbicacionesGPS", "Ubicaciones")
-
-            servicePendiente.MultiWebMethodsAppAsync(null,
-                AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
-        }
-    }
+//    fun ConsumirWebService(aGeoLocalizacion: List<UbicacionGPS>){
+//        servicePendiente.Url = AppSofomConfigs().URLWSFull()
+//
+////        val StrIMEI: String = AppSofomConfigs().getIMEI(context)
+//
+//        if (!OCapa.getXMLSetUbicacionesGPS(aGeoLocalizacion)){
+//            this.StrProblema = "Error en el XML: " + OCapa.StrProblema
+//        }
+//        else{
+//            val strXML: String = OCapa.StrXMLReturn.replace("AppUbicacionesGPS", "Ubicaciones")
+//
+//            servicePendiente.MultiWebMethodsAppAsync(null,
+//                AppSofomConfigs().cNameEmpresa, "AppSofom", "SETUBICACIONESGPS", strXML, UserApp.StrUser, UserApp.StrPass, "")
+//        }
+//    }
 }

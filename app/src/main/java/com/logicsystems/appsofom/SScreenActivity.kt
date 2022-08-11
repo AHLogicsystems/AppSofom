@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import com.logicsystems.appsofom.datos.ClsGenerica
 
-class SplashScreenActivity : ClsGenerica() {
+class SScreenActivity : ClsGenerica() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)

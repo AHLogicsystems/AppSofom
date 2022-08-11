@@ -754,7 +754,7 @@ class AppSofomPay {
     var TipoAdelanto = 0
     var FechaPago = Date(Long.MIN_VALUE)
     var IdPagoAPP = 0
-    var Integrantes = mutableListOf<AppClienteGrupo>()
+    var Integrantes = arrayListOf<AppClienteGrupo>()
 }
 
 open class AppCobranzaRespuesta : AppRespuesta()
@@ -771,7 +771,7 @@ open class AppCobranzaRespuesta : AppRespuesta()
     var IdClienteMoral = 0
     var IdGrupoSolidario = 0
 
-    var Integrantes = mutableListOf<AppClienteGrupo>()
+    var Integrantes = arrayListOf<AppClienteGrupo>()
 }
 
 class PeticionReportes {
@@ -781,7 +781,7 @@ class PeticionReportes {
 
 class HistorialPagos : AppRespuesta()
 {
-    var Pagos = mutableListOf<GeneralPagos>()
+    var Pagos = arrayListOf<GeneralPagos>()
 }
 
 open class GeneralPagos : AppRespuesta()
@@ -818,7 +818,7 @@ class DetallePagos : GeneralPagos()
 
 class HistorialCredito : AppRespuesta()
 {
-    var GeneralHistorico = mutableListOf<GeneralHistorialCredito>()
+    var GeneralHistorico = arrayListOf<GeneralHistorialCredito>()
 }
 
 open class GeneralHistorialCredito : AppRespuesta()
@@ -869,11 +869,11 @@ class CorteCajaRespuesta : AppRespuesta()
     var SaldoDeclarado = 0.0
 
     fun NameEstadoCorte(): String {
-        var Name = when (EstadoCorte) {
-            EdosCorte.Abierto as Int -> "Abierto"
-            EdosCorte.Cerrado as Int -> "Cerrado"
-            EdosCorte.Cancelado as Int -> "Cancelado"
-            EdosCorte.Revisado as Int -> "Revisado"
+        val Name = when (EstadoCorte) {
+            EdosCorte.Abierto.ordinal -> "Abierto"
+            EdosCorte.Cerrado.ordinal -> "Cerrado"
+            EdosCorte.Cancelado.ordinal -> "Cancelado"
+            EdosCorte.Revisado.ordinal -> "Revisado"
             else -> {
                 ""
             }
@@ -906,25 +906,25 @@ open class UserApp : Application()
     }
 }
 
-class PrestamoApp : Application()
+open class PrestamoApp : Application()
 {
     var IntIdPrestamo = 0
     var IntIdCobranza = 0
     var IntIdDisposicion = 0
     var DblLiquidar = 0.0
     var IntIdGrupoSolidario = 0
-    var Integrantes = mutableListOf<AppClienteGrupo>()
+    var Integrantes = arrayListOf<AppClienteGrupo>()
 }
 
 class CobranzaRepuesta : AppRespuesta()
 {
-    var Cobranzas = mutableListOf<AppCobranzaRespuesta>()
+    var Cobranzas = arrayListOf<AppCobranzaRespuesta>()
 }
 
 //region GetPrestamosDetalle
 class DisposicionMasivaRespuesta : AppRespuesta()
 {
-    var DetalleDisposicion = mutableListOf<RespuestaPrestamoDetalle>()
+    var DetalleDisposicion = arrayListOf<RespuestaPrestamoDetalle>()
 }
 open class RespuestaPrestamoDetalle : AppRespuesta(){
     //PRESTAMO
@@ -942,7 +942,7 @@ open class RespuestaPrestamoDetalle : AppRespuesta(){
     var IdGrupoSolidario = 0
     var cDireccion = ""
 
-    var Integrantes = mutableListOf<AppClienteGrupo>()
+    var Integrantes = arrayListOf<AppClienteGrupo>()
 }
 class RespuestaAccesorios : RespuestaPrestamoDetalle(){
     var lComision = false
@@ -1006,7 +1006,7 @@ class GetEntregaPrestamo{
 
 //region SetUbicacionGPS
 class UbicacionesGPS{
-    var Ubicacion = mutableListOf<UbicacionGPS>()
+    var Ubicacion = arrayListOf<UbicacionGPS>()
 }
 class UbicacionGPS{
     var GeoLocalizacion = ""
@@ -1134,7 +1134,7 @@ class AppGrupoSolidario : AppRespuesta(){
     var IdGrupoRenovacion = 0
     var cNombreRenovacion = ""
 
-    var Integrantes = mutableListOf<AppClienteGrupo>()
+    var Integrantes = arrayListOf<AppClienteGrupo>()
     var showRolGrupal = true
     var IdPrestamo = 0
     var IdEdoPrestamo = 0
@@ -1153,7 +1153,7 @@ class AppClienteGrupo : AppClienteSimple(){
 }
 
 class AppGrupoSolidarioBusquedaRespuesta : AppRespuesta(){
-    var Grupos = mutableListOf<AppSofomInfoGrupoSolidario>()
+    var Grupos = arrayListOf<AppSofomInfoGrupoSolidario>()
 }
 
 class AppClienteComplete : AppClienteSimple(){
@@ -1234,7 +1234,7 @@ open class AppClienteSimple : AppRespuesta(), IBasicListElement {
 }
 
 class ClienteRepuesta : AppRespuesta(){
-    var Clientes = mutableListOf<AppClienteSimple>()
+    var Clientes = arrayListOf<AppClienteSimple>()
 }
 
 open class AppOperadorSimple : AppRespuesta(), IBasicListElement {
@@ -1300,11 +1300,11 @@ class GetCarteraOperador : AppRespuesta(){
 }
 
 class OperadorRepuesta : AppRespuesta(){
-    var Operadores = mutableListOf<AppOperadorSimple>()
+    var Operadores = arrayListOf<AppOperadorSimple>()
 }
 
 class OperadorCarteraRepuesta : AppRespuesta(){
-    var CarteraOperador = mutableListOf<AppOperadorCartera>()
+    var CarteraOperador = arrayListOf<AppOperadorCartera>()
 }
 
 class AppSinPagoCapital{
@@ -1317,7 +1317,7 @@ class AppSinPagoCapital{
 }
 
 class SinPagoCapitalRespuesta : AppRespuesta(){
-    var SinPagar = mutableListOf<AppSinPagoCapital>()
+    var SinPagar = arrayListOf<AppSinPagoCapital>()
 }
 
 //region Datos PLD
@@ -1326,7 +1326,7 @@ class ClientePLD : AppRespuesta(){
     var Nombre = ""
     var Apellidos = ""
     var DatosPld: DatosClientePLD? = null
-    var Documentos = mutableListOf<DatosDocumentoPLD>()
+    var Documentos = arrayListOf<DatosDocumentoPLD>()
 }
 class DatosClientePLD{
     var Funcionario = 0
@@ -1399,7 +1399,7 @@ class AppPlantilla : IBasicListElement {
     }
 }
 class PlantillaRespuesta : AppRespuesta(){
-    var Plantilla = mutableListOf<AppPlantilla>()
+    var Plantilla = arrayListOf<AppPlantilla>()
 }
 //endregion
 
@@ -1441,7 +1441,7 @@ class AppZonas : IBasicListElement {
 }
 
 class ZonasRespuesta : AppRespuesta(){
-    var Plantilla = mutableListOf<AppZonas>()
+    var Plantilla = arrayListOf<AppZonas>()
 }
 //endregion
 
@@ -1533,7 +1533,7 @@ class AppDireccion : AppRespuesta(), IBasicListElement {
     }
 }
 class DireccionRespuesta : AppRespuesta(){
-    var Direccion = mutableListOf<AppDireccion>()
+    var Direccion = arrayListOf<AppDireccion>()
 }
 //endregion
 
@@ -1580,7 +1580,7 @@ class AppAsentamiento : IBasicListElement {
     }
 }
 class AsentamientoRespuesta : AppRespuesta(){
-    var Asentamiento = mutableListOf<AppAsentamiento>()
+    var Asentamiento = arrayListOf<AppAsentamiento>()
 }
 //endregion
 
@@ -1596,7 +1596,7 @@ class AppClienteTelefono : AppSofomInfoTelefono(){
     var cTel = ""
 }
 class ClienteTelefonoRepuesta : AppRespuesta(){
-    var Telefonos = mutableListOf<AppClienteTelefono>()
+    var Telefonos = arrayListOf<AppClienteTelefono>()
 }
 //endregion
 
@@ -1635,7 +1635,7 @@ class AppEmpresaBusqueda : IBasicListElement {
     }
 }
 class EmpresaRespuesta : AppRespuesta(){
-    var Empresa = mutableListOf<AppEmpresaBusqueda>()
+    var Empresa = arrayListOf<AppEmpresaBusqueda>()
 }
 class NegocioSave : AppRespuesta(){
     var IdNegocio = 0
@@ -1702,7 +1702,7 @@ class AppGiroBusqueda : IBasicListElement {
     }
 }
 class GiroRespuesta : AppRespuesta(){
-    var Giro = mutableListOf<AppGiroBusqueda>()
+    var Giro = arrayListOf<AppGiroBusqueda>()
 }
 //endregion
 
@@ -1741,7 +1741,7 @@ class AppHorario : IBasicListElement {
     }
 }
 class HorarioRespuesta : AppRespuesta(){
-    var Horario = mutableListOf<AppHorario>()
+    var Horario = arrayListOf<AppHorario>()
 }
 //endregion
 

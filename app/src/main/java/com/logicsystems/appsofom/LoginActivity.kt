@@ -4,10 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.ProgressBar
 import com.logicsystems.appsofom.datos.ClsConfiguracion
 import com.logicsystems.appsofom.datos.ClsGenerica
-import com.logicsystems.appsofom.datos.Utils
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 
@@ -15,8 +14,7 @@ import kotlinx.coroutines.cancel
 open class LoginActivity : ClsGenerica() {
     private lateinit var txtUserName: EditText
     private lateinit var txtPassword: EditText
-    private lateinit var loading: pl.droidsonroids.gif.GifImageView
-    private lateinit var progressBar: ProgressBar
+//    private lateinit var progressBar: ProgressBar
     private val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +23,12 @@ open class LoginActivity : ClsGenerica() {
 
         txtUserName = findViewById(R.id.txtUserName)
         txtPassword = findViewById(R.id.txtPassword)
-//        loading = findViewById(R.id.gifLoading)
-        progressBar = findViewById(R.id.progressBarLogin)
-        progressBar.visibility = View.GONE
+
+
+        btnLogIn.setOnClickListener {
+            LogIn()
+        }
+
 
     }
 
@@ -37,16 +38,12 @@ open class LoginActivity : ClsGenerica() {
         scope.cancel() // Destruimos el alcance de la corrutina
     }
 
-    fun LogInUser(v: View){
-        progressBar.visibility = View.VISIBLE
-        LogIn()
-        progressBar.visibility = View.GONE
-    }
-
     private fun LogIn(){
+        val dialog = service.progressBarCIB(this)
         val user = txtUserName.text.toString()
         val pass = txtPassword.text.toString()
-        if (Utils.isConnected(this)){
+        if (service.isConnected(this)){
+            dialog.show()
             config.LoadConfig(this)
             if(config.cNameEntorno != "" && config.cNameEmpresa != ""){
                 service.Url = config.URLWSFull()
@@ -125,10 +122,12 @@ open class LoginActivity : ClsGenerica() {
         else{
             this.StrProblema += "Debe de estar conectado a internet para utilizar nuestros servicios \n"
         }
+
         if (this.StrProblema != ""){
             service.alertasError(this, this.StrProblema)
             this.StrProblema = ""
         }
+        dialog.dismiss()
     }
 
     fun ConfigUser(v: View){

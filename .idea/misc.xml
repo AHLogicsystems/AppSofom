@@ -12,6 +12,7 @@
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/gradient_principal.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_User.xml" value="0.1295" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_assessment.xml" value="0.197" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_circle_add.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_delete.xml" value="0.197" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_event.xml" value="0.197" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/drawable/ic_hand_holding_dollar_solid.xml" value="0.197" />
@@ -44,10 +45,18 @@
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout-v27/activity_login.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1285140562248996" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout-w936dp/activity_login.xml" value="0.15" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_cobro_accesorios.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_config.xml" value="0.22" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_lista_creditos_xcobrar.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_login.xml" value="0.2986003110419907" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_operation.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_operation_search_prestamo.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_prestamos.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_reestructurar.xml" value="0.19655797101449277" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_renovar.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_soap.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_solicitud.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/activity_splash_screen.xml" value="0.1859375" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/app_bar_main.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/content_main.xml" value="0.19655797101449277" />
@@ -58,7 +67,8 @@
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/fragment_prestamos.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/fragment_slideshow.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/ic_menu_currency.xml" value="0.148224043715847" />
-        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/item_subprestamo.xml" value="0.5" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/item_subprestamo.xml" value="0.42953020134228187" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/layout_loading_dialog.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/listitem_subprestamos.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/login.xml" value="0.21" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/myrect.xml" value="0.1859375" />
@@ -67,8 +77,10 @@
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/spinner_item.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/test_layout.xml" value="0.19895833333333332" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/layout/toolbar.xml" value="0.19655797101449277" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/menu/activity_main_drawer.xml" value="0.225" />
         <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/menu/main.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/AppSofom/app/src/main/res/menu/menu_cat.xml" value="0.2" />
       </map>
     </option>
   </component>

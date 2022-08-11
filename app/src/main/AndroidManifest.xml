@@ -13,22 +13,40 @@
         android:label="@string/ApplicationName"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".OperationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListaCreditosXCobrarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityCobroAccesorios"
+            android:exported="false" />
+        <activity
+            android:name=".OperationSearchPrestamo"
+            android:exported="false" />
+        <activity
+            android:name=".ReestructurarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RenovarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SolicitudActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PrestamosActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.AppSofom" />
-        <activity
-            android:name=".ClientesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SearchClientesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SplashScreenActivity"
-            android:exported="true">
+            android:theme="@style/Theme.AppSofom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,9 +54,24 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ClientesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchClientesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
-            android:exported="true" />
-        <activity android:name=".ConfigActivity" />
+            android:exported="true" /> <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <activity
+            android:name=".ConfigActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

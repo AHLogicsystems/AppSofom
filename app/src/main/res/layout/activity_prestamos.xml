@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25dp"
+    android:minHeight="25dp">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/second_toolbar">
+        <TextView
+            android:text="Buscar Prestamos"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="left"
+            android:textColor="#546E7A" />
+    </LinearLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:useDefaultMargins="true"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="false"
+        android:columnCount="5"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:text="Folio:"
+            android:textSize="17dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/txtViewF"
+            android:textColor="@android:color/holo_blue_dark" />
+        <EditText
+            android:ems="8"
+            android:textSize="17dp"
+            android:layout_gravity="left"
+            android:id="@+id/txtFolio"
+            android:textColor="@android:color/black"
+            android:singleLine="true"
+            android:layout_columnSpan="4"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/rounded_edittext" />
+        <TextView
+            android:text="Cliente:"
+            android:textSize="17dp"
+            android:layout_column="0"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/txtViewFolio"
+            android:textColor="@android:color/holo_blue_dark" />
+        <EditText
+            android:ems="12"
+            android:textSize="17dp"
+            android:id="@+id/txtCliente"
+            android:layout_gravity="left"
+            android:textColor="@android:color/black"
+            android:singleLine="true"
+            android:layout_columnSpan="4"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/rounded_edittext" />
+    </GridLayout>
+    <Button
+        android:text="Buscar"
+        android:id="@+id/btnSearch"
+        android:height="20dp"
+        android:textSize="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_buttom" />
+</LinearLayout>

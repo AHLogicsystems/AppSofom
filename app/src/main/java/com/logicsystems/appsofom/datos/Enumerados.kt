@@ -79,3 +79,12 @@ enum class DEBUG_MODE {
     TESTING_EXTERNO,
     PRODUCCION
 }
+
+enum class SolicitudCredito{
+    SOLICITUD,
+    RENOVAR,
+    REESTRUCTURAR,
+    ENTREGAR,
+    COBRAR,
+    COBROACCESORIO
+}
