@@ -5,17 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
 import com.logicsystems.appsofom.datos.ClsGenerica
 import com.logicsystems.appsofom.datos.SolicitudCredito
+import kotlinx.android.synthetic.main.activity_prestamos.*
 
 class PrestamosActivity : ClsGenerica() {
     lateinit var txtFolio: EditText
     lateinit var txtCliente: EditText
-    lateinit var btnSearch: Button
     private lateinit var IMenuAgregarSol: MenuItem
     var IntTypeSearch = 0
     override fun onCreate(savedInstanceState: Bundle?) {

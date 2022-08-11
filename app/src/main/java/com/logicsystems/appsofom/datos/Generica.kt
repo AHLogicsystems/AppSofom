@@ -20,6 +20,8 @@ open class ClsGenerica : AppCompatActivity(){
     protected var StrProblema: String = ""
     val cProblema: String = this.StrProblema
 
+    val ClaseNegocios = "AppSofom"
+
     lateinit var myContext: Context
 
     val service = Service()

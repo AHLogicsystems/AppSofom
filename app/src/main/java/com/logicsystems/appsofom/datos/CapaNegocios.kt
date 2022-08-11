@@ -10,17 +10,17 @@ import java.util.*
 
 
 open class ClsCapaNegocios {
-    open var StrProblema = ""
-    open var StrXMLReturn = ""
-    //region getXML
-    fun getXMLSearch(StrFolio: String, StrCliente: String, IntTypeSearch: Int): Boolean {
+    open var StrJSONResult = ""
+    var StrProblema = ""
+    //region getJSON
+    fun getJSONSearch(StrFolio: String, StrCliente: String, IntTypeSearch: Int): Boolean {
         var BlnReturn = false
         try {
             val OSearch = AppSofomSearch()
             OSearch.Folio = StrFolio
             OSearch.Cliente = StrCliente
             OSearch.TypeSearch = IntTypeSearch
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -30,7 +30,7 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSetUbicacionesGPS(GeoLocalizacion: String, DteUbicacion: Date): Boolean {
+    open fun getJSONSetUbicacionesGPS(GeoLocalizacion: String, DteUbicacion: Date): Boolean {
         var BlnReturn = false
         try {
             val OSearch = UbicacionesGPS()
@@ -38,7 +38,7 @@ open class ClsCapaNegocios {
             oUbicacion.GeoLocalizacion = GeoLocalizacion
             oUbicacion.DteUbicacion = DteUbicacion
             OSearch.Ubicacion.add(oUbicacion)
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -48,14 +48,14 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSetUbicacionesGPS(Ubicaciones: List<UbicacionGPS>): Boolean{
+    open fun getJSONSetUbicacionesGPS(Ubicaciones: List<UbicacionGPS>): Boolean{
         var BlnReturn = false
         try {
             val OSearch = UbicacionesGPS()
             for (oEach: UbicacionGPS in Ubicaciones){
                 OSearch.Ubicacion.add(oEach)
             }
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         }
         catch (ex: Exception)
         {
@@ -68,7 +68,7 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLClientes(Nombres: String, Apellidos: String, RFC: String): Boolean {
+    open fun getJSONClientes(Nombres: String, Apellidos: String, RFC: String): Boolean {
         var BlnReturn = false
         try {
             val OSearch = BuscarCliente()
@@ -76,7 +76,7 @@ open class ClsCapaNegocios {
             OSearch.Nombres = Nombres
             OSearch.Apellidos = Apellidos
             OSearch.RFC = RFC
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -86,12 +86,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLGetClienteComplete(IdCliente: Int): Boolean {
+    open fun getJSONGetClienteComplete(IdCliente: Int): Boolean {
         var BlnReturn = false
         try {
             val OSearch = AppSofomInfoCliente()
             OSearch.IdCliente = IdCliente
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -101,12 +101,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLGetGrupoSolidarioComplete(IdGrupoSolidario: Int): Boolean {
+    open fun getJSONGetGrupoSolidarioComplete(IdGrupoSolidario: Int): Boolean {
         var BlnReturn = false
         try {
             val OSearch = AppSofomInfoGrupoSolidario()
             OSearch.IdGrupoSolidario = IdGrupoSolidario
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -116,12 +116,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLGetGrupoSolidarioSearch(nombre: String): Boolean {
+    open fun getJSONGetGrupoSolidarioSearch(nombre: String): Boolean {
         var BlnReturn = false
         try {
             val OSearch = AppSofomInfoGrupoSolidario()
             OSearch.cNombreGrupo = nombre
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -131,10 +131,10 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLGrupoSolidarioComplete(grupo: AppGrupoSolidario): Boolean {
+    open fun getJSONGrupoSolidarioComplete(grupo: AppGrupoSolidario): Boolean {
         var BlnReturn = false
         try {
-            this.StrXMLReturn = SerializeXML(grupo)
+            this.StrJSONResult = SerializeXML(grupo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -144,14 +144,14 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLTelefono(IdCliente: Int, nTipoCliente: Int): Boolean {
+    open fun getJSONTelefono(IdCliente: Int, nTipoCliente: Int): Boolean {
         var BlnReturn = false
         try {
             val OSearch = AppSofomInfoTelefono()
             OSearch.IdTel = 0
             OSearch.IdCliente = IdCliente
             OSearch.nTipoCliente = nTipoCliente
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -161,7 +161,7 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSaveTelefono(IdCliente: Int, nTipoCliente: Int, IdTipoTel: Int, cTel: String): Boolean {
+    open fun getJSONSaveTelefono(IdCliente: Int, nTipoCliente: Int, IdTipoTel: Int, cTel: String): Boolean {
         var BlnReturn = false
         try {
             val OSearch = AppClienteTelefono()
@@ -171,7 +171,7 @@ open class ClsCapaNegocios {
             OSearch.IdTipoTel = IdTipoTel
             OSearch.cTel = cTel
             OSearch.Exitoso = true
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -181,7 +181,7 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLDeleteTelefono(IdTelefono: Int, nTipoCliente: Int, IdCliente: Int): Boolean {
+    open fun getJSONDeleteTelefono(IdTelefono: Int, nTipoCliente: Int, IdCliente: Int): Boolean {
         var BlnReturn = false
         try {
             val OSearch = AppSofomInfoTelefono()
@@ -190,7 +190,7 @@ open class ClsCapaNegocios {
             OSearch.nTipoCliente = nTipoCliente
             OSearch.IdCliente = IdCliente
             OSearch.Exitoso = true
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -200,10 +200,10 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSaveClienteSimple(oCliente: AppClienteSimple): Boolean {
+    open fun getJSONSaveClienteSimple(oCliente: AppClienteSimple): Boolean {
         var BlnReturn = false
         try {
-            this.StrXMLReturn = SerializeXML(oCliente)
+            this.StrJSONResult = SerializeXML(oCliente)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -213,10 +213,10 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSaveClienteComplete(oCliente: AppClienteComplete): Boolean {
+    open fun getJSONSaveClienteComplete(oCliente: AppClienteComplete): Boolean {
         var BlnReturn = false
         try {
-            this.StrXMLReturn = SerializeXML(oCliente)
+            this.StrJSONResult = SerializeXML(oCliente)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -226,11 +226,11 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLEntregarPrestamo(IdPrestamo: Int, nMonto: Double): Boolean {
-        return getXMLEntregarPrestamo(IdPrestamo, nMonto, Date(Long.MIN_VALUE), 0)
+    open fun getJSONEntregarPrestamo(IdPrestamo: Int, nMonto: Double): Boolean {
+        return getJSONEntregarPrestamo(IdPrestamo, nMonto, Date(Long.MIN_VALUE), 0)
     }
 
-    open fun getXMLEntregarPrestamo(IdPrestamo: Int, nMonto: Double, DteEntrega: Date, IdDispAPP: Int): Boolean {
+    open fun getJSONEntregarPrestamo(IdPrestamo: Int, nMonto: Double, DteEntrega: Date, IdDispAPP: Int): Boolean {
         var BlnReturn = false
         try {
             val OSearch = GetEntregaPrestamo()
@@ -238,7 +238,7 @@ open class ClsCapaNegocios {
             OSearch.MontoEntrega = nMonto
             OSearch.FechaEntrega = DteEntrega
             OSearch.IdDispAPP = IdDispAPP
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -248,12 +248,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLInfoCredito(IntIdPrestamo: Int): Boolean {
+    open fun getJSONInfoCredito(IntIdPrestamo: Int): Boolean {
         var BlnReturn = false
         try {
             val OInfo = AppSofomInfoCred()
             OInfo.IdPrestamo = IntIdPrestamo
-            this.StrXMLReturn = SerializeXML(OInfo)
+            this.StrJSONResult = SerializeXML(OInfo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -263,7 +263,7 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSolRenovar(IntIdPrestamo: Int, IntPlazo: Int, DblMonto: Double, IdTipoPagoPrestamo: Int, DteVencimiento: Date): Boolean {
+    open fun getJSONSolRenovar(IntIdPrestamo: Int, IntPlazo: Int, DblMonto: Double, IdTipoPagoPrestamo: Int, DteVencimiento: Date): Boolean {
         var BlnReturn = false
         try {
             val OInfo = AppSofomSolRenovar()
@@ -272,7 +272,7 @@ open class ClsCapaNegocios {
             OInfo.Monto = DblMonto
             OInfo.IdTipoPagoPrestamo = IdTipoPagoPrestamo
             OInfo.DteVencimiento = DteVencimiento
-            this.StrXMLReturn = SerializeXML(OInfo)
+            this.StrJSONResult = SerializeXML(OInfo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -282,7 +282,7 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSolReestructurar(IntIdPrestamo: Int, DblMontoCA: Double, DteVencimiento: Date
+    open fun getJSONSolReestructurar(IntIdPrestamo: Int, DblMontoCA: Double, DteVencimiento: Date
     ): Boolean {
         var BlnReturn = false
         try {
@@ -290,7 +290,7 @@ open class ClsCapaNegocios {
             OInfo.IdPrestamo = IntIdPrestamo
             OInfo.MontoAdicional = DblMontoCA
             OInfo.DteVencimiento = DteVencimiento
-            this.StrXMLReturn = SerializeXML(OInfo)
+            this.StrJSONResult = SerializeXML(OInfo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -300,10 +300,10 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLPago(oPago: AppSofomPay): Boolean {
+    open fun getJSONPago(oPago: AppSofomPay): Boolean {
         var BlnReturn = false
         try {
-            this.StrXMLReturn = SerializeXML(oPago)
+            this.StrJSONResult = SerializeXML(oPago)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -313,11 +313,11 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLPago(IdPrestamo: Int, nPago: Double, IdMedioPago: Int, cNumCheque: String, nTipoEmisor: Int, cEmisor: String, nTipoAdelanto: Int): Boolean {
-        return getXMLPago(IdPrestamo, nPago, IdMedioPago, cNumCheque, nTipoEmisor, cEmisor, nTipoAdelanto, Date(Long.MIN_VALUE), 0)
+    open fun getJSONPago(IdPrestamo: Int, nPago: Double, IdMedioPago: Int, cNumCheque: String, nTipoEmisor: Int, cEmisor: String, nTipoAdelanto: Int): Boolean {
+        return getJSONPago(IdPrestamo, nPago, IdMedioPago, cNumCheque, nTipoEmisor, cEmisor, nTipoAdelanto, Date(Long.MIN_VALUE), 0)
     }
 
-    open fun getXMLPago(IdPrestamo: Int, nPago: Double, IdMedioPago: Int, cNumCheque: String, nTipoEmisor: Int, cEmisor: String, nTipoAdelanto: Int, DtePago: Date, IdPagoAPP: Int): Boolean {
+    open fun getJSONPago(IdPrestamo: Int, nPago: Double, IdMedioPago: Int, cNumCheque: String, nTipoEmisor: Int, cEmisor: String, nTipoAdelanto: Int, DtePago: Date, IdPagoAPP: Int): Boolean {
         val OPago = AppSofomPay()
         OPago.IdPrestamo = IdPrestamo
         OPago.Pago = nPago
@@ -328,16 +328,16 @@ open class ClsCapaNegocios {
         OPago.TipoAdelanto = nTipoAdelanto
         OPago.FechaPago = DtePago
         OPago.IdPagoAPP = IdPagoAPP
-        return getXMLPago(OPago)
+        return getJSONPago(OPago)
     }
 
-    open fun getXMLTicketPago(IdPrestamo: Int, IdPagoPrestamo: Int): Boolean {
+    open fun getJSONTicketPago(IdPrestamo: Int, IdPagoPrestamo: Int): Boolean {
         var BlnReturn = false
         try {
             val OTicket = SolicitudTicketPP()
             OTicket.IdPrestamo = IdPrestamo
             OTicket.IdPagoPrestamo = IdPagoPrestamo
-            this.StrXMLReturn = SerializeXML(OTicket)
+            this.StrJSONResult = SerializeXML(OTicket)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -347,13 +347,13 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLReportes(IdPrestamo: Int, IdDetalle: Int): Boolean {
+    open fun getJSONReportes(IdPrestamo: Int, IdDetalle: Int): Boolean {
         var BlnReturn = false
         try {
             val OPago = PeticionReportes()
             OPago.IdReferencia = IdPrestamo
             OPago.IdDetalle = IdDetalle
-            this.StrXMLReturn = SerializeXML(OPago)
+            this.StrJSONResult = SerializeXML(OPago)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -363,13 +363,13 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLCorteCaja(_IdCorteCaja: Int, _nSaldoDeclarado: Double): Boolean {
+    open fun getJSONCorteCaja(_IdCorteCaja: Int, _nSaldoDeclarado: Double): Boolean {
         var BlnReturn = false
         try {
             val OCierre = CerrarCaja()
             OCierre.IdCorteCaja = _IdCorteCaja
             OCierre.SaldoDeclarado = _nSaldoDeclarado
-            this.StrXMLReturn = SerializeXML(OCierre)
+            this.StrJSONResult = SerializeXML(OCierre)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -379,13 +379,13 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLPlantilla(cNombrePlantilla: String, cDescripcion: String): Boolean {
+    open fun getJSONPlantilla(cNombrePlantilla: String, cDescripcion: String): Boolean {
         var BlnReturn = false
         try {
             val OPlantilla = GetPlantilla()
             OPlantilla.Nombre = cNombrePlantilla
             OPlantilla.Descripcion = cDescripcion
-            this.StrXMLReturn = SerializeXML(OPlantilla)
+            this.StrJSONResult = SerializeXML(OPlantilla)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -395,12 +395,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLZonas(cZona: String): Boolean {
+    open fun getJSONZonas(cZona: String): Boolean {
         var BlnReturn = false
         try {
             val OZona = GetZonas()
             OZona.Nombre = cZona
-            this.StrXMLReturn = SerializeXML(OZona)
+            this.StrJSONResult = SerializeXML(OZona)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -410,7 +410,7 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSolicitud(IdPrestamo: Int, IdPlantillaCred: Int, nMontoTotal: Double, IdTipoPlazo: Int, nPlazo: Int, IdZona: Int, IdCliente: Int, IdGrupoSol: Int, DteVencimiento: Date, IdTipoPagoPrestamo: Int): Boolean {
+    open fun getJSONSolicitud(IdPrestamo: Int, IdPlantillaCred: Int, nMontoTotal: Double, IdTipoPlazo: Int, nPlazo: Int, IdZona: Int, IdCliente: Int, IdGrupoSol: Int, DteVencimiento: Date, IdTipoPagoPrestamo: Int): Boolean {
         var BlnReturn = false
         try {
             val OSolicitud = SolicitudCredApp()
@@ -424,7 +424,7 @@ open class ClsCapaNegocios {
             OSolicitud.IdGrupoSolidario = IdGrupoSol
             OSolicitud.DteVencimiento = DteVencimiento
             OSolicitud.IdTipoPagoPrestamo = IdTipoPagoPrestamo
-            this.StrXMLReturn = SerializeXML(OSolicitud)
+            this.StrJSONResult = SerializeXML(OSolicitud)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -434,12 +434,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLInfoNegocio(IdNegocio: Int): Boolean {
+    open fun getJSONInfoNegocio(IdNegocio: Int): Boolean {
         var BlnReturn= false
         try {
             val OInfo = AppEmpresaBusqueda()
             OInfo.IdEmpresa = IdNegocio
-            this.StrXMLReturn = SerializeXML(OInfo)
+            this.StrJSONResult = SerializeXML(OInfo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -449,7 +449,7 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLNegocio(IdNegocio: Int, NombreNegocio: String, AntiguedadNeg: Int, NumEmpleados: Int, Ingreso: Double, Egreso: Double, IdGiro: Int, IdDomNegocio: Int, IdSituacionDom: Int, AntiguedadDom: Int, IdHLunes: Int, IdHMartes: Int, IdHMiercoles: Int, IdHJueves: Int, IdHViernes: Int, IdHSabado: Int, IdHDomingo: Int): Boolean{
+    open fun getJSONNegocio(IdNegocio: Int, NombreNegocio: String, AntiguedadNeg: Int, NumEmpleados: Int, Ingreso: Double, Egreso: Double, IdGiro: Int, IdDomNegocio: Int, IdSituacionDom: Int, AntiguedadDom: Int, IdHLunes: Int, IdHMartes: Int, IdHMiercoles: Int, IdHJueves: Int, IdHViernes: Int, IdHSabado: Int, IdHDomingo: Int): Boolean{
         var BlnReturn = false
         try {
             val OSolicitud = NegocioSave()
@@ -470,7 +470,7 @@ open class ClsCapaNegocios {
             OSolicitud.IdHorarioVI = IdHViernes
             OSolicitud.IdHorarioSA = IdHSabado
             OSolicitud.IdHorarioDO = IdHDomingo
-            this.StrXMLReturn = SerializeXML(OSolicitud)
+            this.StrJSONResult = SerializeXML(OSolicitud)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -480,12 +480,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLNegocios(Nombre: String): Boolean {
+    open fun getJSONNegocios(Nombre: String): Boolean {
         var BlnReturn = false
         try {
             val OSearch = GetEmpresa()
             OSearch.Nombre = Nombre
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -495,12 +495,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLHorariosNeg(Nombre: String): Boolean {
+    open fun getJSONHorariosNeg(Nombre: String): Boolean {
         var BlnReturn = false
         try {
             val OSearch = GetHorario()
             OSearch.Horario = Nombre
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -510,12 +510,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLGirosNeg(Nombre: String): Boolean{
+    open fun getJSONGirosNeg(Nombre: String): Boolean{
         var BlnReturn = false
         try {
             val OSearch = GetGiro()
             OSearch.Nombre = Nombre
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -525,12 +525,12 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSolRepCorteC(IdCorteCaja: Int): Boolean {
+    open fun getJSONSolRepCorteC(IdCorteCaja: Int): Boolean {
         var BlnReturn = false
         try {
             val OReporte = SolicitudReporteCorteC()
             OReporte.IdCorteCaja = IdCorteCaja
-            this.StrXMLReturn = SerializeXML(OReporte)
+            this.StrJSONResult = SerializeXML(OReporte)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -540,14 +540,14 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLOperadores(Nombres: String, Apellidos: String): Boolean {
+    open fun getJSONOperadores(Nombres: String, Apellidos: String): Boolean {
         var BlnReturn = false
         try {
             val OSearch = BuscarOperador()
             val OperApp = OperadorApp()
             OSearch.Nombres = Nombres
             OSearch.Apellidos = Apellidos
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -557,13 +557,13 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLPermiso(StrPermiso: String): Boolean {
+    open fun getJSONPermiso(StrPermiso: String): Boolean {
         var BlnReturn = false
         try {
             val OSearch = BuscarPermisoOperador()
             val OperApp = OperadorApp()
             OSearch.Permiso = StrPermiso
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -573,13 +573,13 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSinPagoCapital(IdOperador: Int, MinDias: Int): Boolean {
+    open fun getJSONSinPagoCapital(IdOperador: Int, MinDias: Int): Boolean {
         var BlnReturn = false
         try {
             val OSearch = GetSinPagoCapital()
             OSearch.IdOperadorCobranza = IdOperador
             OSearch.nDias = MinDias
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -589,14 +589,14 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLCarteraOperador(IdOperador: Int, DteFechaIni: Date, DteFechaFin: Date): Boolean {
+    open fun getJSONCarteraOperador(IdOperador: Int, DteFechaIni: Date, DteFechaFin: Date): Boolean {
         var BlnReturn = false
         try {
             val OSearch = GetCarteraOperador()
             OSearch.IdOperador = IdOperador
             OSearch.DteFechaIni = DteFechaIni
             OSearch.DteFechaFin = DteFechaFin
-            this.StrXMLReturn = SerializeXML(OSearch)
+            this.StrJSONResult = SerializeXML(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -606,10 +606,10 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
 
-    open fun getXMLSaveCobroAccesorios(OCobranza: RespuestaAccesorios): Boolean {
+    open fun getJSONSaveCobroAccesorios(OCobranza: RespuestaAccesorios): Boolean {
         var BlnReturn = false
         try {
-            this.StrXMLReturn = SerializeXML(OCobranza)
+            this.StrJSONResult = SerializeXML(OCobranza)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }

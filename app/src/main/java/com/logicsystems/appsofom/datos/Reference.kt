@@ -31,22 +31,6 @@ open class Reference {
         }
         return BlnReturn
     }
-
-//    fun AppLoginAsync(spinner: Spinner, StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String) {
-//        AppLoginAsync(spinner, StrUser, StrPass, StrEmpresa, StrIMEI, null)
-//    }
-//
-//    fun AppLoginAsync(spinner: Spinner, StrUser: String, StrPass: String, StrEmpresa: String, StrIMEI: String, userState: Any?) {
-//        Utils().doMyTask(spinner, "AppLogin", listOf(StrUser, StrPass, StrEmpresa, StrIMEI))
-//    }
-
-//    fun AppGetEmpresasAsync(txtTest : TextView) {
-//        AppGetEmpresasAsync(txtTest, null)
-//    }
-
-//    fun AppGetEmpresasAsync(txtTest: TextView, userState: Any?) {
-//        Utils().doMyTask(txtTest, "AppGetEmpresas", listOf())
-//    }
     open fun alertasError(_context: Context, StrProblema: String){
         AlertDialog.Builder(_context).apply {
             setTitle("Mensaje del sistema")
