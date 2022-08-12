@@ -5,19 +5,33 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import com.logicsystems.appsofom.datos.bd.Configuracion
+import kotlin.properties.Delegates
 
-open class ClsConfiguracion : ClsGenerica() {
+open class ClsConfiguracion : Generica() {
     lateinit var c: Cursor
-    var Id: Int = 0
-    var cEntorno: String = ""
-    var cEmpresa: String = ""
-    var nMinUpdateGPS: Int = 0
-    var nMinUpdateInfo: Int = 0
-    var cLoginUser: String = ""
-    var cLoginPass: String = ""
-    var cOperador: String = ""
-    var cInfoTicket: String = ""
-    var cIMEI = ""
+    var Id by Delegates.notNull<Int>()
+    var cEntorno: String
+    var cEmpresa: String
+    var nMinUpdateGPS by Delegates.notNull<Int>()
+    var nMinUpdateInfo by Delegates.notNull<Int>()
+    var cLoginUser: String
+    var cLoginPass: String
+    var cOperador: String
+    var cInfoTicket: String
+    var cIMEI: String
+    init {
+        this.Limpiar()
+        this.Id = 0
+        this.cEntorno = ""
+        this.cEmpresa = ""
+        this.nMinUpdateGPS = 0
+        this.nMinUpdateInfo = 0
+        this.cLoginUser = ""
+        this.cLoginPass = ""
+        this.cOperador = ""
+        this.cInfoTicket = ""
+        this.cIMEI = ""
+    }
 
     fun validacion(ODB: SQLiteDatabase): Boolean {
         var BlnReturn = false

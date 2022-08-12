@@ -8,10 +8,10 @@ import android.view.View
 import android.widget.*
 import com.logicsystems.appsofom.datos.AppSofomConfigs
 import com.logicsystems.appsofom.datos.ClsConfiguracion
-import com.logicsystems.appsofom.datos.ClsGenerica
+import com.logicsystems.appsofom.datos.GenericaActivitys
 
 
-open class ConfigActivity : ClsGenerica() {
+open class ConfigActivity : GenericaActivitys() {
 
     private lateinit var txtEntorno: EditText
     private lateinit var txtViewEmpresa: TextView

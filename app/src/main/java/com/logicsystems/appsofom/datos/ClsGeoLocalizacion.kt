@@ -1,7 +1,6 @@
 package com.logicsystems.appsofom.datos
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -15,10 +14,10 @@ import java.util.*
 
 
 class ClsGeoLocalizacionRegs{
-    var oRegistros = mutableListOf<ClsGeoLocalizacion>()
+    var oRegistros = arrayListOf<ClsGeoLocalizacion>()
 }
 
-open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
+open class ClsGeoLocalizacion : Generica(), LocationListener {
     val OCapa = ClsCapaNegocios()
 
     var locationManager: LocationManager = Context.LOCATION_SERVICE as LocationManager
@@ -45,8 +44,7 @@ open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
 
     private lateinit var oReg: ClsGeoLocalizacionRegs
 
-    @SuppressLint("NotConstructor")
-    fun ClsGeoLocalizacion(){
+    init{
         this.Limpiar()
         this.nID = 0
         this.strGeoLocalizacion = ""

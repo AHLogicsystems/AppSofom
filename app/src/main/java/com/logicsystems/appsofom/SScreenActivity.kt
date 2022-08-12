@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.logicsystems.appsofom.datos.ClsGenerica
+import com.logicsystems.appsofom.datos.GenericaActivitys
 
-class SScreenActivity : ClsGenerica() {
+class SScreenActivity : GenericaActivitys() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)

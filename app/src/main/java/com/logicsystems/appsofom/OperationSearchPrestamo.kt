@@ -1,9 +1,9 @@
 package com.logicsystems.appsofom
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.logicsystems.appsofom.datos.GenericaActivitys
 
-class OperationSearchPrestamo : AppCompatActivity() {
+class OperationSearchPrestamo : GenericaActivitys() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_operation_search_prestamo)

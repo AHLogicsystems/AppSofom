@@ -8,11 +8,11 @@ import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
-import com.logicsystems.appsofom.datos.ClsGenerica
+import com.logicsystems.appsofom.datos.GenericaActivitys
 import com.logicsystems.appsofom.datos.SolicitudCredito
 import kotlinx.android.synthetic.main.activity_prestamos.*
 
-class PrestamosActivity : ClsGenerica() {
+class PrestamosActivity : GenericaActivitys() {
     lateinit var txtFolio: EditText
     lateinit var txtCliente: EditText
     private lateinit var IMenuAgregarSol: MenuItem

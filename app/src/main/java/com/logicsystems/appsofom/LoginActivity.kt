@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import com.logicsystems.appsofom.datos.ClsConfiguracion
-import com.logicsystems.appsofom.datos.ClsGenerica
+import com.logicsystems.appsofom.datos.GenericaActivitys
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 
 
-open class LoginActivity : ClsGenerica() {
+open class LoginActivity : GenericaActivitys() {
     private lateinit var txtUserName: EditText
     private lateinit var txtPassword: EditText
 //    private lateinit var progressBar: ProgressBar
@@ -24,12 +24,9 @@ open class LoginActivity : ClsGenerica() {
         txtUserName = findViewById(R.id.txtUserName)
         txtPassword = findViewById(R.id.txtPassword)
 
-
         btnLogIn.setOnClickListener {
             LogIn()
         }
-
-
     }
 
     override fun onDestroy() {

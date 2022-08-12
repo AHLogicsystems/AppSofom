@@ -40,9 +40,10 @@ open class Reference {
         }.show()
     }
 
-    open fun progresBarWAlert(_context: Context, StrTexto: String) : AlertDialog.Builder{
+    open fun alertasError(_context: Context) : AlertDialog.Builder{
         return AlertDialog.Builder(_context).apply {
-            setMessage(StrTexto)
+            setTitle("Mensaje del sistema")
+            setCancelable(false)
         }
     }
 

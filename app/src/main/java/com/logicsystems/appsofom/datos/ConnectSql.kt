@@ -25,7 +25,6 @@ class ConnectSql {
             connString = "jdbc:jtds:sqlserver://192.168.201.170;databaseName=$db;user=$username;password=$password"
             conn = DriverManager.getConnection(connString)
         }catch (ex: SQLException){
-
             Log.e("Error: ", ex.message!!)
         }catch (ex1: ClassNotFoundException){
             Log.e( "Error: ", ex1.message!!)

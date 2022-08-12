@@ -28,6 +28,9 @@ class PrestamosFragment : ClsGenericaFragments() {
         datos.add(SubMenuPrestamos().apply { StrTitulo = "Entregar Crédito"; IntImagen = R.drawable.img_entregar })
         datos.add(SubMenuPrestamos().apply { StrTitulo = "Cobrar Crédito"; IntImagen = R.drawable.img_cobrar })
         datos.add(SubMenuPrestamos().apply { StrTitulo = "Cobro de Accesorios Crédito"; IntImagen = R.drawable.img_creditos_x_cobrar })
+        if (config.cNameEntorno.uppercase() == "CHANGE2131"){
+            datos.add(SubMenuPrestamos().apply { StrTitulo = "Lista de Créditos por cobrar"; IntImagen = R.drawable.img_creditos_x_cobrar })
+        }
 
         listDetallado.adapter = AdaptadorSubMenuPrestamo(this.requireActivity(), datos)
 
@@ -40,7 +43,10 @@ class PrestamosFragment : ClsGenericaFragments() {
                 this.activity?.let { service.alertasError(it, "Esta opción solo se encuentra disponible en la modalidad en línea") }
             }
             else{
-                val intent = Intent(this.activity, PrestamosActivity::class.java)
+                var intent = Intent(this.activity, PrestamosActivity::class.java)
+                if (position == SolicitudCredito.LISTACREDITOXCOBRAR.ordinal){
+                    intent = Intent(this.activity, ListaCreditosXCobrarActivity::class.java)
+                }
                 intent.putExtra("TypeSearch", position)
                 startActivity(intent)
             }

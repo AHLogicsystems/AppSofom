@@ -86,5 +86,6 @@ enum class SolicitudCredito{
     REESTRUCTURAR,
     ENTREGAR,
     COBRAR,
-    COBROACCESORIO
+    COBROACCESORIO,
+    LISTACREDITOXCOBRAR
 }

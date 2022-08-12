@@ -11,10 +11,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.logicsystems.appsofom.databinding.ActivityMainBinding
-import com.logicsystems.appsofom.datos.ClsGenerica
+import com.logicsystems.appsofom.datos.GenericaActivitys
 
 
-class MainActivity : ClsGenerica() {
+class MainActivity : GenericaActivitys() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding

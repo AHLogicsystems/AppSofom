@@ -1,17 +1,16 @@
 package com.logicsystems.appsofom
 
 import android.app.Application
+import com.google.gson.Gson
 import com.logicsystems.appsofom.Adapters.IBasicListElement
 import com.logicsystems.appsofom.datos.EdosCorte
-import org.xml.sax.helpers.XMLReaderAdapter
-import org.xmlpull.v1.XmlSerializer
-import java.io.StringWriter
 import java.util.*
 
 
 open class ClsCapaNegocios {
     open var StrJSONResult = ""
     var StrProblema = ""
+    var gson = Gson()
     //region getJSON
     fun getJSONSearch(StrFolio: String, StrCliente: String, IntTypeSearch: Int): Boolean {
         var BlnReturn = false
@@ -20,7 +19,7 @@ open class ClsCapaNegocios {
             OSearch.Folio = StrFolio
             OSearch.Cliente = StrCliente
             OSearch.TypeSearch = IntTypeSearch
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -38,7 +37,7 @@ open class ClsCapaNegocios {
             oUbicacion.GeoLocalizacion = GeoLocalizacion
             oUbicacion.DteUbicacion = DteUbicacion
             OSearch.Ubicacion.add(oUbicacion)
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -55,7 +54,7 @@ open class ClsCapaNegocios {
             for (oEach: UbicacionGPS in Ubicaciones){
                 OSearch.Ubicacion.add(oEach)
             }
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         }
         catch (ex: Exception)
         {
@@ -76,7 +75,7 @@ open class ClsCapaNegocios {
             OSearch.Nombres = Nombres
             OSearch.Apellidos = Apellidos
             OSearch.RFC = RFC
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -91,7 +90,7 @@ open class ClsCapaNegocios {
         try {
             val OSearch = AppSofomInfoCliente()
             OSearch.IdCliente = IdCliente
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -106,7 +105,7 @@ open class ClsCapaNegocios {
         try {
             val OSearch = AppSofomInfoGrupoSolidario()
             OSearch.IdGrupoSolidario = IdGrupoSolidario
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -121,7 +120,7 @@ open class ClsCapaNegocios {
         try {
             val OSearch = AppSofomInfoGrupoSolidario()
             OSearch.cNombreGrupo = nombre
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -134,7 +133,7 @@ open class ClsCapaNegocios {
     open fun getJSONGrupoSolidarioComplete(grupo: AppGrupoSolidario): Boolean {
         var BlnReturn = false
         try {
-            this.StrJSONResult = SerializeXML(grupo)
+            this.StrJSONResult = gson.toJson(grupo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -151,7 +150,7 @@ open class ClsCapaNegocios {
             OSearch.IdTel = 0
             OSearch.IdCliente = IdCliente
             OSearch.nTipoCliente = nTipoCliente
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -171,7 +170,7 @@ open class ClsCapaNegocios {
             OSearch.IdTipoTel = IdTipoTel
             OSearch.cTel = cTel
             OSearch.Exitoso = true
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -190,7 +189,7 @@ open class ClsCapaNegocios {
             OSearch.nTipoCliente = nTipoCliente
             OSearch.IdCliente = IdCliente
             OSearch.Exitoso = true
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -203,7 +202,7 @@ open class ClsCapaNegocios {
     open fun getJSONSaveClienteSimple(oCliente: AppClienteSimple): Boolean {
         var BlnReturn = false
         try {
-            this.StrJSONResult = SerializeXML(oCliente)
+            this.StrJSONResult = gson.toJson(oCliente)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -216,7 +215,7 @@ open class ClsCapaNegocios {
     open fun getJSONSaveClienteComplete(oCliente: AppClienteComplete): Boolean {
         var BlnReturn = false
         try {
-            this.StrJSONResult = SerializeXML(oCliente)
+            this.StrJSONResult = gson.toJson(oCliente)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -238,7 +237,7 @@ open class ClsCapaNegocios {
             OSearch.MontoEntrega = nMonto
             OSearch.FechaEntrega = DteEntrega
             OSearch.IdDispAPP = IdDispAPP
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -253,7 +252,7 @@ open class ClsCapaNegocios {
         try {
             val OInfo = AppSofomInfoCred()
             OInfo.IdPrestamo = IntIdPrestamo
-            this.StrJSONResult = SerializeXML(OInfo)
+            this.StrJSONResult = gson.toJson(OInfo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -272,7 +271,7 @@ open class ClsCapaNegocios {
             OInfo.Monto = DblMonto
             OInfo.IdTipoPagoPrestamo = IdTipoPagoPrestamo
             OInfo.DteVencimiento = DteVencimiento
-            this.StrJSONResult = SerializeXML(OInfo)
+            this.StrJSONResult = gson.toJson(OInfo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -290,7 +289,7 @@ open class ClsCapaNegocios {
             OInfo.IdPrestamo = IntIdPrestamo
             OInfo.MontoAdicional = DblMontoCA
             OInfo.DteVencimiento = DteVencimiento
-            this.StrJSONResult = SerializeXML(OInfo)
+            this.StrJSONResult = gson.toJson(OInfo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -303,7 +302,7 @@ open class ClsCapaNegocios {
     open fun getJSONPago(oPago: AppSofomPay): Boolean {
         var BlnReturn = false
         try {
-            this.StrJSONResult = SerializeXML(oPago)
+            this.StrJSONResult = gson.toJson(oPago)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -337,7 +336,7 @@ open class ClsCapaNegocios {
             val OTicket = SolicitudTicketPP()
             OTicket.IdPrestamo = IdPrestamo
             OTicket.IdPagoPrestamo = IdPagoPrestamo
-            this.StrJSONResult = SerializeXML(OTicket)
+            this.StrJSONResult = gson.toJson(OTicket)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -353,7 +352,7 @@ open class ClsCapaNegocios {
             val OPago = PeticionReportes()
             OPago.IdReferencia = IdPrestamo
             OPago.IdDetalle = IdDetalle
-            this.StrJSONResult = SerializeXML(OPago)
+            this.StrJSONResult = gson.toJson(OPago)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -369,7 +368,7 @@ open class ClsCapaNegocios {
             val OCierre = CerrarCaja()
             OCierre.IdCorteCaja = _IdCorteCaja
             OCierre.SaldoDeclarado = _nSaldoDeclarado
-            this.StrJSONResult = SerializeXML(OCierre)
+            this.StrJSONResult = gson.toJson(OCierre)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -385,7 +384,7 @@ open class ClsCapaNegocios {
             val OPlantilla = GetPlantilla()
             OPlantilla.Nombre = cNombrePlantilla
             OPlantilla.Descripcion = cDescripcion
-            this.StrJSONResult = SerializeXML(OPlantilla)
+            this.StrJSONResult = gson.toJson(OPlantilla)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -400,7 +399,7 @@ open class ClsCapaNegocios {
         try {
             val OZona = GetZonas()
             OZona.Nombre = cZona
-            this.StrJSONResult = SerializeXML(OZona)
+            this.StrJSONResult = gson.toJson(OZona)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -424,7 +423,7 @@ open class ClsCapaNegocios {
             OSolicitud.IdGrupoSolidario = IdGrupoSol
             OSolicitud.DteVencimiento = DteVencimiento
             OSolicitud.IdTipoPagoPrestamo = IdTipoPagoPrestamo
-            this.StrJSONResult = SerializeXML(OSolicitud)
+            this.StrJSONResult = gson.toJson(OSolicitud)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -439,7 +438,7 @@ open class ClsCapaNegocios {
         try {
             val OInfo = AppEmpresaBusqueda()
             OInfo.IdEmpresa = IdNegocio
-            this.StrJSONResult = SerializeXML(OInfo)
+            this.StrJSONResult = gson.toJson(OInfo)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -470,7 +469,7 @@ open class ClsCapaNegocios {
             OSolicitud.IdHorarioVI = IdHViernes
             OSolicitud.IdHorarioSA = IdHSabado
             OSolicitud.IdHorarioDO = IdHDomingo
-            this.StrJSONResult = SerializeXML(OSolicitud)
+            this.StrJSONResult = gson.toJson(OSolicitud)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -485,7 +484,7 @@ open class ClsCapaNegocios {
         try {
             val OSearch = GetEmpresa()
             OSearch.Nombre = Nombre
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -500,7 +499,7 @@ open class ClsCapaNegocios {
         try {
             val OSearch = GetHorario()
             OSearch.Horario = Nombre
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -515,7 +514,7 @@ open class ClsCapaNegocios {
         try {
             val OSearch = GetGiro()
             OSearch.Nombre = Nombre
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -530,7 +529,7 @@ open class ClsCapaNegocios {
         try {
             val OReporte = SolicitudReporteCorteC()
             OReporte.IdCorteCaja = IdCorteCaja
-            this.StrJSONResult = SerializeXML(OReporte)
+            this.StrJSONResult = gson.toJson(OReporte)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -547,7 +546,7 @@ open class ClsCapaNegocios {
             val OperApp = OperadorApp()
             OSearch.Nombres = Nombres
             OSearch.Apellidos = Apellidos
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -563,7 +562,7 @@ open class ClsCapaNegocios {
             val OSearch = BuscarPermisoOperador()
             val OperApp = OperadorApp()
             OSearch.Permiso = StrPermiso
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -579,7 +578,7 @@ open class ClsCapaNegocios {
             val OSearch = GetSinPagoCapital()
             OSearch.IdOperadorCobranza = IdOperador
             OSearch.nDias = MinDias
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -596,7 +595,7 @@ open class ClsCapaNegocios {
             OSearch.IdOperador = IdOperador
             OSearch.DteFechaIni = DteFechaIni
             OSearch.DteFechaFin = DteFechaFin
-            this.StrJSONResult = SerializeXML(OSearch)
+            this.StrJSONResult = gson.toJson(OSearch)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -609,7 +608,7 @@ open class ClsCapaNegocios {
     open fun getJSONSaveCobroAccesorios(OCobranza: RespuestaAccesorios): Boolean {
         var BlnReturn = false
         try {
-            this.StrJSONResult = SerializeXML(OCobranza)
+            this.StrJSONResult = gson.toJson(OCobranza)
         } catch (ex: Exception) {
             this.StrProblema = "Error: " + ex.message
         }
@@ -619,22 +618,6 @@ open class ClsCapaNegocios {
         return BlnReturn
     }
     //endregion
-
-    fun SerializeXML(OXML: Any): String {
-        var StrXMLRet = ""
-        val S: XmlSerializer? = null
-        var Escritor: StringWriter? = null
-        if (S != null){
-            S.setProperty("Id", OXML)
-            S.startTag("start","")
-            S.attribute("id","","")
-            S.endTag("end","")
-            StrXMLRet = S.text("").toString()
-        }
-
-        val Serializador: XMLReaderAdapter
-        return StrXMLRet
-    }
 
     fun FindMedioPago(StrMedioPago: String): Int {
         val BlnReturn = when (StrMedioPago) {
