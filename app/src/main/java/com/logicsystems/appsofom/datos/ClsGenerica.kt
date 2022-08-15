@@ -5,13 +5,18 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import java.math.BigInteger
 import java.security.MessageDigest
+import java.text.SimpleDateFormat
+import java.util.*
 
-open class Generica {
+open class ClsGenerica {
     protected var StrProblema: String = ""
     val cProblema: String = this.StrProblema
-    private lateinit var _helper: DataManagerHelper
+
+    protected lateinit var _helper: DataManagerHelper
 
     lateinit var myContext: Context
+
+    val DateTimeMinValue = SimpleDateFormat("dd-MM-yyyy").parse("01/01/1753") as Date
 
     fun SetContext(context: Context) {
         this.myContext = context
@@ -120,7 +125,7 @@ open class Generica {
         return true
     }
 
-    private fun Delete(OCom: SQLiteDatabase): Boolean {
+    open fun Delete(OCom: SQLiteDatabase): Boolean {
         return true
     }
 
@@ -128,15 +133,15 @@ open class Generica {
         return true
     }
 
-    private fun LoadReg(OCom: SQLiteDatabase, nMaxRegistros: Int): Boolean {
+    open fun LoadReg(OCom: SQLiteDatabase, nMaxRegistros: Int): Boolean {
         return true
     }
 
-    private fun Load(OCom: SQLiteDatabase): Boolean {
+    open fun Load(OCom: SQLiteDatabase): Boolean {
         return true
     }
 
-    private fun Search(OCom: SQLiteDatabase, IntTipoConsulta: Int, StrValues: Array<String>): Boolean{
+    open fun Search(OCom: SQLiteDatabase, IntTipoConsulta: Int, StrValues: Array<String>): Boolean{
         val BlnReturn = false
         val db: SQLiteDatabase = _helper.writableDatabase
 
@@ -150,15 +155,15 @@ open class Generica {
         return BlnReturn
     }
 
-    private fun getCursor(): Cursor? {
+    protected open fun getCursor(): Cursor? {
         return null
     }
 
-    fun FetchData(): Boolean {
+    open fun FetchData(): Boolean {
         return false
     }
 
-    fun MoveToFirst(): Boolean {
+    open fun MoveToFirst(): Boolean {
         if (this.getCursor() != null) {
             if (this.getCursor()?.moveToFirst() == true) {
                 return this.FetchData()
@@ -167,7 +172,7 @@ open class Generica {
         return false
     }
 
-    fun MoveToLast(): Boolean {
+    open fun MoveToLast(): Boolean {
         if (this.getCursor() != null) {
             if (this.getCursor()?.moveToLast() == true) {
                 return FetchData()
@@ -176,7 +181,7 @@ open class Generica {
         return false
     }
 
-    fun MoveNext(): Boolean {
+    open fun MoveNext(): Boolean {
         if (this.getCursor() != null) {
             if (this.getCursor()?.moveToNext() == true) {
                 return FetchData()
@@ -185,7 +190,7 @@ open class Generica {
         return false
     }
 
-    fun MovePrevious(): Boolean {
+    open fun MovePrevious(): Boolean {
         if (this.getCursor() != null) {
             if (this.getCursor()?.moveToPrevious() == true) {
                 return FetchData()
@@ -201,12 +206,18 @@ object MD5 {
         return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
     }
 }
+
 class GeoCoordinate{
-    //    fun GeoCoordinate(Latitude: Double, Longitude:Double)
-//    {
-//        this.Latitude = Latitude
-//        this.Longitude = Longitude
-//    }
-    var Latitude: Double = 0.0
-    var Longitude: Double = 0.0
+    var Latitude: Double
+    var Longitude: Double
+
+    constructor() {
+        this.Latitude = 0.0
+        this.Longitude = 0.0
+    }
+
+    constructor(Latitude: Double, Longitude:Double) {
+        this.Latitude = Latitude
+        this.Longitude = Longitude
+    }
 }

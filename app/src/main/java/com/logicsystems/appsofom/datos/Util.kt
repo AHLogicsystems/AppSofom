@@ -5,74 +5,96 @@ import android.provider.Settings
 import android.widget.Spinner
 import android.widget.Toast
 import com.logicsystems.appsofom.R
+import kotlin.math.truncate
 
 
 open class AppSofomConfigs{
-        var URL_MODOS = mapOf(
-            DEBUG_MODE.LOCAL to "https://192.168.201.77/",
-            DEBUG_MODE.TESTING_INTERNO to "http://testing.logicsystems.com.mx/",
-            DEBUG_MODE.TESTING_EXTERNO to "http://187.141.66.20:5001/",
-            DEBUG_MODE.PRODUCCION to "https://cib.logicsystems.com.mx/"
-        )
-        var IdConfiguracion: Int = 0
-        var cNameEntorno: String = ""
-        var cNameEmpresa: String = ""
-        var nMinUpdateGPS = 0
-        var nMinUpdateInfo = 0
-        var cLogUser: String = ""
-        var cLogPass: String = ""
-        var cNameOperador: String = ""
-        var cInfoTicket: String = ""
-        var cIMEI: String = ""
-        var lLoggin: Boolean = false
-        var nDigitosIdDispositivo: Int = 16
-        var MODO = DEBUG_MODE.TESTING_INTERNO
-        fun URLWSFull(): String {return getURLFUll(cNameEntorno)}
+    var URL_MODOS = mapOf(
+        DEBUG_MODE.LOCAL to "https://192.168.201.77/",
+        DEBUG_MODE.TESTING_INTERNO to "http://testing.logicsystems.com.mx/",
+        DEBUG_MODE.TESTING_EXTERNO to "http://187.141.66.20:5001/",
+        DEBUG_MODE.PRODUCCION to "https://cib.logicsystems.com.mx/"
+    )
+    var IdConfiguracion: Int = 0
+    var cNameEntorno: String = ""
+    var cNameEmpresa: String = ""
+    var nMinUpdateGPS = 0
+    var nMinUpdateInfo = 0
+    var cLogUser: String = ""
+    var cLogPass: String = ""
+    var cNameOperador: String = ""
+    var cInfoTicket: String = ""
+    var cIMEI: String = ""
+    var lLoggin: Boolean = false
+    var nDigitosIdDispositivo: Int = 16
+    var MODO = DEBUG_MODE.TESTING_INTERNO
+    fun URLWSFull(): String {return getURLFUll(cNameEntorno)}
 
-        fun getURLFUll(entorno: String = ""): String{
-            val url: String = URL_MODOS[MODO]!!
-            var cEntorno: String = ""
-            if (entorno != "/") { cEntorno = entorno + "/" }
-            return url + cEntorno + "WSAppSofom.asmx"
-        }
+    fun getURLFUll(entorno: String = ""): String{
+        val url: String = URL_MODOS[MODO]!!
+        var cEntorno: String = ""
+        if (entorno != "/") { cEntorno = entorno + "/" }
+        return url + cEntorno + "WSAppSofom.asmx"
+    }
 
-        fun getIdInstalacion(_context: Context): String {
-            var IdInstalacionApp = ""
-            try {
-                IdInstalacionApp = Settings.Secure.ANDROID_ID
-                //Formatemos el ID EN CASO DE ACTUALIZACIÓN DE LIBRERÍAS
-                if (IdInstalacionApp.length < nDigitosIdDispositivo) {
-                    IdInstalacionApp = IdInstalacionApp.padStart(nDigitosIdDispositivo, '0')
-                } else {
-                    IdInstalacionApp = IdInstalacionApp.substring(0, nDigitosIdDispositivo)
-                }
-            } catch (ex: Exception) {
-                val innerMessage: String =
-                    ex.printStackTrace().toString()
-                val w: String = innerMessage
-                Toast.makeText(_context, w,Toast.LENGTH_LONG).show()
+    fun getIdInstalacion(_context: Context): String {
+        var IdInstalacionApp = ""
+        try {
+            IdInstalacionApp = Settings.Secure.ANDROID_ID
+            //Formatemos el ID EN CASO DE ACTUALIZACIÓN DE LIBRERÍAS
+            if (IdInstalacionApp.length < nDigitosIdDispositivo) {
+                IdInstalacionApp = IdInstalacionApp.padStart(nDigitosIdDispositivo, '0')
+            } else {
+                IdInstalacionApp = IdInstalacionApp.substring(0, nDigitosIdDispositivo)
             }
-            return IdInstalacionApp.uppercase()
+        } catch (ex: Exception) {
+            val innerMessage: String =
+                ex.printStackTrace().toString()
+            val w: String = innerMessage
+            Toast.makeText(_context, w,Toast.LENGTH_LONG).show()
         }
+        return IdInstalacionApp.uppercase()
+    }
 
-        fun LoadConfig(context: Context) {
-            val Data = ClsConfiguracion()
-            Data.SetContext(context)
-            if (Data.LoadAll()) {
-                if (Data.c.moveToFirst()) {
-                    IdConfiguracion = Data.c.getInt(0)
-                    cNameEntorno = Data.c.getString(1)
-                    cNameEmpresa = Data.c.getString(2)
-                    nMinUpdateGPS = Data.c.getInt(3)
-                    nMinUpdateInfo = Data.c.getInt(4)
-                    cLogUser = Data.c.getString(5)
-                    cLogPass = Data.c.getString(6)
-                    cNameOperador = Data.c.getString(7)
-                    cInfoTicket = Data.c.getString(8)
-                    cIMEI = Data.c.getString(9)
-                }
+    fun LoadConfig(context: Context) {
+        val Data = ClsConfiguracion()
+        Data.SetContext(context)
+        if (Data.LoadAll()) {
+            if (Data.c.moveToFirst()) {
+                IdConfiguracion = Data.c.getInt(0)
+                cNameEntorno = Data.c.getString(1)
+                cNameEmpresa = Data.c.getString(2)
+                nMinUpdateGPS = Data.c.getInt(3)
+                nMinUpdateInfo = Data.c.getInt(4)
+                cLogUser = Data.c.getString(5)
+                cLogPass = Data.c.getString(6)
+                cNameOperador = Data.c.getString(7)
+                cInfoTicket = Data.c.getString(8)
+                cIMEI = Data.c.getString(9)
             }
         }
+    }
+
+    private var EarthRadius = 6371.0
+    fun GetDistance(point1: GeoCoordinate, point2: GeoCoordinate): Double{
+        var distance = 0.0
+        val Lat = (point2.Latitude - point1.Latitude) * (Math.PI / 100)
+        val Lon = (point2.Longitude - point1.Longitude) * (Math.PI / 100)
+        val a = Math.sin(Lat / 2) * Math.sin(Lat / 2) * Math.cos(point1.Latitude * (Math.PI)) * Math.cos(point2.Latitude * (Math.PI / 100)) * Math.sin(Lon / 2) * Math.sin((Lon / 2))
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        distance = EarthRadius * c
+        distance = truncate(distance)
+        return distance
+    }
+
+    fun ObjectToStringArray(parametros: Array<Any>) : Array<String>{
+        val arreglo = emptyArray<String>()
+        for (i in parametros.indices){
+            arreglo[i] = parametros[i].toString()
+        }
+        return arreglo
+    }
+
 
     /*fun isOnLine(X: Context): Boolean {
         val cm = X.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

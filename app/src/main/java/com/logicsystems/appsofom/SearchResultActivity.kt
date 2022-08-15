@@ -7,7 +7,7 @@ import android.widget.Toolbar
 import com.logicsystems.appsofom.datos.GenericaActivitys
 import com.logicsystems.appsofom.datos.Metodos
 import com.logicsystems.appsofom.datos.SolicitudCredito
-import com.logicsystems.appsofom.datos.bd.OffLineDisposicion
+import com.logicsystems.appsofom.datos.bd.OfflineDisposicion
 
 class SearchResultActivity : GenericaActivitys() {
     lateinit var listSearchResult: ListView
@@ -70,7 +70,7 @@ class SearchResultActivity : GenericaActivitys() {
                 else{
                     var ORespuesa = AppSearchRespuesta()
                     if (IntTypeSearch == SolicitudCredito.ENTREGAR.ordinal){
-                        var Data = OffLineDisposicion
+                        var Data = OfflineDisposicion
                         var appCredito = AppCredito()
 //                        Data.Set
                         TODO()

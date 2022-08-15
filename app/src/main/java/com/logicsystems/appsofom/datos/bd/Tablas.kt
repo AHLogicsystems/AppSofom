@@ -37,7 +37,7 @@ object Configuracion {
 
 //region UbicacionGPS
 object UbicacionGPS {
-    private const val TABLE_NAME = "UbicacionGPS"
+    const val TABLE_NAME = "UbicacionGPS"
 
     const val Id = "Id"
     const val cUbicacion = "cUbicacion"
@@ -54,8 +54,8 @@ object UbicacionGPS {
 //endregion
 
 //region OffLineDisposicion
-object OffLineDisposicion {
-    private const val TABLE_NAME = "OffLineDisposicion"
+object OfflineDisposicion {
+    const val TABLE_NAME = "OffLineDisposicion"
 
     const val Id = "Id"
     const val IdPrestamo = "IdPrestamo"
@@ -87,7 +87,7 @@ object OffLineDisposicion {
 
 //region Disposiciones
 object Disposiciones {
-    private const val TABLE_NAME = "Disposiciones"
+    const val TABLE_NAME = "Disposiciones"
 
     const val Id = "Id"
     const val IdPrestamo = "IdPrestamo"
@@ -116,8 +116,8 @@ object Disposiciones {
 //endregion
 
 //region OffLineCobranza
-object OffLineCobranza {
-    private const val TABLE_NAME = "OffLineCobranza"
+object OfflineCobranza {
+    const val TABLE_NAME = "OffLineCobranza"
 
     const val Id = "Id"
     const val IdPrestamo = "IdPrestamo"
@@ -152,7 +152,7 @@ object OffLineCobranza {
 
 //region Pagos
 object Pagos {
-    private const val TABLE_NAME = "Pagos"
+    const val TABLE_NAME = "Pagos"
 
     const val Id = "Id"
     const val IdPrestamo = "IdPrestamo"
@@ -189,7 +189,7 @@ object Pagos {
 
 //region IntegrantesGrupoOffline
 object IntegrantesGrupoOffline {
-    private const val TABLE_NAME = "IntegrantesGrupoOffline"
+    const val TABLE_NAME = "IntegrantesGrupoOffline"
 
     const val Id = "Id"
     const val IdRef = "IdRef"
@@ -225,8 +225,8 @@ object IntegrantesGrupoOffline {
 //endregion
 
 //region OffLinePrestamoXCobrar
-object OffLinePrestamoXCobrar {
-    private const val TABLE_NAME = "OffLinePrestamoXCobrar"
+object OfflinePrestamoXCobrar {
+    const val TABLE_NAME = "OffLinePrestamoXCobrar"
 
     const val Id = "Id"
     const val IdPrestamo = "IdPrestamo"
@@ -270,8 +270,8 @@ object OffLinePrestamoXCobrar {
 //endregion
 
 //region OffLinePrestamoXOperador
-object OffLinePrestamoXOperador {
-    private const val TABLE_NAME = "OffLinePrestamoXOperador"
+object OfflinePrestamoXOperador {
+    const val TABLE_NAME = "OffLinePrestamoXOperador"
 
     const val Id = "Id"
     const val IdPrestamo = "IdPrestamo"
@@ -314,21 +314,21 @@ object OffLinePrestamoXOperador {
 const val SQL_CREATE_ENTRIES =
     Configuracion.Create +
     UbicacionGPS.Create +
-    OffLineDisposicion.Create +
+    OfflineDisposicion.Create +
     Disposiciones.Create +
-    OffLineCobranza.Create +
+    OfflineCobranza.Create +
     Pagos.Create +
     IntegrantesGrupoOffline.Create +
-    OffLinePrestamoXCobrar.Create +
-    OffLinePrestamoXOperador.Create
+    OfflinePrestamoXCobrar.Create +
+    OfflinePrestamoXOperador.Create
 
 const val SQL_DELETE_ENTRIES =
     Configuracion.Delete +
     UbicacionGPS.Delete +
-    OffLineDisposicion.Delete +
+    OfflineDisposicion.Delete +
     Disposiciones.Delete +
-    OffLineCobranza.Delete +
+    OfflineCobranza.Delete +
     Pagos.Delete +
     IntegrantesGrupoOffline.Delete +
-    OffLinePrestamoXCobrar.Delete +
-    OffLinePrestamoXOperador.Delete
+    OfflinePrestamoXCobrar.Delete +
+    OfflinePrestamoXOperador.Delete

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteException
 import com.logicsystems.appsofom.datos.bd.Configuracion
 import kotlin.properties.Delegates
 
-open class ClsConfiguracion : Generica() {
+open class ClsConfiguracion : ClsGenerica() {
     lateinit var c: Cursor
     var Id by Delegates.notNull<Int>()
     var cEntorno: String

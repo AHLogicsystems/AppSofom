@@ -17,7 +17,7 @@ class ClsGeoLocalizacionRegs{
     var oRegistros = arrayListOf<ClsGeoLocalizacion>()
 }
 
-open class ClsGeoLocalizacion : Generica(), LocationListener {
+open class ClsGeoLocalizacion : ClsGenerica(), LocationListener {
     val OCapa = ClsCapaNegocios()
 
     var locationManager: LocationManager = Context.LOCATION_SERVICE as LocationManager
