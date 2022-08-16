@@ -14,7 +14,7 @@ apply plugin: 'maven-publish'
 
 
 dependencies {
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.jayway.jsonpath:json-path:2.1.0'
     testImplementation 'org.mockito:mockito-core:1.9.5'
 }
@@ -47,3 +47,5 @@ publishing {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
+
+java.targetCompatibility = JavaVersion.VERSION_1_8

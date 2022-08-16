@@ -8,7 +8,9 @@ import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
+import com.logicsystems.appsofom.datos.AppSofomConfigs
 import com.logicsystems.appsofom.datos.GenericaActivitys
+import com.logicsystems.appsofom.datos.Service
 import com.logicsystems.appsofom.datos.SolicitudCredito
 import kotlinx.android.synthetic.main.activity_prestamos.*
 
@@ -17,6 +19,7 @@ class PrestamosActivity : GenericaActivitys() {
     lateinit var txtCliente: EditText
     private lateinit var IMenuAgregarSol: MenuItem
     var IntTypeSearch = 0
+    val service = Service()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prestamos)
@@ -42,7 +45,7 @@ class PrestamosActivity : GenericaActivitys() {
                 SolicitudCredito.REESTRUCTURAR.ordinal,
                 SolicitudCredito.SOLICITUD.ordinal,
                 SolicitudCredito.ENTREGAR.ordinal ->
-                    if (!service.isConnected(this)){
+                    if (!AppSofomConfigs.isOnLine(this)){
                         this.StrProblema = "Esta opción solo se encuentra disponible en la modalidad en línea"
                     }
             }
@@ -51,13 +54,13 @@ class PrestamosActivity : GenericaActivitys() {
                 intent.putExtra("Folio", txtFolio.text)
                 intent.putExtra("Cliente", txtCliente.text)
                 intent.putExtra("TypeSearch", IntTypeSearch)
-                PrestamoApp().IntIdPrestamo = 0
+                PrestamoApp.IntIdPrestamo = 0
                 resultLauncher.launch(intent)
             }
-            else{
-                service.alertasError(this, this.StrProblema)
-                this.StrProblema = ""
-            }
+        }
+        if (this.StrProblema != ""){
+            service.alertasError(this, this.StrProblema)
+            this.StrProblema = ""
         }
     }
 
@@ -92,14 +95,14 @@ class PrestamosActivity : GenericaActivitys() {
             }
         }
         else{
-            PrestamoApp().IntIdPrestamo = 0
-            PrestamoApp().IntIdGrupoSolidario = 0
-            PrestamoApp().Integrantes.clear()
+            PrestamoApp.IntIdPrestamo = 0
+            PrestamoApp.IntIdGrupoSolidario = 0
+            PrestamoApp.Integrantes.clear()
         }
     }
 
     override fun onBackPressed() {
-        PrestamoApp().IntIdPrestamo = 0
+        PrestamoApp.IntIdPrestamo = 0
         super.onBackPressed()
     }
 
@@ -124,7 +127,7 @@ class PrestamosActivity : GenericaActivitys() {
         when(item.itemId){
             R.id.menu_add -> {
                 val intent = Intent(this, SolicitudActivity::class.java)
-                PrestamoApp().IntIdPrestamo = 0
+                PrestamoApp.IntIdPrestamo = 0
                 this.startActivity(intent)
             }
             else -> this.finish()

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.GridView
+import com.logicsystems.appsofom.datos.AppSofomConfigs
 import com.logicsystems.appsofom.datos.ClsGenericaFragments
 import com.logicsystems.appsofom.datos.SolicitudCredito
 import kotlinx.android.synthetic.main.item_subprestamo.view.*
@@ -28,14 +29,14 @@ class PrestamosFragment : ClsGenericaFragments() {
         datos.add(SubMenuPrestamos().apply { StrTitulo = "Entregar Crédito"; IntImagen = R.drawable.img_entregar })
         datos.add(SubMenuPrestamos().apply { StrTitulo = "Cobrar Crédito"; IntImagen = R.drawable.img_cobrar })
         datos.add(SubMenuPrestamos().apply { StrTitulo = "Cobro de Accesorios Crédito"; IntImagen = R.drawable.img_creditos_x_cobrar })
-        if (config.cNameEntorno.uppercase() == "CHANGE2131"){
+        if (AppSofomConfigs.NameEntorno.uppercase() == "CHANGE2131"){
             datos.add(SubMenuPrestamos().apply { StrTitulo = "Lista de Créditos por cobrar"; IntImagen = R.drawable.img_creditos_x_cobrar })
         }
 
         listDetallado.adapter = AdaptadorSubMenuPrestamo(this.requireActivity(), datos)
 
         listDetallado.setOnItemClickListener { parent, view, position, id ->
-            if (!service.isConnected(this.requireActivity()) &&
+            if (!AppSofomConfigs.isOnLine(this.requireActivity()) &&
                 (position == SolicitudCredito.RENOVAR.ordinal ||
                  position == SolicitudCredito.REESTRUCTURAR.ordinal ||
                  position == SolicitudCredito.SOLICITUD.ordinal ||

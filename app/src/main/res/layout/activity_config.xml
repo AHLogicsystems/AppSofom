@@ -9,6 +9,9 @@
     android:id="@+id/activityConfig"
     android:background="@android:color/white"
     tools:context=".ConfigActivity">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

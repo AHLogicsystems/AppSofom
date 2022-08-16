@@ -891,12 +891,14 @@ open class UserApp : Application()
 
 open class PrestamoApp : Application()
 {
-    var IntIdPrestamo = 0
-    var IntIdCobranza = 0
-    var IntIdDisposicion = 0
-    var DblLiquidar = 0.0
-    var IntIdGrupoSolidario = 0
-    var Integrantes = arrayListOf<AppClienteGrupo>()
+    companion object{
+        var IntIdPrestamo = 0
+        var IntIdCobranza = 0
+        var IntIdDisposicion = 0
+        var DblLiquidar = 0.0
+        var IntIdGrupoSolidario = 0
+        var Integrantes = arrayListOf<AppClienteGrupo>()
+    }
 }
 
 class CobranzaRepuesta : AppRespuesta()
@@ -1048,7 +1050,9 @@ class AppSofomRespRenov : AppSofomRespInfoGnal(){
 }
 
 class ClienteApp : Application(){
-    var IntIdCliente = 0
+    companion object{
+        var IntIdCliente = 0
+    }
 }
 
 class BuscarCliente{
@@ -1058,7 +1062,9 @@ class BuscarCliente{
 }
 
 class OperadorApp : Application(){
-    var IntIdOperador = -1
+    companion object{
+        var IntIdOperador = -1
+    }
 }
 
 class BuscarOperador{

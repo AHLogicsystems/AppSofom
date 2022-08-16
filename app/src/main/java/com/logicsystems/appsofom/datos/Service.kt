@@ -1,16 +1,7 @@
 package com.logicsystems.appsofom.datos
 
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
-import android.util.Log
 import com.google.gson.Gson
-import org.ksoap2.SoapEnvelope
-import org.ksoap2.serialization.SoapObject
-import org.ksoap2.serialization.SoapSerializationEnvelope
-import org.ksoap2.transport.HttpTransportSE
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import org.xmlpull.v1.XmlPullParserFactory
@@ -25,75 +16,6 @@ open class Service : Reference() {
 
     inline fun <reified T : Any> parseJSON(JSON: String) : T {
         return Gson().fromJson(JSON, T::class.java)
-    }
-
-    fun isConnected(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork ?: return false
-            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-
-            return when {
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                else -> false
-            }
-        } else {
-            @Suppress("DEPRECATION") val networkInfo =
-                connectivityManager.activeNetworkInfo ?: return false
-            @Suppress("DEPRECATION")
-            return networkInfo.isConnected
-        }
-    }
-    companion object {
-        val SOAP_NAMESPACE = "http://LogicSystems.org/"
-    }
-
-    fun callApi(methodName: String, params: List<String>): String {
-        var result = ""
-        val SOAP_ACTION = SOAP_NAMESPACE + methodName
-        val soapObject = SoapObject(SOAP_NAMESPACE, methodName)
-
-        when (methodName){
-            "AppGetEmpresas" -> {}
-            "AppLogin" -> {
-                soapObject.addProperty("StrUser", params[0])
-                soapObject.addProperty("StrPass", params[1])
-                soapObject.addProperty("StrEmpresa", params[2])
-                soapObject.addProperty("StrIMEI", params[3])
-            }
-            "MultiWebMethodsApp" -> {
-                soapObject.addProperty("StrEmpresa", params[0])
-                soapObject.addProperty("StrClaseNegocios", params[1])
-                soapObject.addProperty("StrMetodo", params[2])
-                soapObject.addProperty("StrParametros", params[3])
-                soapObject.addProperty("StrUser", params[4])
-                soapObject.addProperty("StrPass", params[5])
-                soapObject.addProperty("StrIMEI", params[6])
-            }
-        }
-
-        val envelope = SoapSerializationEnvelope(SoapEnvelope.VER11)
-        envelope.setOutputSoapObject(soapObject)
-        envelope.dotNet = true
-
-        val httpTransportSE = HttpTransportSE(this.Url)
-
-        try {
-            httpTransportSE.call(SOAP_ACTION, envelope)
-            val soapPrimitive = envelope.response
-            cJSON = soapPrimitive.toString()
-        } catch (ex: Exception) {
-            if (ex.message.toString().contains("404")){
-                this.StrProblema = "El entorno introducido no existe."
-            }
-            else{
-                this.StrProblema = ex.message.toString()
-            }
-            Log.e("Error", this.StrProblema, ex.cause)
-        }
-
-        return this.cJSON
     }
 
     fun sendPostRequest(userName:String, password:String) {
@@ -134,6 +56,7 @@ open class Service : Reference() {
             conn.requestMethod = "GET"
             conn.doInput = true
             conn.connect()
+
             val parserFactory = XmlPullParserFactory.newInstance()
             val parser = parserFactory.newPullParser()
 

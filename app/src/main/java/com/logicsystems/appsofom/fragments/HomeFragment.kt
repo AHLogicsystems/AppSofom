@@ -12,7 +12,6 @@ class HomeFragment : ClsGenericaFragments() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        config.LoadConfig(this.requireActivity())
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_clientes, container, false)
     }

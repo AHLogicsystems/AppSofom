@@ -114,7 +114,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:onClick="ConfigUser"
             android:text="@string/text_configurar"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#0099CC" />

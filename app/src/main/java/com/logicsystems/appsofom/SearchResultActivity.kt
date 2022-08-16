@@ -4,13 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
 import android.widget.Toolbar
-import com.logicsystems.appsofom.datos.GenericaActivitys
-import com.logicsystems.appsofom.datos.Metodos
-import com.logicsystems.appsofom.datos.SolicitudCredito
+import com.logicsystems.appsofom.datos.*
 import com.logicsystems.appsofom.datos.bd.OfflineDisposicion
 
 class SearchResultActivity : GenericaActivitys() {
     lateinit var listSearchResult: ListView
+    val service = Service()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
@@ -23,7 +22,8 @@ class SearchResultActivity : GenericaActivitys() {
         val StrCliente = intent.extras?.getString("Cliente") ?: ""
         val IntTypeSearch = intent.extras?.getInt("TypeSearch") ?: 0
 
-        service.Url = config.URLWSFull()
+        service.Url = AppSofomConfigs.URLWSFull
+        val StrIMEI = AppSofomConfigs.getIMEI(this)
         val OCapa = ClsCapaNegocios()
         var bl = false
         when(IntTypeSearch){
@@ -45,11 +45,11 @@ class SearchResultActivity : GenericaActivitys() {
                     }
                 }
                 else{
-                    service.MultiWebMethodsApp(config.cNameEmpresa, ClaseNegocios, Metodos.APPSEARCH, OCapa.StrJSONResult, UserApp.StrUser, UserApp.StrPass, config.cIMEI)
+                    service.MultiWebMethodsApp(AppSofomConfigs.NameEmpresa, ClaseNegocios, Metodos.APPSEARCH, OCapa.StrJSONResult, UserApp.StrUser, UserApp.StrPass, StrIMEI)
                 }
             }
             SolicitudCredito.REESTRUCTURAR.ordinal -> {
-                if (service.isConnected(this)){
+                if (AppSofomConfigs.isOnLine(this)){
                     if (!OCapa.getJSONSearch(StrFolio, StrCliente, IntTypeSearch)){
                         service.alertasError(this).apply {
                             setMessage(StrProblema)
@@ -64,7 +64,7 @@ class SearchResultActivity : GenericaActivitys() {
                         }
                     }
                     else{
-                        service.MultiWebMethodsApp(config.cNameEmpresa, ClaseNegocios, Metodos.APPSEARCH, OCapa.StrJSONResult, UserApp.StrUser, UserApp.StrPass, config.cIMEI)
+                        service.MultiWebMethodsApp(AppSofomConfigs.NameEmpresa, ClaseNegocios, Metodos.APPSEARCH, OCapa.StrJSONResult, UserApp.StrUser, UserApp.StrPass, StrIMEI)
                     }
                 }
                 else{
@@ -79,6 +79,6 @@ class SearchResultActivity : GenericaActivitys() {
             }
         }
 
-        service.MultiWebMethodsApp(config.cNameEmpresa, ClaseNegocios, Metodos.APPSEARCH, "", UserApp.StrUser, UserApp.StrUser, config.cIMEI)
+        service.MultiWebMethodsApp(AppSofomConfigs.NameEmpresa, ClaseNegocios, Metodos.APPSEARCH, "", UserApp.StrUser, UserApp.StrUser, StrIMEI)
     }
 }

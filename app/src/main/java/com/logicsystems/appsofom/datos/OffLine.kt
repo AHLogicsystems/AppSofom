@@ -5,6 +5,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.util.Log
+import com.logicsystems.appsofom.AppCobranzaRespuesta
+import com.logicsystems.appsofom.PrestamoApp
 import com.logicsystems.appsofom.datos.bd.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,7 +21,7 @@ open class ClsOfflineDisposicion : ClsGenerica() {
     var cCliente: String
     var nMontoTotal by Delegates.notNull<Double>()
     var nSaldoPendiente by Delegates.notNull<Double>()
-    var DteSaveInfo: Date
+    lateinit var DteSaveInfo: Date
     var BlnDeleteAll by Delegates.notNull<Boolean>()
     var BlnDeleteAllPrestamo by Delegates.notNull<Boolean>()
     var IdCliente by Delegates.notNull<Int>()
@@ -36,7 +38,6 @@ open class ClsOfflineDisposicion : ClsGenerica() {
         this.cCliente = ""
         this.nMontoTotal = 0.0
         this.nSaldoPendiente = 0.0
-        this.DteSaveInfo = DateTimeMinValue
         this.BlnDeleteAll = false
         this.BlnDeleteAllPrestamo = false
         this.IdCliente = 0
@@ -832,17 +833,17 @@ open class ClsOffLineCobranza : ClsGenerica() {
         try {
             if (this.Id == 0){
                 val values = ContentValues()
-                values.put(OC.IdPrestamo, this.IdPrestamo)
-                values.put(OC.cFolio, this.cFolio)
-                values.put(OC.cCliente, this.cCliente)
-                values.put(OC.nPendiente, this.nPendiente)
-                values.put(OC.nAlDia, this.nAlDia)
-                values.put(OC.nLiquidar, this.nLiquidar)
-                values.put(OC.DteSaveInfo, this.DteSaveInfo.time)
-                values.put(OC.IdCliente, this.IdCliente)
-                values.put(OC.IdClienteMoral, this.IdClienteMoral)
-                values.put(OC.IdGrupoSolidario, this.IdGrupoSolidario)
-                val LastId: Long = OCom.insert(OC.TABLE_NAME, null, values)
+                values.put(this.OC.IdPrestamo, this.IdPrestamo)
+                values.put(this.OC.cFolio, this.cFolio)
+                values.put(this.OC.cCliente, this.cCliente)
+                values.put(this.OC.nPendiente, this.nPendiente)
+                values.put(this.OC.nAlDia, this.nAlDia)
+                values.put(this.OC.nLiquidar, this.nLiquidar)
+                values.put(this.OC.DteSaveInfo, this.DteSaveInfo.time)
+                values.put(this.OC.IdCliente, this.IdCliente)
+                values.put(this.OC.IdClienteMoral, this.IdClienteMoral)
+                values.put(this.OC.IdGrupoSolidario, this.IdGrupoSolidario)
+                val LastId: Long = OCom.insert(this.OC.TABLE_NAME, null, values)
                 this.Id = LastId.toInt()
             }
         }
@@ -853,25 +854,172 @@ open class ClsOffLineCobranza : ClsGenerica() {
     }
 
     override fun LoadAll(OCom: SQLiteDatabase): Boolean {
-        var columnas = arrayOf(
-            OC.Id,
-            OC.IdPrestamo,
-            OC.cFolio,
-            OC.cCliente,
-            OC.nPendiente,
-            OC.nAlDia,
-            OC.nLiquidar,
-            OC.DteSaveInfo,
-            OC.IdCliente,
-            OC.IdClienteMoral,
-            OC.IdGrupoSolidario
+        val columnas = arrayOf(
+            this.OC.Id,
+            this.OC.IdPrestamo,
+            this.OC.cFolio,
+            this.OC.cCliente,
+            this.OC.nPendiente,
+            this.OC.nAlDia,
+            this.OC.nLiquidar,
+            this.OC.DteSaveInfo,
+            this.OC.IdCliente,
+            this.OC.IdClienteMoral,
+            this.OC.IdGrupoSolidario
         )
         try {
-            this.c = OCom.query(OC.TABLE_NAME, columnas, null, null, null, null, null)
+            this.c = OCom.query(this.OC.TABLE_NAME, columnas, null, null, null, null, null)
         }
         catch (ex: Exception){
             this.StrProblema = ex.message.toString()
         }
         return this.StrProblema == ""
+    }
+
+    override fun Search(OCom: SQLiteDatabase, IntTipoConsulta: Int, StrValues: Array<String>): Boolean {
+        var columnas = arrayOf(
+            this.OC.Id,
+            this.OC.IdPrestamo,
+            this.OC.cFolio,
+            this.OC.cCliente,
+            this.OC.nPendiente,
+            this.OC.nAlDia,
+            this.OC.nLiquidar,
+            this.OC.DteSaveInfo,
+            this.OC.IdCliente,
+            this.OC.IdClienteMoral,
+            this.OC.IdGrupoSolidario
+        )
+        var cCondiciones = ""
+        var cWhere = emptyArray<String>()
+        when(IntTipoConsulta){
+            0 -> {
+                cCondiciones = this.OC.IdPrestamo + "=?"
+                cWhere[0] = StrValues[0]
+            }
+            1 -> {
+                cCondiciones = "(" + this.OC.cFolio + " like ? and ?<>'') or (" + this.OC.cCliente + " like ? and ?<>'')"
+                cWhere = arrayOf( "%" + StrValues[0] + "%", StrValues[0], "%" + StrValues[1] + "%", StrValues[1] )
+            }
+            2 -> {
+                columnas = emptyArray()
+                columnas = arrayOf("Min(datetime(DteSaveInfo,'unixepoch')) as " + this.OC.DteSaveInfo)
+            }
+            3 -> {
+                cCondiciones = this.OC.Id + "=?"
+                cWhere[0] = StrValues[0]
+            }
+        }
+        try {
+            this.c = OCom.query(this.OC.TABLE_NAME, columnas, cCondiciones, cWhere, null, null, null)
+        }
+        catch (ex: Exception){
+            this.StrProblema = ex.message.toString()
+        }
+        return this.StrProblema == ""
+    }
+
+    override fun Delete(OCom: SQLiteDatabase): Boolean {
+        try {
+            var cWhere = arrayOf(this.Id.toString())
+            var cCondicion = this.OC.Id + "=?"
+            if (BlnDeleteAll){
+                cCondicion = ""
+                cWhere = emptyArray()
+            }
+            if (BlnDeleteAllPrestamo){
+                cCondicion = this.OC.IdPrestamo + "=?"
+                cWhere[0] = this.IdPrestamo.toString()
+            }
+            OCom.delete(this.OC.TABLE_NAME, cCondicion, cWhere)
+        }
+        catch (ex: Exception){
+            this.StrProblema = ex.message.toString()
+        }
+        return this.StrProblema == ""
+    }
+
+    override fun FetchData(): Boolean {
+        try {
+            this.Id = c.getInt(0)
+            this.IdPrestamo = c.getInt(1)
+            this.cFolio = c.getString(2)
+            this.cCliente = c.getString(3)
+            this.nAlDia = c.getDouble(4)
+            this.nLiquidar = c.getDouble(5)
+            this.DteSaveInfo = SimpleDateFormat("dd-MM-yyyy").parse(c.getString(6)) as Date
+            this.IdCliente = c.getInt(6)
+            this.IdClienteMoral = c.getInt(7)
+            this.IdGrupoSolidario = c.getInt(8)
+            return true
+        }
+        catch (ex: Exception){}
+        return false
+    }
+}
+
+open class ClsPagos : ClsGenerica(){
+    lateinit var c: Cursor
+    var Id by Delegates.notNull<Int>()
+    var IdPrestamo by Delegates.notNull<Int>()
+    var cFolio: String
+    var cCliente: String
+    var nPago by Delegates.notNull<Double>()
+    var IdMedioPago by Delegates.notNull<Int>()
+    var cNumeroCheque: String
+    var lTipoEmisor by Delegates.notNull<Boolean>()
+    var cEmisor: String
+    var nTipoAdelanto by Delegates.notNull<Int>()
+    lateinit var DteSaveInfo: Date
+    var cErrorWS: String
+    var BlnDeleteAll by Delegates.notNull<Boolean>()
+    var BlnDeleteAllPrestamo by Delegates.notNull<Boolean>()
+    var BlnUpdateAll: Boolean
+    lateinit var ORespuesta: AppCobranzaRespuesta
+
+    init {
+        this.Limpiar()
+        this.Id = 0
+        this.IdPrestamo = 0
+        this.cFolio = ""
+        this.cCliente = ""
+        this.nPago = 0.0
+        this.IdMedioPago = 0
+        this.cNumeroCheque = ""
+        this.lTipoEmisor = false
+        this.cEmisor = ""
+        this.nTipoAdelanto = 0
+        this.cErrorWS = ""
+        this.BlnDeleteAll = false
+        this.BlnDeleteAllPrestamo = false
+        this.BlnUpdateAll = false
+    }
+
+    fun validacion(ODB: SQLiteDatabase){
+        var IntIdTipoSearch = 0
+        var Data = ClsOffLineCobranza()
+        ORespuesta = AppCobranzaRespuesta()
+        var args = emptyArray<String>()
+        if (PrestamoApp.IntIdCobranza == 0){
+            args = arrayOf(PrestamoApp.IntIdPrestamo.toString())
+        }
+        else{
+            args = arrayOf(PrestamoApp.IntIdPrestamo.toString())
+            IntIdTipoSearch = 3
+        }
+        if (Data.Search(ODB, IntIdTipoSearch, args)){
+            if(Data.c.moveToFirst()){
+                ORespuesta.Exitoso = true
+                PrestamoApp.IntIdCobranza = Data.c.getString(0).toInt()
+                ORespuesta.IdPrestamo = Data.c.getString(1).toInt()
+                ORespuesta.Folio = Data.c.getString(2)
+                ORespuesta.Cliente = Data.c.getString(3)
+                ORespuesta.Pendiente = Data.c.getString(4).toDouble()
+                ORespuesta.AlDia = Data.c.getString(5).toDouble()
+                ORespuesta.Liquidar = Data.c.getString(6).toDouble()
+                var DteTest: Date = SimpleDateFormat("dd-MM-yyyy").parse(Data.c.getString(7)) as Date
+
+            }
+        }
     }
 }

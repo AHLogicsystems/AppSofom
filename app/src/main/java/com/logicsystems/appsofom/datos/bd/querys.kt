@@ -8,7 +8,7 @@ class querys (_context: Context) : DataManagerHelper(_context) {
     fun getIMEI(){
         val cursor = db.query(
             Configuracion.TABLE_NAME,   // The table to query
-            arrayOf(Configuracion.cIMEI),             // The array of columns to return (pass null to get all)
+            arrayOf(""),             // The array of columns to return (pass null to get all)
             null,              // The columns for the WHERE clause
             null,          // The values for the WHERE clause
             null,                   // don't group the rows

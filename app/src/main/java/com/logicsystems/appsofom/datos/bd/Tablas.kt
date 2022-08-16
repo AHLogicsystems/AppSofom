@@ -14,7 +14,6 @@ object Configuracion {
     const val cLoginPass = "cLoginPass"
     const val cOperador = "cOperador"
     const val cInfoTicket = "cInfoTicket"
-    const val cIMEI = "cIMEI"
 
     const val Create =
         "CREATE TABLE IF NOT EXISTS $TABLE_NAME (" +
@@ -26,8 +25,7 @@ object Configuracion {
                 "$cLoginUser TEXT NOT NULL," +
                 "$cLoginPass TEXT NOT NULL," +
                 "$cOperador TEXT NOT NULL," +
-                "$cInfoTicket TEXT NOT NULL," +
-                "$cIMEI TEXT NOT NULL" +
+                "$cInfoTicket TEXT NOT NULL" +
                 ");"
 
 

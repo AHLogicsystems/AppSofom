@@ -5,7 +5,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import java.math.BigInteger
 import java.security.MessageDigest
-import java.text.SimpleDateFormat
 import java.util.*
 
 open class ClsGenerica {
@@ -16,7 +15,10 @@ open class ClsGenerica {
 
     lateinit var myContext: Context
 
-    val DateTimeMinValue = SimpleDateFormat("dd-MM-yyyy").parse("01/01/1753") as Date
+    var calendar = Calendar.getInstance()
+
+    var dt = calendar.set(1751, 1, 1)
+
 
     fun SetContext(context: Context) {
         this.myContext = context

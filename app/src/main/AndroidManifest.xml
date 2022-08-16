@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-        android:usesCleartextTraffic="true">
+        >
         <activity
             android:name=".OperationActivity"
             android:exported="false" />
@@ -47,11 +47,11 @@
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AppSofom">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".ClientesActivity"
@@ -64,11 +64,14 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" /> <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
+            android:exported="true" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ConfigActivity"
             android:exported="false" />

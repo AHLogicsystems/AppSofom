@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.logicsystems.appsofom.datos.AppSofomConfigs
 import com.logicsystems.appsofom.datos.GenericaActivitys
 
 class SScreenActivity : GenericaActivitys() {
@@ -11,10 +12,10 @@ class SScreenActivity : GenericaActivitys() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        config.LoadConfig(this)
+        AppSofomConfigs.LoadConfig(this)
         Handler(Looper.getMainLooper()).postDelayed({
 
-            if(config.cNameEntorno == "" || config.cNameEmpresa == ""){
+            if(AppSofomConfigs.NameEntorno == "" || AppSofomConfigs.NameEmpresa == ""){
                 val intent = Intent(this, ConfigActivity::class.java)
                 this.startActivity(intent)
             }

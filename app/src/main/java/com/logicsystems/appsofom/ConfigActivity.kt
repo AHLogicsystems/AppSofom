@@ -1,14 +1,13 @@
 package com.logicsystems.appsofom
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.*
 import com.logicsystems.appsofom.datos.AppSofomConfigs
 import com.logicsystems.appsofom.datos.ClsConfiguracion
 import com.logicsystems.appsofom.datos.GenericaActivitys
+import com.logicsystems.appsofom.datos.Service
 
 
 open class ConfigActivity : GenericaActivitys() {
@@ -25,11 +24,14 @@ open class ConfigActivity : GenericaActivitys() {
     private lateinit var txtViewUpdateGPSActual: TextView
     private lateinit var txtViewUpdateInfoActual: TextView
     private lateinit var txtViewIdDispositivo: TextView
+    private val service = Service()
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar.title = "Configuración"
 
         txtEntorno = findViewById(R.id.txtEntorno)
         txtViewEmpresa = findViewById(R.id.txtViewEmpresa)
@@ -44,37 +46,29 @@ open class ConfigActivity : GenericaActivitys() {
         txtViewUpdateInfoActual = findViewById(R.id.tViewUpdateInfoActual)
         txtViewIdDispositivo = findViewById(R.id.tViewIdDispositivo)
 
-        val config = AppSofomConfigs()
-        config.LoadConfig(this)
-        val Obj2 = ClsConfiguracion()
-        Obj2.Id = config.IdConfiguracion
+        txtViewIdDispositivo.text = AppSofomConfigs.getIdInstalacion(this)
 
-        txtViewIdDispositivo.text = "Identificador CIB: ${config.cIMEI}"
         txtViewEmpresa.visibility = View.GONE
         spinnerEmpresa.visibility = View.GONE
         txtUpdateGPS.visibility = View.GONE
         txtUpdateInfo.visibility = View.GONE
         btnGuardarConfig.visibility = View.GONE
 
-        if (config.IdConfiguracion != 0){
-            txtViewEntornoActual.text = config.cNameEntorno
-            txtViewEmpresaActual.text = config.cNameEmpresa
-            txtViewUpdateGPSActual.text = config.nMinUpdateGPS.toString()
-            txtViewUpdateInfoActual.text = config.nMinUpdateInfo.toString()
-            txtViewIdDispositivo.text = config.cInfoTicket
+        if (AppSofomConfigs.IdConfiguracion != 0){
+            txtViewEntornoActual.text = AppSofomConfigs.NameEntorno
+            txtViewEmpresaActual.text = AppSofomConfigs.NameEmpresa
+            txtViewUpdateGPSActual.text = AppSofomConfigs.MinUpdateGPS.toString()
+            txtViewUpdateInfoActual.text = AppSofomConfigs.MinUpdateInfo.toString()
+            txtViewIdDispositivo.text = AppSofomConfigs.InfoTicket
         }
 
         btnEntorno.setOnClickListener {
-            service.progressBarCIB(this).show()
             buscarEntorno()
-            service.progressBarCIB(this).dismiss()
         }
         btnGuardarConfig.setOnClickListener {
-            service.progressBarCIB(this).show()
             guardarConfiguracion()
-            service.progressBarCIB(this).dismiss()
         }
-        AppSofomConfigs().lLoggin = false
+        AppSofomConfigs.lLoggin = false
     }
 
     private fun buscarEntorno(){
@@ -86,29 +80,9 @@ open class ConfigActivity : GenericaActivitys() {
             }
             btnEntorno.isEnabled = false
 
-            service.Url = AppSofomConfigs().getURLFUll(txtEntorno.text.toString().uppercase().trim())
+            service.Url = AppSofomConfigs.getURLFUll(txtEntorno.text.toString().uppercase().trim())
             if (service.AppGetEmpresas()){
-                val OJson = service.cJSON
-                val ORespuesta = service.parseJSON<AppListaEmpresa>(OJson)
-                val Mov = arrayListOf<String>()
-                for (OEach in ORespuesta.Empresas){
-                    Mov.add(OEach.Empresa)
-                }
-                val AdapterEmpresas = ArrayAdapter(this, R.layout.spinner_item, Mov)
-                AdapterEmpresas.setDropDownViewResource(R.layout.spinner_dropdown_item)
-                with(spinnerEmpresa)
-                {
-                    adapter = AdapterEmpresas
-                    setSelection(0, false)
-                    prompt = "Selecciona tu ambiente"
-                    gravity = android.view.Gravity.CENTER
-                    visibility = android.view.View.VISIBLE
-                }
-                txtViewEmpresa.visibility = View.VISIBLE
-                spinnerEmpresa.visibility = View.VISIBLE
-                txtUpdateGPS.visibility = View.VISIBLE
-                txtUpdateInfo.visibility = View.VISIBLE
-                btnGuardarConfig.visibility = View.VISIBLE
+                service_AppGetEmpresasCompleted()
             }
             else{
                 this.StrProblema = service.StrProblema
@@ -129,23 +103,39 @@ open class ConfigActivity : GenericaActivitys() {
         }
     }
 
+    private fun service_AppGetEmpresasCompleted() {
+        val OJson = service.cJSON
+        val ORespuesta = service.parseJSON<AppListaEmpresa>(OJson)
+        val Mov = arrayListOf<String>()
+        for (OEach in ORespuesta.Empresas){
+            Mov.add(OEach.Empresa)
+        }
+        val AdapterEmpresas = ArrayAdapter(this, R.layout.spinner_item, Mov)
+        AdapterEmpresas.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        with(spinnerEmpresa)
+        {
+            adapter = AdapterEmpresas
+            setSelection(0, false)
+            prompt = "Selecciona tu ambiente"
+            gravity = android.view.Gravity.CENTER
+            visibility = View.VISIBLE
+        }
+        txtViewEmpresa.visibility = View.VISIBLE
+        spinnerEmpresa.visibility = View.VISIBLE
+        txtUpdateGPS.visibility = View.VISIBLE
+        txtUpdateInfo.visibility = View.VISIBLE
+        btnGuardarConfig.visibility = View.VISIBLE
+    }
+
     private fun guardarConfiguracion(){
         var lExecute = false
         val cUpdateGPS: String = txtUpdateGPS.text.toString().trim()
         val cUpdateInfo: String = txtUpdateInfo.text.toString().trim()
         if (cUpdateGPS == "" || cUpdateInfo == "") {
-            Toast.makeText(
-                this,
-                "Se debe capturar un valor en los campos Enviar Ubicación y/o Sincronizar Datos.",
-                Toast.LENGTH_LONG
-            ).show()
+                this.StrProblema = "Se debe capturar un valor en los campos Enviar Ubicación y/o Sincronizar Datos."
         } else {
             if ((cUpdateGPS.toIntOrNull() ?: 0) <= 0 || (cUpdateInfo.toIntOrNull() ?: 0) <= 0) {
-                Toast.makeText(
-                    this,
-                    "El valor capturado en los campos Enviar Ubicación y/o Sincronizar Datos debe ser mayor a 0.",
-                    Toast.LENGTH_LONG
-                ).show()
+                    this.StrProblema = "El valor capturado en los campos Enviar Ubicación y/o Sincronizar Datos debe ser mayor a 0."
             } else {
                 lExecute = true
             }
@@ -156,7 +146,7 @@ open class ConfigActivity : GenericaActivitys() {
                 val Obj = ClsConfiguracion()
                 //ConfigSave.nTipoOperacion = 1;
                 Obj.SetContext(this)
-                Obj.Id = config.IdConfiguracion
+                Obj.Id = AppSofomConfigs.IdConfiguracion
                 Obj.cEntorno = txtEntorno.text.toString().uppercase()
                 Obj.cEmpresa = spinnerEmpresa.selectedItem.toString().uppercase()
                 Obj.nMinUpdateGPS = cUpdateGPS.toIntOrNull() ?: 0
@@ -165,30 +155,17 @@ open class ConfigActivity : GenericaActivitys() {
                 Obj.cLoginPass = ""
                 Obj.cOperador = ""
                 Obj.cInfoTicket = ""
-                Obj.cIMEI = getIMEI()
                 Obj.Guardar()
             }
             catch (ex: Exception){
                 Log.e("Error", ex.message.toString())
             }
-            //ConfigSave.Execute(Obj);
-            if (this.StrProblema == ""){
-                this.finish()
-            }
         }
-    }
-
-    fun getIMEI() : String{
-        var cIMEI = ""
-        try{
-            cIMEI = Settings.Secure.getString(applicationContext.contentResolver,  Settings.Secure.ANDROID_ID)
-            cIMEI = Settings.System.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-            Log.d("IMEI",cIMEI)
+        if (this.StrProblema != ""){
+            service.alertasError(this, this.StrProblema)
+            this.StrProblema = ""
         }
-        catch (ex: Exception){
-            Log.e("Error en IMEI", ex.message.toString())
-        }
-        return cIMEI
+        else this.finish()
     }
 }
 
