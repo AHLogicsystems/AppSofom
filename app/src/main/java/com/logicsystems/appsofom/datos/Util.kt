@@ -9,6 +9,8 @@ import android.provider.Settings
 import android.widget.Spinner
 import android.widget.Toast
 import com.logicsystems.appsofom.R
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.truncate
 
 
@@ -135,13 +137,16 @@ open class AppSofomConfigs{
         return arreglo
     }
 
+    fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+        val formatter = SimpleDateFormat(format, locale)
+        return formatter.format(this)
+    }
 
-    /*fun isOnLine(X: Context): Boolean {
-        val cm = X.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val netInfo = cm.activeNetwork
-        return netInfo != null && cm.activeNetwork
-        return true
-    }*/
+    fun Boolean.toInt() = if (this) 1 else 0
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
 }
 
 internal class Recursos{
@@ -201,3 +206,5 @@ internal class Recursos{
         }
     }
 }
+
+fun Int.toBoolean(): Boolean = java.lang.Boolean.parseBoolean(this.toString())

@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import com.logicsystems.appsofom.datos.AppSofomConfigs
-import com.logicsystems.appsofom.datos.ClsConfiguracion
-import com.logicsystems.appsofom.datos.GenericaActivitys
-import com.logicsystems.appsofom.datos.Service
+import com.logicsystems.appsofom.datos.*
 
 
 open class ConfigActivity : GenericaActivitys() {
@@ -60,6 +57,7 @@ open class ConfigActivity : GenericaActivitys() {
             txtViewUpdateGPSActual.text = AppSofomConfigs.MinUpdateGPS.toString()
             txtViewUpdateInfoActual.text = AppSofomConfigs.MinUpdateInfo.toString()
             txtViewIdDispositivo.text = AppSofomConfigs.InfoTicket
+            txtViewIdDispositivo.text = AppSofomConfigs.getIdInstalacion(this)
         }
 
         btnEntorno.setOnClickListener {
@@ -81,7 +79,7 @@ open class ConfigActivity : GenericaActivitys() {
             btnEntorno.isEnabled = false
 
             service.Url = AppSofomConfigs.getURLFUll(txtEntorno.text.toString().uppercase().trim())
-            if (service.AppGetEmpresas()){
+            if (service.callApi(MetodosApp.AppGetEmpresas, emptyArray())){
                 service_AppGetEmpresasCompleted()
             }
             else{
@@ -104,8 +102,7 @@ open class ConfigActivity : GenericaActivitys() {
     }
 
     private fun service_AppGetEmpresasCompleted() {
-        val OJson = service.cJSON
-        val ORespuesta = service.parseJSON<AppListaEmpresa>(OJson)
+        val ORespuesta = DeserializeXML<AppListaEmpresa>(service.StrResult)
         val Mov = arrayListOf<String>()
         for (OEach in ORespuesta.Empresas){
             Mov.add(OEach.Empresa)
@@ -156,6 +153,8 @@ open class ConfigActivity : GenericaActivitys() {
                 Obj.cOperador = ""
                 Obj.cInfoTicket = ""
                 Obj.Guardar()
+
+                AppSofomConfigs.NameEntorno = txtEntorno.text.toString()
             }
             catch (ex: Exception){
                 Log.e("Error", ex.message.toString())

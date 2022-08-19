@@ -5,10 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
-import com.logicsystems.appsofom.datos.AppSofomConfigs
-import com.logicsystems.appsofom.datos.ClsConfiguracion
-import com.logicsystems.appsofom.datos.GenericaActivitys
-import com.logicsystems.appsofom.datos.Service
+import com.logicsystems.appsofom.datos.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -32,7 +29,6 @@ open class LoginActivity : GenericaActivitys() {
             val intent = Intent(this, ConfigActivity::class.java)
             resultLauncher.launch(intent)
         }
-
         txtUserName = findViewById(R.id.txtUserName)
         txtPassword = findViewById(R.id.txtPassword)
 
@@ -75,8 +71,8 @@ open class LoginActivity : GenericaActivitys() {
                         isFocusableInTouchMode = false
                     }
                     btnLogIn.isEnabled = false
-                    service.Url = AppSofomConfigs.URLWSFull
-                    if (service.AppLogin(txtUserName.text.toString(), txtPassword.text.toString(), AppSofomConfigs.NameEmpresa, StrIMEI))
+                    service.Url = AppSofomConfigs.getURLFUll(AppSofomConfigs.NameEntorno)
+                    if (service.callApi(MetodosApp.AppLogin, arrayOf(txtUserName.text.toString(), txtPassword.text.toString(), AppSofomConfigs.NameEmpresa, StrIMEI)))
                     {
                         service_AppLoginCompleted()
                     }
@@ -117,8 +113,7 @@ open class LoginActivity : GenericaActivitys() {
     }
 
     private fun service_AppLoginCompleted() {
-        val OJson = service.cJSON
-        val ORespuesta = service.parseJSON<AppRespuestaLogIn>(OJson)
+        val ORespuesta = DeserializeXML<AppRespuestaLogIn>(service.StrResult)
         if (ORespuesta.Exitoso){
             if (AppSofomConfigs.LogUser != txtUserName.text.toString() || AppSofomConfigs.LogPass != txtPassword.text.toString() || AppSofomConfigs.InfoTicket!=ORespuesta.InfoTicket || AppSofomConfigs.NameOperador!=ORespuesta.NickName)
             {

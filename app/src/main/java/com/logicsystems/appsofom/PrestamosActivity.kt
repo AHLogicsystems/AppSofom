@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
 import android.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
 import com.logicsystems.appsofom.datos.AppSofomConfigs
@@ -15,8 +14,6 @@ import com.logicsystems.appsofom.datos.SolicitudCredito
 import kotlinx.android.synthetic.main.activity_prestamos.*
 
 class PrestamosActivity : GenericaActivitys() {
-    lateinit var txtFolio: EditText
-    lateinit var txtCliente: EditText
     private lateinit var IMenuAgregarSol: MenuItem
     var IntTypeSearch = 0
     val service = Service()
@@ -49,10 +46,12 @@ class PrestamosActivity : GenericaActivitys() {
                         this.StrProblema = "Esta opción solo se encuentra disponible en la modalidad en línea"
                     }
             }
-            if (this.StrProblema != ""){
+            if (this.StrProblema == ""){
+                val cfolio = txtFolio.text.toString()
+                val cCliente = txtCliente.text.toString()
                 val intent = Intent(this, SearchResultActivity::class.java)
-                intent.putExtra("Folio", txtFolio.text)
-                intent.putExtra("Cliente", txtCliente.text)
+                intent.putExtra("Folio", cfolio)
+                intent.putExtra("Cliente", cCliente)
                 intent.putExtra("TypeSearch", IntTypeSearch)
                 PrestamoApp.IntIdPrestamo = 0
                 resultLauncher.launch(intent)

@@ -705,4 +705,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="verificando_espere">Verificando… Espere …</string>
     <string name="agregar">Agregar</string>
+    <string name="monto_a_disponer">Monto a Disponer:</string>
+    <string name="informaci_n_de_entrega">Información de Entrega</string>
+    <string name="informaci_n_del_prestamo">Información del Prestamo</string>
+    <string name="folio">Folio:</string>
 </resources>

@@ -89,3 +89,9 @@ enum class SolicitudCredito{
     COBROACCESORIO,
     LISTACREDITOXCOBRAR
 }
+
+enum class MetodosApp{
+    AppGetEmpresas,
+    AppLogin,
+    MultiWebMethodsApp
+}

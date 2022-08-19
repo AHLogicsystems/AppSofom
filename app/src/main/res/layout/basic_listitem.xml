@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingEnd="5dp"
+    android:paddingStart="5dp"
+    android:paddingBottom="4dp"
+    android:id="@+id/ReorderView">
+    <TextView
+        android:id="@+id/txtBasicTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+    <TextView
+        android:id="@+id/txtBasicSubtitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textColor="#585b5c"
+        android:textColorHint="@android:color/holo_blue_dark"
+        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/txtBasicSubtitle2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textColor="#585b5c"
+        android:textColorHint="@android:color/holo_blue_dark"
+        android:textSize="15sp" />
+</LinearLayout>

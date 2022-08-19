@@ -11,8 +11,6 @@ apply plugin: 'maven-publish'
     //id 'maven-publish'
 // }
 
-
-
 dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.jayway.jsonpath:json-path:2.1.0'
