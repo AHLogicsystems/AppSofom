@@ -205,7 +205,7 @@ class SearchResultActivity : GenericaActivitys() {
 
     fun SetInfoList(ORespuesa: AppSearchRespuesta) {
         if(ORespuesa.Exitoso){
-            if (ORespuesa.Creditos.count() > 0){
+            if (ORespuesa.Creditos.isNotEmpty()){
                 listSearchResult.adapter = GenericBasicAdapter<AppCredito>(this, ORespuesa.Creditos, true)
             }
             else{

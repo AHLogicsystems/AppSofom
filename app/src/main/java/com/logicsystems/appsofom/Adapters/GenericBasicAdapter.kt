@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.logicsystems.appsofom.R
 
-open class GenericBasicAdapter<T>(private val _context: Context, private val list: Array<T>, private val usarSubtitulo: Boolean) : ArrayAdapter<T>(_context, R.layout.basic_listitem, R.id.txtBasicTitle, list) where T : IBasicListElement {
+open class GenericBasicAdapter<T>(private val _context: Context, private val list: ArrayList<T>, private val usarSubtitulo: Boolean) : ArrayAdapter<T>(_context, R.layout.basic_listitem, R.id.txtBasicTitle, list) where T : IBasicListElement {
 
     override fun setDropDownViewResource(resource: Int) {
         super.setDropDownViewResource(R.layout.basic_listitem)
