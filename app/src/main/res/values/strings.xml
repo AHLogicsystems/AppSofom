@@ -709,4 +709,9 @@
     <string name="informaci_n_de_entrega">Información de Entrega</string>
     <string name="informaci_n_del_prestamo">Información del Prestamo</string>
     <string name="folio">Folio:</string>
+    <string name="buscar_clientes">Buscar Clientes</string>
+    <string name="nombres">Nombres:</string>
+    <string name="apellidos">Apellidos:</string>
+    <string name="rfc">RFC:</string>
+    <string name="buscar">Buscar</string>
 </resources>

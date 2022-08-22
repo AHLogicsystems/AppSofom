@@ -17,7 +17,7 @@
             android:icon="@drawable/ic_menu_prestamos"
             android:title="@string/menu_prestamos" />
         <item
-            android:id="@+id/nav_otros"
+            android:id="@+id/nav_catalogos"
             android:icon="@drawable/ic_menu_done"
             android:title="@string/menu_catalogos" />
         <item

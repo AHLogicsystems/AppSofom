@@ -1,4 +1,4 @@
-package com.logicsystems.appsofom
+package com.logicsystems.appsofom.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -8,13 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.GridView
+import androidx.fragment.app.Fragment
+import com.logicsystems.appsofom.ListaCreditosXCobrarActivity
+import com.logicsystems.appsofom.PrestamosActivity
+import com.logicsystems.appsofom.R
 import com.logicsystems.appsofom.datos.AppSofomConfigs
-import com.logicsystems.appsofom.datos.ClsGenericaFragments
+import com.logicsystems.appsofom.datos.Service
 import com.logicsystems.appsofom.datos.SolicitudCredito
 import kotlinx.android.synthetic.main.item_subprestamo.view.*
 
-
-class PrestamosFragment : ClsGenericaFragments() {
+class PrestamosFragment : Fragment() {
+    val service = Service()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,14 +27,16 @@ class PrestamosFragment : ClsGenericaFragments() {
         val listDetallado = view.findViewById<GridView>(R.id.ContenlistView)
 
         val datos = arrayListOf<SubMenuPrestamos>()
-        datos.add(SubMenuPrestamos().apply { StrTitulo = "Solicitud Crédito"; IntImagen = R.drawable.img_solicitud })
-        datos.add(SubMenuPrestamos().apply { StrTitulo = "Renovar Crédito"; IntImagen = R.drawable.img_renovar })
-        datos.add(SubMenuPrestamos().apply { StrTitulo = "Reestructurar Crédito"; IntImagen = R.drawable.img_reestructura })
-        datos.add(SubMenuPrestamos().apply { StrTitulo = "Entregar Crédito"; IntImagen = R.drawable.img_entregar })
-        datos.add(SubMenuPrestamos().apply { StrTitulo = "Cobrar Crédito"; IntImagen = R.drawable.img_cobrar })
-        datos.add(SubMenuPrestamos().apply { StrTitulo = "Cobro de Accesorios Crédito"; IntImagen = R.drawable.img_creditos_x_cobrar })
+        datos.add(SubMenuPrestamos("Solicitud Crédito", R.drawable.img_solicitud ))
+        datos.add(SubMenuPrestamos("Renovar Crédito", R.drawable.img_renovar ))
+        datos.add(SubMenuPrestamos("Reestructurar Crédito", R.drawable.img_reestructura ))
+        datos.add(SubMenuPrestamos("Entregar Crédito", R.drawable.img_entregar ))
+        datos.add(SubMenuPrestamos("Cobrar Crédito", R.drawable.img_cobrar ))
+        datos.add(SubMenuPrestamos("Cobro de Accesorios Crédito", R.drawable.img_creditos_x_cobrar ))
+
+
         if (AppSofomConfigs.NameEntorno.uppercase() == "CHANGE2131"){
-            datos.add(SubMenuPrestamos().apply { StrTitulo = "Lista de Créditos por cobrar"; IntImagen = R.drawable.img_creditos_x_cobrar })
+            datos.add(SubMenuPrestamos("Lista de Créditos por cobrar", R.drawable.img_creditos_x_cobrar ))
         }
 
         listDetallado.adapter = AdaptadorSubMenuPrestamo(this.requireActivity(), datos)
@@ -41,7 +47,7 @@ class PrestamosFragment : ClsGenericaFragments() {
                  position == SolicitudCredito.REESTRUCTURAR.ordinal ||
                  position == SolicitudCredito.SOLICITUD.ordinal ||
                  position == SolicitudCredito.ENTREGAR.ordinal)){
-                this.activity?.let { service.alertasError(it, "Esta opción solo se encuentra disponible en la modalidad en línea") }
+                service.alertasError(this.requireActivity(), "Esta opción solo se encuentra disponible en la modalidad en línea")
             }
             else{
                 var intent = Intent(this.activity, PrestamosActivity::class.java)
@@ -57,10 +63,7 @@ class PrestamosFragment : ClsGenericaFragments() {
     }
 }
 
-open class SubMenuPrestamos{
-    var StrTitulo = ""
-    var IntImagen = 0
-}
+open class SubMenuPrestamos( var StrTitulo: String, var IntImagen: Int )
 
 open class AdaptadorSubMenuPrestamo(private val cContext: Activity, private val datos: ArrayList<SubMenuPrestamos>) :
     ArrayAdapter<SubMenuPrestamos>(cContext, 0, datos) {

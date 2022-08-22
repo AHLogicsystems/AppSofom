@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_prestamos.*
 
 class PrestamosActivity : GenericaActivitys() {
     private lateinit var IMenuAgregarSol: MenuItem
-    var IntTypeSearch = 0
+    private var IntTypeSearch = 0
     val service = Service()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +84,7 @@ class PrestamosActivity : GenericaActivitys() {
                     this.startActivity(IntentSolicitud)
                 }
                 SolicitudCredito.COBROACCESORIO.ordinal ->{
-                    val IntentCobroAccesorio = Intent(this, ActivityCobroAccesorios::class.java)
+                    val IntentCobroAccesorio = Intent(this, CobroAccesoriosActivity::class.java)
                     this.startActivity(IntentCobroAccesorio)
                 }
                 else ->{

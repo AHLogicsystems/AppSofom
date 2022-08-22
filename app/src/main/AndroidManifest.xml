@@ -20,6 +20,18 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="m">
         <activity
+            android:name=".SearchResultClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GrupoSolidarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NegocioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DireccionesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivityGrupoSolidario"
             android:exported="false" />
         <activity
@@ -29,7 +41,7 @@
             android:name=".ListaCreditosXCobrarActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityCobroAccesorios"
+            android:name=".CobroAccesoriosActivity"
             android:exported="false" />
         <activity
             android:name=".OperationSearchPrestamo"
