@@ -2,11 +2,11 @@ package com.logicsystems.appsofom
 
 import android.os.Bundle
 import android.widget.GridLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.logicsystems.appsofom.datos.GenericaActivitys
 import com.logicsystems.appsofom.datos.Service
 
-class OperationSearchPrestamo : GenericaActivitys() {
+class OperationSearchPrestamo : AppCompatActivity() {
     val service = Service()
     lateinit var OCapa: ClsCapaNegocios
     lateinit var containerEntregaIndividual: GridLayout

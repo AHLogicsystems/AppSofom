@@ -1,9 +1,9 @@
 package com.logicsystems.appsofom
 
 import android.os.Bundle
-import com.logicsystems.appsofom.datos.GenericaActivitys
+import androidx.appcompat.app.AppCompatActivity
 
-class CobroAccesoriosActivity : GenericaActivitys() {
+class CobroAccesoriosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cobro_accesorios)

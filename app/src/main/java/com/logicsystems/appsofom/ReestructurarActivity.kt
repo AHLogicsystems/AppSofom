@@ -1,9 +1,9 @@
 package com.logicsystems.appsofom
 
 import android.os.Bundle
-import com.logicsystems.appsofom.datos.GenericaActivitys
+import androidx.appcompat.app.AppCompatActivity
 
-class ReestructurarActivity : GenericaActivitys() {
+class ReestructurarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reestructurar)

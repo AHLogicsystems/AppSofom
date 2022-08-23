@@ -1,9 +1,9 @@
 package com.logicsystems.appsofom
 
 import android.os.Bundle
-import com.logicsystems.appsofom.datos.GenericaActivitys
+import androidx.appcompat.app.AppCompatActivity
 
-class OperationActivity : GenericaActivitys() {
+class OperationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_operation)

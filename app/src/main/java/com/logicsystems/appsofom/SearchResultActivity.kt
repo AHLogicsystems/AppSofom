@@ -4,13 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
 import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import com.logicsystems.appsofom.Adapters.GenericBasicAdapter
 import com.logicsystems.appsofom.datos.*
 
 
-class SearchResultActivity : GenericaActivitys() {
-    lateinit var listSearchResult: ListView
+class SearchResultActivity : AppCompatActivity() {
+    protected var StrProblema: String = ""
     val service = Service()
+    lateinit var listSearchResult: ListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
@@ -34,7 +36,7 @@ class SearchResultActivity : GenericaActivitys() {
             SolicitudCredito.COBRAR.ordinal -> {
                 if (!OCapa.getXMLSearch(StrFolio, StrCliente, IntTypeSearch)){
                     service.alertasError(this).apply {
-                        setMessage(StrProblema)
+                        setMessage(OCapa.StrProblema)
                         setPositiveButton("Aceptar") { dialog, which ->
                                 bl = true
                             }
@@ -46,7 +48,7 @@ class SearchResultActivity : GenericaActivitys() {
                     }
                 }
                 else{
-                    if (service.callApi(MetodosApp.MultiWebMethodsApp, arrayOf(AppSofomConfigs.NameEmpresa, ClaseNegocios, Metodos.APPSEARCH, OCapa.StrXMLReturn, UserApp.StrUser, UserApp.StrPass, StrIMEI))) {
+                    if (service.callApi(MetodosApp.MultiWebMethodsApp, arrayOf(AppSofomConfigs.NameEmpresa, ClsCapaNegocios.ClaseNegocios, Metodos.APPSEARCH, OCapa.StrXMLReturn, UserApp.StrUser, UserApp.StrPass, StrIMEI))) {
                         service_MultiWebMethodsAppCompleted()
                     }
                 }
@@ -55,7 +57,7 @@ class SearchResultActivity : GenericaActivitys() {
                 if (AppSofomConfigs.isOnLine(this)){
                     if (!OCapa.getXMLSearch(StrFolio, StrCliente, IntTypeSearch)){
                         service.alertasError(this).apply {
-                            setMessage(StrProblema)
+                            setMessage(OCapa.StrProblema)
                             setPositiveButton("Aceptar") { dialog, which ->
                                 bl = true
                             }
@@ -67,7 +69,7 @@ class SearchResultActivity : GenericaActivitys() {
                         }
                     }
                     else{
-                        if (service.callApi(MetodosApp.MultiWebMethodsApp, arrayOf(AppSofomConfigs.NameEmpresa, ClaseNegocios, Metodos.APPSEARCH, OCapa.StrXMLReturn, UserApp.StrUser, UserApp.StrPass, StrIMEI))) {
+                        if (service.callApi(MetodosApp.MultiWebMethodsApp, arrayOf(AppSofomConfigs.NameEmpresa, ClsCapaNegocios.ClaseNegocios, Metodos.APPSEARCH, OCapa.StrXMLReturn, UserApp.StrUser, UserApp.StrPass, StrIMEI))) {
                             service_MultiWebMethodsAppCompleted()
                         }
                     }
@@ -199,8 +201,7 @@ class SearchResultActivity : GenericaActivitys() {
         }
     }
     private fun service_MultiWebMethodsAppCompleted() {
-        val ORespuesta = DeserializeXML<AppSearchRespuesta>(service.StrResult)
-        SetInfoList(ORespuesta)
+        SetInfoList(DeserializeXML(service.StrResult))
     }
 
     fun SetInfoList(ORespuesa: AppSearchRespuesta) {

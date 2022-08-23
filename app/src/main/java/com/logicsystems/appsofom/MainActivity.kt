@@ -3,6 +3,7 @@ package com.logicsystems.appsofom
 import android.os.Bundle
 import android.view.Menu
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,10 +12,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.logicsystems.appsofom.databinding.ActivityMainBinding
-import com.logicsystems.appsofom.datos.GenericaActivitys
 
 
-class MainActivity : GenericaActivitys() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding

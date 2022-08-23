@@ -47,13 +47,6 @@ open class AppSofomConfigs{
 
         fun getIMEI(_context: Context) : String{
             val cIMEI = getIdInstalacion(_context)
-//            try{
-//                cIMEI = Settings.System.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-//                Log.d("IMEI",cIMEI)
-//            }
-//            catch (ex: Exception){
-//                Log.e("Error en IMEI", ex.message.toString())
-//            }
             return cIMEI
         }
 

@@ -5,19 +5,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.logicsystems.appsofom.datos.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 
 
-open class LoginActivity : GenericaActivitys() {
+open class LoginActivity : AppCompatActivity() {
+    protected var StrProblema: String = ""
+    val service = Service()
+
     private lateinit var txtUserName: EditText
     private lateinit var txtPassword: EditText
 //    private lateinit var progressBar: ProgressBar
     private val scope = MainScope()
 
-    val service = Service()
 
     var StrIMEI = ""
 

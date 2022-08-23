@@ -15,6 +15,9 @@ import java.util.*
 open class ClsCapaNegocios {
     var StrXMLReturn = ""
     var StrProblema = ""
+    companion object{
+        val ClaseNegocios = "AppSofom"
+    }
     //region getXML
     fun getXMLSearch(StrFolio: String, StrCliente: String, IntTypeSearch: Int): Boolean {
         try {

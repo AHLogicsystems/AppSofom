@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +19,15 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="m">
         <activity
+            android:name=".ClientePldActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CatReferenciasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CatClientesActivity"
+            android:exported="false" />
+        <activity
             android:name=".SearchResultClienteActivity"
             android:exported="false" />
         <activity
@@ -30,9 +38,6 @@
             android:exported="false" />
         <activity
             android:name=".DireccionesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityGrupoSolidario"
             android:exported="false" />
         <activity
             android:name=".OperationActivity"

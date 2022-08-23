@@ -7,16 +7,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.logicsystems.appsofom.datos.AppSofomConfigs
-import com.logicsystems.appsofom.datos.GenericaActivitys
 import com.logicsystems.appsofom.datos.Service
 import com.logicsystems.appsofom.datos.SolicitudCredito
 import kotlinx.android.synthetic.main.activity_prestamos.*
 
-class PrestamosActivity : GenericaActivitys() {
+class PrestamosActivity : AppCompatActivity() {
+    protected var StrProblema: String = ""
+    val service = Service()
     private lateinit var IMenuAgregarSol: MenuItem
     private var IntTypeSearch = 0
-    val service = Service()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prestamos)

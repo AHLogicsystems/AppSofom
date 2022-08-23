@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.logicsystems.appsofom.datos.*
 
 
-open class ConfigActivity : GenericaActivitys() {
+open class ConfigActivity : AppCompatActivity() {
+    protected var StrProblema: String = ""
+    private val service = Service()
 
     private lateinit var txtEntorno: EditText
     private lateinit var txtViewEmpresa: TextView
@@ -21,7 +24,6 @@ open class ConfigActivity : GenericaActivitys() {
     private lateinit var txtViewUpdateGPSActual: TextView
     private lateinit var txtViewUpdateInfoActual: TextView
     private lateinit var txtViewIdDispositivo: TextView
-    private val service = Service()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
