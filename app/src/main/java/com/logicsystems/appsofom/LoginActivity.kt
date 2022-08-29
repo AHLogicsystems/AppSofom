@@ -1,8 +1,11 @@
 package com.logicsystems.appsofom
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +18,7 @@ import kotlinx.coroutines.cancel
 open class LoginActivity : AppCompatActivity() {
     protected var StrProblema: String = ""
     val service = Service()
-
+    lateinit var progress: Dialog
     private lateinit var txtUserName: EditText
     private lateinit var txtPassword: EditText
 //    private lateinit var progressBar: ProgressBar
@@ -27,6 +30,9 @@ open class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        progress = ProgressDialog.progressDialog(this)
+
         AppSofomConfigs.LoadConfig(this)
         if (AppSofomConfigs.NameEntorno == "" || AppSofomConfigs.NameEmpresa == ""){
             val intent = Intent(this, ConfigActivity::class.java)
@@ -36,7 +42,11 @@ open class LoginActivity : AppCompatActivity() {
         txtPassword = findViewById(R.id.txtPassword)
 
         btnLogIn.setOnClickListener {
-            LogIn()
+            progress.show()
+            Handler(Looper.getMainLooper()).postDelayed({
+                LogIn()
+                progress.dismiss()
+            }, 1000)
         }
 
         txtViewConfigurar.setOnClickListener {
@@ -108,6 +118,7 @@ open class LoginActivity : AppCompatActivity() {
             service.alertasError(this, this.StrProblema)
             this.StrProblema = ""
         }
+        progress.dismiss()
     }
 
     private fun Config(){

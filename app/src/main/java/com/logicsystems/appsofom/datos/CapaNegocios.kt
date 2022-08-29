@@ -1215,7 +1215,7 @@ open class UbicacionGPS{
     var GeoLocalizacion = ""
 
     @field:Element(name = "DteUbicacion")
-    var DteUbicacion = Date(Long.MIN_VALUE)
+    var DteUbicacion = Date(175111)
 }
 
 @Root(name = "RespuestaSetUbicacionesGPS")

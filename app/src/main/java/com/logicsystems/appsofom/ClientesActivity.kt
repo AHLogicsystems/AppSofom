@@ -1,8 +1,11 @@
 package com.logicsystems.appsofom
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
@@ -12,12 +15,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.logicsystems.appsofom.datos.Catalogos
+import com.logicsystems.appsofom.datos.ProgressDialog
 import com.logicsystems.appsofom.datos.REQUEST_CODES
 import com.logicsystems.appsofom.datos.Service
 import kotlinx.android.synthetic.main.activity_clientes.*
 
 
 class ClientesActivity : AppCompatActivity() {
+    lateinit var progress: Dialog
     var service = Service()
     var StrProblema: String = ""
     lateinit var txtClienteNombres: EditText
@@ -30,6 +35,7 @@ class ClientesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clientes)
 
+        progress = ProgressDialog.progressDialog(this)
         txtClienteNombres = findViewById(R.id.txtClienteNombres)
         txtClienteApellidos = findViewById(R.id.txtClienteApellidos)
         txtClienteRFC = findViewById(R.id.txtClienteRFC)
@@ -48,17 +54,21 @@ class ClientesActivity : AppCompatActivity() {
 
         txtViewTituloClienteBusqueda.text = "Buscar" + ActionBar.DISPLAY_SHOW_TITLE
         btnSearch.setOnClickListener {
-            val intent = Intent(this, SearchResultClienteActivity::class.java)
-            intent.putExtra("Nombres", txtClienteNombres.text)
-            intent.putExtra("Apellidos", txtClienteApellidos.text)
-            intent.putExtra("RFC", txtClienteRFC.text)
-            intent.putExtra("TypeSearch", IntTypeSearch)
-            ClienteApp.IntIdCliente = 0
-            when(IntTypeSearch){
-                REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal -> {
-                    resultLauncher.launch(intent)
+            progress.show()
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, SearchResultClienteActivity::class.java)
+                intent.putExtra("Nombres", txtClienteNombres.text)
+                intent.putExtra("Apellidos", txtClienteApellidos.text)
+                intent.putExtra("RFC", txtClienteRFC.text)
+                intent.putExtra("TypeSearch", IntTypeSearch)
+                ClienteApp.IntIdCliente = 0
+                when(IntTypeSearch){
+                    REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal -> {
+                        resultLauncher.launch(intent)
+                    }
                 }
-            }
+                progress.dismiss()
+            }, 1000)
         }
     }
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

@@ -56,7 +56,7 @@ class SearchResultClienteActivity : AppCompatActivity() {
         }
     }
 
-    fun service_MultiWebMethodsAppCompleted(){
+    private fun service_MultiWebMethodsAppCompleted(){
         val ORespuesta = DeserializeXML<ClienteRepuesta>(service.StrResult)
         try {
             if (ORespuesta.Exitoso){

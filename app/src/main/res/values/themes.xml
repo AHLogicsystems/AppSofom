@@ -30,6 +30,12 @@
         <item name="colorControlActivated">@color/CIBBlueHeavy</item>
     </style>
 
+    <style name="InputLabel" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:paddingBottom">@dimen/input_label_vertical_spinner</item>
+        <item name="android:paddingLeft">@dimen/input_label_horizontal_spinner</item>
+        <item name="android:paddingRight">@dimen/input_label_horizontal_spinner</item>
+    </style>
+
 
 
     <style name="Theme.AppSofom.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

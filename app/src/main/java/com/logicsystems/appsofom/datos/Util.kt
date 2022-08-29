@@ -143,58 +143,60 @@ open class AppSofomConfigs{
 }
 
 internal class Recursos{
-    fun GetIDCombo(_context: Context, spinner: Spinner): Int{
-        var intReturn = 0
-        var Opciones: Array<String> = arrayOf()
-        var sVal = ""
-        when (spinner.tag.toString().uppercase()){
-            "SPGENERO" -> {
-                Opciones = _context.resources.getStringArray(R.array.Genero_array_values)
-                sVal = "Genero"
+    companion object{
+        fun GetIDCombo(_context: Context, spinner: Spinner): Int{
+            var intReturn = 0
+            var Opciones: Array<String> = arrayOf()
+            var sVal = ""
+            when (spinner.tag.toString().uppercase()){
+                "SPGENERO" -> {
+                    Opciones = _context.resources.getStringArray(R.array.Genero_array_values)
+                    sVal = "Genero"
+                }
+                "SPENTIDADFEDNAC" -> {
+                    Opciones = _context.resources.getStringArray(R.array.Estado_array_values)
+                    sVal = "Entidad"
+                }
+                "SPNACIONALIDAD" -> {
+                    Opciones = _context.resources.getStringArray(R.array.Pais_array_values)
+                    sVal = "Nacionalidad"
+                }
+                "SPESTADOCIVIL" -> {
+                    Opciones = _context.resources.getStringArray(R.array.EstadoCivil_array_values)
+                    sVal = "Estado Civil"
+                }
+                "SPESCOLARIDAD" -> {
+                    Opciones = _context.resources.getStringArray(R.array.Escolaridad_array_values)
+                    sVal = "Escolaridad"
+                }
+                "SPTIPOTELEFONO" -> {
+                    Opciones = _context.resources.getStringArray(R.array.TiposTelefono_array_values)
+                    sVal = "Tipo Telefono"
+                }
             }
-            "SPENTIDADFEDNAC" -> {
-                Opciones = _context.resources.getStringArray(R.array.Estado_array_values)
-                sVal = "Entidad"
-            }
-            "SPNACIONALIDAD" -> {
-                Opciones = _context.resources.getStringArray(R.array.Pais_array_values)
-                sVal = "Nacionalidad"
-            }
-            "SPESTADOCIVIL" -> {
-                Opciones = _context.resources.getStringArray(R.array.EstadoCivil_array_values)
-                sVal = "Estado Civil"
-            }
-            "SPESCOLARIDAD" -> {
-                Opciones = _context.resources.getStringArray(R.array.Escolaridad_array_values)
-                sVal = "Escolaridad"
-            }
-            "SPTIPOTELEFONO" -> {
-                Opciones = _context.resources.getStringArray(R.array.TiposTelefono_array_values)
-                sVal = "Tipo Telefono"
-            }
-        }
-        intReturn = Opciones[spinner.selectedItemId.toInt()].toInt()
-        return intReturn
-    }
-
-    fun GetPositionCombo(_context: Context, spinner: Spinner, ValueSearch: String){
-        val Opciones: Array<String> = when (spinner.tag.toString().uppercase()){
-            "SPGENERO" -> _context.resources.getStringArray(R.array.Genero_array_values)
-            "SPENTIDADFEDNAC" -> _context.resources.getStringArray(R.array.Estado_array_values)
-            "SPNACIONALIDAD" -> _context.resources.getStringArray(R.array.Pais_array_values)
-            "SPESTADOCIVIL" -> _context.resources.getStringArray(R.array.EstadoCivil_array_values)
-            "SPESCOLARIDAD" -> _context.resources.getStringArray(R.array.Escolaridad_array_values)
-            "SPTIPOTELEFONO" -> _context.resources.getStringArray(R.array.TiposTelefono_array_values)
-            else -> arrayOf()
+            intReturn = Opciones[spinner.selectedItemId.toInt()].toInt()
+            return intReturn
         }
 
-        var i = -1
+        fun GetPositionCombo(_context: Context, spinner: Spinner, ValueSearch: String){
+            val Opciones: Array<String> = when (spinner.tag.toString().uppercase()){
+                "SPGENERO" -> _context.resources.getStringArray(R.array.Genero_array_values)
+                "SPENTIDADFEDNAC" -> _context.resources.getStringArray(R.array.Estado_array_values)
+                "SPNACIONALIDAD" -> _context.resources.getStringArray(R.array.Pais_array_values)
+                "SPESTADOCIVIL" -> _context.resources.getStringArray(R.array.EstadoCivil_array_values)
+                "SPESCOLARIDAD" -> _context.resources.getStringArray(R.array.Escolaridad_array_values)
+                "SPTIPOTELEFONO" -> _context.resources.getStringArray(R.array.TiposTelefono_array_values)
+                else -> arrayOf()
+            }
 
-        for (sValues in Opciones){
-            i++
-            if(sValues == ValueSearch){
-                spinner.setSelection(i)
-                break
+            var i = -1
+
+            for (sValues in Opciones){
+                i++
+                if(sValues == ValueSearch){
+                    spinner.setSelection(i)
+                    break
+                }
             }
         }
     }

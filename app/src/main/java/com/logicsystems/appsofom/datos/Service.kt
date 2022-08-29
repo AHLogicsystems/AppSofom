@@ -10,6 +10,7 @@ import org.ksoap2.transport.HttpTransportSE
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
 
+
 open class Service : Reference() {
     var StrResult = ""
 

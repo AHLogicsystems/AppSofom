@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:id="@+id/progressDialogCIB"
     android:padding="20dp">
     <ProgressBar
         android:layout_width="0dp"

@@ -1,14 +1,18 @@
 package com.logicsystems.appsofom
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.logicsystems.appsofom.datos.AppSofomConfigs
+import com.logicsystems.appsofom.datos.ProgressDialog
 import com.logicsystems.appsofom.datos.Service
 import com.logicsystems.appsofom.datos.SolicitudCredito
 import kotlinx.android.synthetic.main.activity_prestamos.*
@@ -18,9 +22,12 @@ class PrestamosActivity : AppCompatActivity() {
     val service = Service()
     private lateinit var IMenuAgregarSol: MenuItem
     private var IntTypeSearch = 0
+    lateinit var progress: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_prestamos)
+
+        progress = ProgressDialog.progressDialog(this)
 
         IntTypeSearch = intent.extras?.getInt("TypeSearch") ?: 0
 
@@ -38,25 +45,29 @@ class PrestamosActivity : AppCompatActivity() {
         }
 
         btnSearch.setOnClickListener {
-            when (IntTypeSearch){
-                SolicitudCredito.RENOVAR.ordinal,
-                SolicitudCredito.REESTRUCTURAR.ordinal,
-                SolicitudCredito.SOLICITUD.ordinal,
-                SolicitudCredito.ENTREGAR.ordinal ->
-                    if (!AppSofomConfigs.isOnLine(this)){
-                        this.StrProblema = "Esta opción solo se encuentra disponible en la modalidad en línea"
-                    }
-            }
-            if (this.StrProblema == ""){
-                val cfolio = txtFolio.text.toString()
-                val cCliente = txtCliente.text.toString()
-                val intent = Intent(this, SearchResultActivity::class.java)
-                intent.putExtra("Folio", cfolio)
-                intent.putExtra("Cliente", cCliente)
-                intent.putExtra("TypeSearch", IntTypeSearch)
-                PrestamoApp.IntIdPrestamo = 0
-                resultLauncher.launch(intent)
-            }
+            progress.show()
+            Handler(Looper.getMainLooper()).postDelayed({
+                when (IntTypeSearch){
+                    SolicitudCredito.RENOVAR.ordinal,
+                    SolicitudCredito.REESTRUCTURAR.ordinal,
+                    SolicitudCredito.SOLICITUD.ordinal,
+                    SolicitudCredito.ENTREGAR.ordinal ->
+                        if (!AppSofomConfigs.isOnLine(this)){
+                            this.StrProblema = "Esta opción solo se encuentra disponible en la modalidad en línea"
+                        }
+                }
+                if (this.StrProblema == ""){
+                    val cfolio = txtFolio.text.toString()
+                    val cCliente = txtCliente.text.toString()
+                    val intent = Intent(this, SearchResultActivity::class.java)
+                    intent.putExtra("Folio", cfolio)
+                    intent.putExtra("Cliente", cCliente)
+                    intent.putExtra("TypeSearch", IntTypeSearch)
+                    PrestamoApp.IntIdPrestamo = 0
+                    resultLauncher.launch(intent)
+                }
+                progress.dismiss()
+            }, 1000)
         }
         if (this.StrProblema != ""){
             service.alertasError(this, this.StrProblema)

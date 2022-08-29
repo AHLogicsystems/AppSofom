@@ -1,6 +1,9 @@
 package com.logicsystems.appsofom
 
+import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -25,9 +28,12 @@ open class ConfigActivity : AppCompatActivity() {
     private lateinit var txtViewUpdateInfoActual: TextView
     private lateinit var txtViewIdDispositivo: TextView
 
+    lateinit var progress: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
+
+        progress = ProgressDialog.progressDialog(this)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         toolbar.title = "Configuración"
@@ -63,10 +69,15 @@ open class ConfigActivity : AppCompatActivity() {
         }
 
         btnEntorno.setOnClickListener {
-            buscarEntorno()
+            progress.show()
+            Handler(Looper.getMainLooper()).postDelayed({
+                buscarEntorno()
+            }, 1000)
         }
         btnGuardarConfig.setOnClickListener {
-            guardarConfiguracion()
+            Handler(Looper.getMainLooper()).postDelayed({
+                guardarConfiguracion()
+            }, 1000)
         }
         AppSofomConfigs.lLoggin = false
     }
@@ -101,6 +112,7 @@ open class ConfigActivity : AppCompatActivity() {
         if (this.StrProblema != ""){
             service.alertasError(this, this.StrProblema)
         }
+        progress.dismiss()
     }
 
     private fun service_AppGetEmpresasCompleted() {
@@ -167,6 +179,7 @@ open class ConfigActivity : AppCompatActivity() {
             this.StrProblema = ""
         }
         else this.finish()
+        progress.dismiss()
     }
 }
 

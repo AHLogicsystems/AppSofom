@@ -19,6 +19,15 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="m">
         <activity
+            android:name=".TelefonosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DireccionesSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchNegocioActivity"
+            android:exported="false" />
+        <activity
             android:name=".ClientePldActivity"
             android:exported="false" />
         <activity
