@@ -207,7 +207,7 @@ class SearchResultActivity : AppCompatActivity() {
     fun SetInfoList(ORespuesa: AppSearchRespuesta) {
         if(ORespuesa.Exitoso){
             if (ORespuesa.Creditos.isNotEmpty()){
-                listSearchResult.adapter = GenericBasicAdapter<AppCredito>(this, ORespuesa.Creditos, true)
+                listSearchResult.adapter = GenericBasicAdapter(this, ORespuesa.Creditos, true)
             }
             else{
                 var bl = false

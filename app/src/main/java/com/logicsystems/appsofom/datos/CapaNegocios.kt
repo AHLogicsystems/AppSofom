@@ -538,23 +538,23 @@ open class AppEmpresa
 
 @Root(name = "AppRespuesta")
 open class AppRespuesta {
-    @field:Element(name = "Exitoso")
+    @field:Element
     var Exitoso = false
 
-    @field:Element(name = "Error", required = false)
+    @field:Element(required = false)
     var Error = ""
 
-    @field:Element(name = "Metodo", required = false)
+    @field:Element(required = false)
     var Metodo = ""
 }
 
 @Root(name = "AppRespuestaLogIn")
 open class AppRespuestaLogIn : AppRespuesta()
 {
-    @field:Element(name = "NickName")
+    @field:Element(required = false)
     var NickName = ""
 
-    @field:Element(name = "InfoTicket")
+    @field:Element(required = false)
     var InfoTicket = ""
 }
 

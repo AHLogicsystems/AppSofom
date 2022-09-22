@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -86,6 +87,8 @@ open class CatClientesActivity() : AppCompatActivity() {
     lateinit var dateDialog: DatePickerDialog
     var muestraErrorCurp = true
 
+    private var nRequestCodes = 0
+
 //    constructor(parcel: Parcel) : this() {
 //        IntTypeSearch = parcel.readInt()
 //        Idcliente = parcel.readInt()
@@ -132,6 +135,25 @@ open class CatClientesActivity() : AppCompatActivity() {
         spEstadoCivil.tag = "spEstadoCivil"
         spEscolaridad.tag = "spEscolaridad"
 
+        var Opciones = emptyArray<String>()
+        var sVal = ""
+        val res: Resources = resources
+        spGenero.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                Opciones = res.getStringArray(R.array.Genero_array_values)
+                sVal = "Genero"
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+
         val AdGenero = ArrayAdapter.createFromResource(
             this,
             R.array.Genero_array,
@@ -169,10 +191,118 @@ open class CatClientesActivity() : AppCompatActivity() {
         spNacionalidad.adapter = AdNacionalidad
         spEstadoCivil.adapter = AdEstadoCivil
         spEscolaridad.adapter = AdEscolaridad
+
+        _dateDisplay = findViewById(R.id.txtFechaNac)
+        _dateSelectButton = findViewById(R.id.btnSelecFecha)
+        _dateSelectButton.setOnClickListener { TODO() }
+
+//        dateDialog = DatePickerDialog(this, this.dateDialog_DateSet(), today)
+
+        this.BtnSrchRefLab1 = findViewById(R.id.BtnSrchRefLab1)
+        this.BtnDelRefLab1 = findViewById(R.id.BtnDelRefLab1)
+        this.txtIdRefLab1 = findViewById(R.id.txtIdRefLab1)
+        this.txtRefLab1 = findViewById(R.id.txtRefLab1)
+
+        this.BtnSrchRefLab2 = findViewById(R.id.BtnSrchRefLab2)
+        this.BtnDelRefLab2 = findViewById(R.id.BtnDelRefLab2)
+        this.txtIdRefLab2 = findViewById(R.id.txtIdRefLab2)
+        this.txtRefLab2 = findViewById(R.id.txtRefLab2)
+
+        this.BtnSrchRefVec1 = findViewById(R.id.BtnSrchRefVec1)
+        this.BtnDelRefVec1 = findViewById(R.id.BtnDelRefVec1)
+        this.txtIdRefVec1 = findViewById(R.id.txtIdRefVec1)
+        this.txtRefVec1 = findViewById(R.id.txtRefVec1)
+
+        this.BtnSrchRefVec2 = findViewById(R.id.BtnSrchRefVec2)
+        this.BtnDelRefVec2 = findViewById(R.id.BtnDelRefVec2)
+        this.txtIdRefVec2 = findViewById(R.id.txtIdRefVec2)
+        this.txtRefVec2 = findViewById(R.id.txtRefVec2)
+
+        this.BtnSrchNegocio = findViewById(R.id.BtnSrchNegocio)
+        this.BtnDelNegocio = findViewById(R.id.BtnDelNegocio)
+        this.txtIdNegocio = findViewById(R.id.txtIdNegocio)
+        this.txtNegocio = findViewById(R.id.txtNegocio)
+
+        this.txtIdDomicilio = findViewById(R.id.txtIdDomicilio)
+        this.txtDomicilio = findViewById(R.id.txtDomicilio)
+        this.txtIdClienteDireccion = findViewById(R.id.txtIdClienteDireccion)
+
+        this.txtIdClienteDireccion.visibility = View.VISIBLE
+
+        if (Idcliente == 0)
+        {
+            //Es agregar
+            this.BtnDelRefLab1.visibility = View.VISIBLE
+
+            this.BtnDelRefLab2.visibility = View.VISIBLE
+
+            this.BtnDelRefVec1.visibility = View.VISIBLE
+
+            this.BtnDelRefVec2.visibility = View.VISIBLE
+
+            this.BtnDelNegocio.visibility = View.VISIBLE
+
+            this.BtnDelDomicilio.visibility = View.VISIBLE
+        }
+        else
+        {
+            BotonesVistas()
+        }
+
+        this.BtnSrchRefLab1.setOnClickListener { BtnSrchRefLab1_Click() }
+        this.BtnDelRefLab1.setOnClickListener { BtnDelRefLab1_Click() }
+
+        this.BtnSrchRefLab2.setOnClickListener { BtnSrchRefLab2_Click() }
+        this.BtnDelRefLab2.setOnClickListener { BtnDelRefLab2_Click() }
+
+        this.BtnSrchRefVec1.setOnClickListener { BtnSrchRefVec1_Click() }
+        this.BtnDelRefVec1.setOnClickListener { BtnDelRefVec1_Click() }
+
+        this.BtnSrchRefVec2.setOnClickListener { BtnSrchRefVec2_Click() }
+        this.BtnDelRefVec2.setOnClickListener { BtnDelRefVec2_Click() }
+
+        this.BtnSrchNegocio.setOnClickListener { BtnSrchNegocio_Click() }
+        this.BtnDelNegocio.setOnClickListener { BtnDelNegocio_Click() }
+
+        this.BtnSrchDomicilio.setOnClickListener { BtnSrchDomicilio_Click() }
+        this.BtnDelDomicilio.setOnClickListener { BtnDelDomicilio_Click() }
+
+        if (!bNuevo){
+            progress.show()
+            Handler(Looper.getMainLooper()).postDelayed({
+                GetCliente()
+                progress.dismiss()
+            }, 1000)
+        }
     }
 
-    fun spinner_ItemSelected() {
-
+    fun spinner_ItemSelected(sender: Any) {
+        val spinner: Spinner = sender as Spinner
+        var Opciones = emptyArray<String>()
+        var sVal = ""
+        val res: Resources = resources
+        when (spinner.tag.toString().uppercase()){
+            "SPGENERO" -> {
+                Opciones = res.getStringArray(R.array.Genero_array_values)
+                sVal = "Genero"
+            }
+            "SPENTIDADFEDNAC" -> {
+                Opciones = res.getStringArray(R.array.EstadoCivil_array_values)
+                sVal = "Entidad"
+            }
+            "SPNACIONALIDAD" -> {
+                Opciones = res.getStringArray(R.array.Pais_array_values)
+                sVal = "Nacionalidad"
+            }
+            "SPESTADOCIVIL" -> {
+                Opciones = res.getStringArray(R.array.EstadoCivil_array_values)
+                sVal = "Estado Civil"
+            }
+            "SPESCOLARIDAD" -> {
+                Opciones = res.getStringArray(R.array.Escolaridad_array)
+                sVal = "Escolaridad"
+            }
+        }
     }
 
     fun BtnDelRefLab1_Click() {
@@ -220,32 +350,37 @@ open class CatClientesActivity() : AppCompatActivity() {
 
     fun BtnSrchRefLab1_Click() {
         val intent = Intent(this, ClientesActivity::class.java)
-        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal)
-        this.startActivityForResult(intent, REQUEST_CODES.PICK_REFERENCIA_LABORAL_1.ordinal)
+        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.valor)
+        resultLauncher.launch(intent)
+        nRequestCodes = REQUEST_CODES.PICK_REFERENCIA_LABORAL_1.valor
     }
 
     fun BtnSrchRefLab2_Click() {
         val intent = Intent(this, ClientesActivity::class.java)
-        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal)
-        this.startActivityForResult(intent, REQUEST_CODES.PICK_REFERENCIA_LABORAL_2.ordinal)
+        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.valor)
+        resultLauncher.launch(intent)
+        nRequestCodes = REQUEST_CODES.PICK_REFERENCIA_LABORAL_2.valor
     }
 
     fun BtnSrchRefVec1_Click() {
         val intent = Intent(this, ClientesActivity::class.java)
-        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal)
-        this.startActivityForResult(intent, REQUEST_CODES.PICK_REFERENCIA_VECINAL_1.ordinal)
+        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.valor)
+        resultLauncher.launch(intent)
+        nRequestCodes = REQUEST_CODES.PICK_REFERENCIA_VECINAL_1.valor
     }
 
     fun BtnSrchRefVec2_Click() {
         val intent = Intent(this, ClientesActivity::class.java)
-        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal)
-        this.startActivityForResult(intent, REQUEST_CODES.PICK_REFERENCIA_VECINAL_2.ordinal)
+        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.valor)
+        resultLauncher.launch(intent)
+        nRequestCodes = REQUEST_CODES.PICK_REFERENCIA_VECINAL_2.valor
     }
 
     fun BtnSrchNegocio_Click() {
         val intent = Intent(this, SearchNegocioActivity::class.java)
-        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_NEGOCIO_PICK.ordinal)
-        this.startActivityForResult(intent, REQUEST_CODES.SEARCH_NEGOCIO_PICK.ordinal)
+        intent.putExtra("TypeSearch", REQUEST_CODES.SEARCH_NEGOCIO_PICK.valor)
+        resultLauncher.launch(intent)
+        nRequestCodes = REQUEST_CODES.SEARCH_NEGOCIO_PICK.valor
     }
 
     //        fun DateSelect_OnClick() {
@@ -286,8 +421,9 @@ open class CatClientesActivity() : AppCompatActivity() {
 
     fun BtnSrchDomicilio_Click() {
         val intent = Intent(this, DireccionesSearchActivity::class.java)
-        intent.putExtra("action", REQUEST_CODES.PICK_DOMICILIO.ordinal)
-        this.startActivityForResult(intent, REQUEST_CODES.PICK_DOMICILIO.ordinal)
+        intent.putExtra("action", REQUEST_CODES.PICK_DOMICILIO.valor)
+        resultLauncher.launch(intent)
+        nRequestCodes = REQUEST_CODES.PICK_DOMICILIO.valor
     }
 
     fun dateDialog_DateSet(e: DatePickerDialog) {
@@ -563,6 +699,7 @@ open class CatClientesActivity() : AppCompatActivity() {
                 progress.show()
                 Handler(Looper.getMainLooper()).postDelayed({
                     this.SaveCliente()
+                    progress.dismiss()
                 }, 1000)
             }
             R.id.menu_telefonos -> {
@@ -571,22 +708,23 @@ open class CatClientesActivity() : AppCompatActivity() {
                 }
                 else{
                     val intent = Intent(this,TelefonosActivity::class.java)
-                    intent.putExtra("TypeSearch", REQUEST_CODES.TELEFONOS_CLIENTE.ordinal)
+                    intent.putExtra("TypeSearch", REQUEST_CODES.TELEFONOS_CLIENTE.valor)
                     intent.putExtra("IdCliente", Idcliente)
-                    resultLauncher2.launch(intent)
+                    resultLauncher.launch(intent)
+                    nRequestCodes = 1254
                 }
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    var resultLauncher2 = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         var TypeSearchResult = 0
         var IdClienteResult = 0
         var NombreClienteResult = ""
         if (result.resultCode == Activity.RESULT_OK) {
-            when (result.resultCode){
-                REQUEST_CODES.PICK_REFERENCIA_LABORAL_1.ordinal -> {
+            when (this.nRequestCodes){
+                REQUEST_CODES.PICK_REFERENCIA_LABORAL_1.valor -> {
                     TypeSearchResult = result.data?.extras?.getInt("TypeSearchResult") ?: 0
                     IdClienteResult = result.data?.extras?.getInt("IdClienteResult") ?: 0
                     NombreClienteResult = result.data?.extras?.getString("NombreClienteResult") ?: ""
@@ -603,7 +741,7 @@ open class CatClientesActivity() : AppCompatActivity() {
                         this.StrProblema = "No puede seleccionar al mismo cliente como Referencia, favor de seleccionar otro!."
                     }
                 }
-                REQUEST_CODES.PICK_REFERENCIA_LABORAL_2.ordinal -> {
+                REQUEST_CODES.PICK_REFERENCIA_LABORAL_2.valor -> {
                     TypeSearchResult = result.data?.extras?.getInt("TypeSearchResult") ?: 0
                     IdClienteResult = result.data?.extras?.getInt("IdClienteResult") ?: 0
                     NombreClienteResult = result.data?.extras?.getString("NombreClienteResult") ?: ""
@@ -620,7 +758,7 @@ open class CatClientesActivity() : AppCompatActivity() {
                         this.StrProblema = "No puede seleccionar al mismo cliente como Referencia, favor de seleccionar otro!."
                     }
                 }
-                REQUEST_CODES.PICK_REFERENCIA_VECINAL_1.ordinal -> {
+                REQUEST_CODES.PICK_REFERENCIA_VECINAL_1.valor -> {
                     TypeSearchResult = result.data?.extras?.getInt("TypeSearchResult") ?: 0
                     IdClienteResult = result.data?.extras?.getInt("IdClienteResult") ?: 0
                     NombreClienteResult = result.data?.extras?.getString("NombreClienteResult") ?: ""
@@ -637,7 +775,109 @@ open class CatClientesActivity() : AppCompatActivity() {
                         this.StrProblema = "No puede seleccionar al mismo cliente como Referencia, favor de seleccionar otro!."
                     }
                 }
+                REQUEST_CODES.PICK_REFERENCIA_VECINAL_2.valor -> {
+                    TypeSearchResult = result.data?.extras?.getInt("TypeSearchResult") ?: 0
+                    IdClienteResult = result.data?.extras?.getInt("IdClienteResult") ?: 0
+                    NombreClienteResult = result.data?.extras?.getString("NombreClienteResult") ?: ""
+
+                    if (IdClienteResult != this.Idcliente)
+                    {
+                        this.BtnSrchRefVec2.visibility = View.GONE
+                        this.BtnDelRefVec2.visibility = View.VISIBLE
+                        this.txtIdRefVec2.setText(IdClienteResult.toString())
+                        this.txtRefVec2.setText(NombreClienteResult)
+                    }
+                    else
+                    {
+                        this.StrProblema = "No puede seleccionar al mismo cliente como Referencia, favor de seleccionar otro!."
+                    }
+                }
+                REQUEST_CODES.SEARCH_NEGOCIO_PICK.valor -> {
+                    val IdNegocio: Int = result.data?.extras?.getInt("IdNegocio") ?: 0
+                    val Empresa = result.data?.extras?.getString("Empresa") ?: ""
+                    this.BtnSrchNegocio.visibility = View.GONE
+                    this.BtnDelNegocio.visibility = View.VISIBLE
+                    this.txtIdNegocio.setText(IdNegocio.toString())
+                    this.txtNegocio.setText(Empresa)
+                }
+                REQUEST_CODES.PICK_DOMICILIO.valor -> {
+                    val IdDomicilio: Int = result.data?.extras?.getInt("iddomicilio") ?: 0
+                    val Domicilio = result.data?.extras?.getString("descripcion") ?: ""
+
+                    this.BtnSrchDomicilio.visibility = View.GONE
+                    this.BtnDelDomicilio.visibility = View.VISIBLE
+                    this.txtIdDomicilio.setText(IdDomicilio.toString())
+                    this.txtDomicilio.setText(Domicilio)
+                }
             }
+        }
+    }
+
+    private fun BotonesVistas(){
+        if (txtIdRefLab1.text.toString() == ""|| txtIdRefLab1.text.toString() == "0")
+        {
+            this.BtnDelRefLab1.visibility = View.GONE
+            this.BtnSrchRefLab1.visibility = View.VISIBLE
+        }
+        else
+        {
+            this.BtnDelRefLab1.visibility = View.VISIBLE
+            this.BtnSrchRefLab1.visibility = View.GONE
+        }
+
+        if (txtIdRefLab2.text.toString() == ""|| txtIdRefLab2.text.toString() == "0")
+        {
+            this.BtnDelRefLab2.visibility = View.GONE
+            this.BtnSrchRefLab2.visibility = View.VISIBLE
+        }
+        else
+        {
+            this.BtnDelRefLab2.visibility = View.VISIBLE
+            this.BtnSrchRefLab2.visibility = View.GONE
+        }
+
+        if (txtIdRefVec1.text.toString() == ""|| txtIdRefVec1.text.toString() == "0")
+        {
+            this.BtnDelRefVec1.visibility = View.GONE
+            this.BtnSrchRefVec1.visibility = View.VISIBLE
+        }
+        else
+        {
+            this.BtnDelRefVec1.visibility = View.VISIBLE
+            this.BtnSrchRefVec1.visibility = View.GONE
+        }
+
+        if (txtIdRefVec2.text.toString() == ""|| txtIdRefVec2.text.toString() == "0")
+        {
+            this.BtnDelRefVec2.visibility = View.GONE
+            this.BtnSrchRefVec2.visibility = View.VISIBLE
+        }
+        else
+        {
+            this.BtnDelRefVec2.visibility = View.VISIBLE
+            this.BtnSrchRefVec2.visibility = View.GONE
+        }
+
+        if (txtIdNegocio.text.toString() == ""|| txtIdNegocio.text.toString() == "0")
+        {
+            this.BtnDelNegocio.visibility = View.GONE
+            this.BtnSrchNegocio.visibility = View.VISIBLE
+        }
+        else
+        {
+            this.BtnDelNegocio.visibility = View.VISIBLE
+            this.BtnSrchNegocio.visibility = View.GONE
+        }
+
+        if (txtIdDomicilio.text.toString() == ""|| txtIdDomicilio.text.toString() == "0")
+        {
+            this.BtnDelDomicilio.visibility = View.GONE
+            this.BtnSrchDomicilio.visibility = View.VISIBLE
+        }
+        else
+        {
+            this.BtnDelDomicilio.visibility = View.VISIBLE
+            this.BtnSrchDomicilio.visibility = View.GONE
         }
     }
 }

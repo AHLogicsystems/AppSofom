@@ -117,6 +117,15 @@ open class LoginActivity : AppCompatActivity() {
         if (this.StrProblema != ""){
             service.alertasError(this, this.StrProblema)
             this.StrProblema = ""
+            txtUserName.apply {
+                isFocusable = true
+                isFocusableInTouchMode = true
+            }
+            txtPassword.apply {
+                isFocusable = true
+                isFocusableInTouchMode = true
+            }
+            btnLogIn.isEnabled = true
         }
         progress.dismiss()
     }
@@ -178,10 +187,6 @@ open class LoginActivity : AppCompatActivity() {
         }
         else{
             this.StrProblema = ORespuesta.Error
-        }
-        if (this.StrProblema != ""){
-            service.alertasError(this, this.StrProblema)
-            this.StrProblema = ""
         }
     }
 }

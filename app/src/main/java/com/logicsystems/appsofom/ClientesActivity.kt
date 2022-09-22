@@ -48,7 +48,7 @@ class ClientesActivity : AppCompatActivity() {
             Catalogos.CLIENTES.ordinal,
             Catalogos.PLD.ordinal -> "Clientes"
             Catalogos.REFERENCIAS.ordinal,
-            REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal -> "Referencias"
+            REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.valor -> "Referencias"
             else -> "Clientes"
         }
 
@@ -63,8 +63,11 @@ class ClientesActivity : AppCompatActivity() {
                 intent.putExtra("TypeSearch", IntTypeSearch)
                 ClienteApp.IntIdCliente = 0
                 when(IntTypeSearch){
-                    REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal -> {
+                    REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.valor -> {
                         resultLauncher.launch(intent)
+                    }
+                    else -> {
+                        resultLauncher.launch(intent, 1254)
                     }
                 }
                 progress.dismiss()
@@ -76,7 +79,7 @@ class ClientesActivity : AppCompatActivity() {
             IntTypeSearch = result.data?.extras?.getInt("TypeSearch") ?: 0
             val IdClienteResult: Int = result.data?.extras?.getInt("IdCliente") ?: 0
             when(IntTypeSearch){
-                REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal -> {
+                REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.valor -> {
                     val NombreClienteResult = result.data?.extras?.getString("NombreCliente") ?: ""
 
                     val intent = Intent(this, CatClientesActivity::class.java)
@@ -144,7 +147,7 @@ class ClientesActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_add){
-            if(IntTypeSearch in arrayListOf(Catalogos.REFERENCIAS.ordinal, REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.ordinal)){
+            if(IntTypeSearch in arrayListOf(Catalogos.REFERENCIAS.ordinal, REQUEST_CODES.SEARCH_CAT_CLIENTES_REF.valor)){
                 val intent2 = Intent(this, CatReferenciasActivity::class.java)
                     .putExtra("TypeSearch", IntTypeSearch)
                     .putExtra("IdCliente", 0)

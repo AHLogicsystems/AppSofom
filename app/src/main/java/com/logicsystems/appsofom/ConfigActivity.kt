@@ -75,6 +75,7 @@ open class ConfigActivity : AppCompatActivity() {
             }, 1000)
         }
         btnGuardarConfig.setOnClickListener {
+            progress.show()
             Handler(Looper.getMainLooper()).postDelayed({
                 guardarConfiguracion()
             }, 1000)

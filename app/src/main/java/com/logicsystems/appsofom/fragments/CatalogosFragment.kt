@@ -40,15 +40,15 @@ class CatalogosFragment : Fragment() {
                 val intent = when(position){
                     Catalogos.DOMICILIOS.ordinal -> {
                         Intent(this.requireActivity(), DireccionesActivity::class.java)
-                            .putExtra("action", REQUEST_CODES.LIST_DOMICILIO)
+                            .putExtra("action", REQUEST_CODES.LIST_DOMICILIO.valor)
                     }
                     Catalogos.NEGOCIOS.ordinal -> {
                         Intent(this.requireActivity(), NegocioActivity::class.java)
-                            .putExtra("TypeSearch", REQUEST_CODES.SEARCH_NEGOCIO_LIST.ordinal)
+                            .putExtra("TypeSearch", REQUEST_CODES.SEARCH_NEGOCIO_LIST.valor)
                     }
                     Catalogos.GRUPOSSOLIDARIOS.ordinal -> {
                         Intent(this.requireActivity(), GrupoSolidarioActivity::class.java)
-                            .putExtra("TypeSearch", REQUEST_CODES.SEARCH_GRUPO_SOLIDARIO_LIST.ordinal)
+                            .putExtra("TypeSearch", REQUEST_CODES.SEARCH_GRUPO_SOLIDARIO_LIST.valor)
                     }
                     else -> {
                         Intent(this.requireActivity(), ClientesActivity::class.java)
