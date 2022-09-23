@@ -32,4 +32,9 @@
         android:name="com.logicsystems.appsofom.fragments.CatalogosFragment"
         android:label="@string/menu_catalogos"
         tools:layout="@layout/fragment_catalogos" />
+    <fragment
+        android:id="@+id/nav_reportes"
+        android:name="com.logicsystems.appsofom.fragments.ReporteFragment"
+        android:label="Reporte"
+        tools:layout="@layout/fragment_reporte" />
 </navigation>

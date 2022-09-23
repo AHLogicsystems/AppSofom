@@ -91,7 +91,7 @@ open class AppSofomConfigs{
             }
         }
 
-        fun LoadConfig(context: Context) {
+        fun LoadConfig(context: Context) { //Ejemplo de funcion load()
             val Data = ClsConfiguracion()
             Data.SetContext(context)
             if (Data.LoadAll()) {

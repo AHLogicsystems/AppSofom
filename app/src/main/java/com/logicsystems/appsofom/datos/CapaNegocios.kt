@@ -2230,7 +2230,7 @@ open class AppAsentamiento : IBasicListElement {
 @Root(name = "AsentamientoRespuesta")
 class AsentamientoRespuesta : AppRespuesta(){
     @field:ElementList(name = "Asentamiento")
-    var Asentamiento = arrayListOf<AppAsentamiento>()
+    var Asentamiento = arrayListOf<AppAsentamiento>() //emptyArray<String>()
 }
 //endregion
 

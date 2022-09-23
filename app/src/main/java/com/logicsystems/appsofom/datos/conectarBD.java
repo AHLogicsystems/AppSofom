@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
 import android.os.AsyncTask;
 
 public class conectarBD {
-
+    //No se usa
     ArrayList Array_Resultados = new ArrayList<String>();
     ArrayList nicks = new ArrayList<String>();
 

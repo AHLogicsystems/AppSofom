@@ -19,6 +19,20 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="m">
         <activity
+            android:name=".testahActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".TestActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".TelefonosActivity"
             android:exported="false" />
         <activity

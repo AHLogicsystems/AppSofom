@@ -7,7 +7,7 @@ import java.sql.DriverManager
 import java.sql.SQLException
 
 class ConnectSql {
-
+    //No se usa
     private val server="SRVDEV02"
     private val db="Dev_WAJunJul22"
     private val username="Cem"

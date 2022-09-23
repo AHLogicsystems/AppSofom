@@ -67,7 +67,8 @@ class ClientesActivity : AppCompatActivity() {
                         resultLauncher.launch(intent)
                     }
                     else -> {
-                        resultLauncher.launch(intent, 1254)
+                        resultLauncher.launch(intent)
+
                     }
                 }
                 progress.dismiss()
