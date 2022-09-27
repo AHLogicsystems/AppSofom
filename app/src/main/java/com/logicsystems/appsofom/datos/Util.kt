@@ -35,6 +35,9 @@ open class AppSofomConfigs{
         var nDigitosIdDispositivo: Int = 16
 
         var MODO = DEBUG_MODE.TESTING_INTERNO
+        // DEBUG_MODE.PRODUCCION <<-- para conectarse a demo
+        // DEBUG_MODE.TESTING_INTERNO <<-- para conectarse a uno de testing
+        // http://testing.logicsystems.com.mx/TestAppSofom
         var URLWSFull = getURLFUll(NameEntorno)
 //        fun URLWSFull(): String {return getURLFUll(NameEntorno)}
 

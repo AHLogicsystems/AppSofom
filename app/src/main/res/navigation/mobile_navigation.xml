@@ -35,6 +35,6 @@
     <fragment
         android:id="@+id/nav_reportes"
         android:name="com.logicsystems.appsofom.fragments.ReporteFragment"
-        android:label="Reporte"
+        android:label="Reporte Prueba"
         tools:layout="@layout/fragment_reporte" />
 </navigation>
